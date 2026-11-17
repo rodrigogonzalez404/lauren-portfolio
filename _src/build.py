@@ -29,7 +29,7 @@ def size(rel):
     with Image.open(os.path.join(ROOT, rel)) as im: return im.size
 def img(rel, alt, r, cls='', eager=False):
     w, h = size(rel)
-    return f'<img src="{r}{rel}" alt="{html.escape(alt)}" width="{w}" height="{h}"{" loading=\"lazy\"" if not eager else ""} decoding="async"{f" class={chr(34)}{cls}{chr(34)}" if cls else ""}>'
+    return f'<img src="{r}{rel}" alt="{html.escape(alt)}" width="{w}" height="{h}" decoding="async"{f" class={chr(34)}{cls}{chr(34)}" if cls else ""}>'
 def card_img(slug):
     return f'assets/img/{slug}/card.jpg' if os.path.exists(os.path.join(IMG, slug, 'card.jpg')) else f'assets/img/{slug}/hero.jpg'
 
@@ -83,7 +83,7 @@ def card(p, r, ratio='', small=False):
 <div class="meta"><div class="col"><span class="s{' sm' if small else ''}">{E(p["title"])}</span><span class="mono{'-s' if small else ''} muted">{sub}</span></div><span class="mono{'-s' if small else ''}">{T(p["year"])}</span></div></a>'''
 def playlist(p, r, link=True):
     ss = imgs(p['slug'], 's')
-    ims = ''.join(f'<img src="{r}assets/img/{p["slug"]}/{f}" alt="{E(p["title"])} — screen {i+1}"{" class=\"on\"" if i == 0 else " loading=\"lazy\""} decoding="async">' for i, f in enumerate(ss))
+    ims = ''.join(f'<img src="{r}assets/img/{p["slug"]}/{f}" alt="{E(p["title"])} — screen {i+1}"{" class=\"on\"" if i == 0 else ""} decoding="async">' for i, f in enumerate(ss))
     inner = f'''<div class="scr" data-interval="3200"><div class="scr-in">{ims}</div>
 <div class="scr-bar"><span class="mono-s scr-tag">● Auto-playing</span><span class="mono-s scr-n">01 / {len(ss):02d}</span></div><div class="scr-prog"><i></i></div></div>'''
     if not link: return inner
@@ -110,7 +110,7 @@ def home():
 <div class="btns mt40">{btn("Real Estate Work", "#real-estate", "pri", "↓")}{btn("Brand &amp; Ecommerce", "#brand", "sec")}</div></div></div></section>
 
 <section class="wrap" style="padding-bottom:var(--sec)" id="real-estate" data-name="01 Real Estate">
-<div class="sec-head"><div class="col gap16"><span class="mono muted">[01] ({len(re_home):02d})</span><h2 class="xl">Real Estate</h2></div>
+<div class="sec-head clean"><div class="col gap16"><span class="mono muted">[01] ({len(re_home):02d})</span><h2 class="xl">Real Estate</h2></div>
 <p class="bm muted intro">{T(H["re_intro"])}</p></div>
 <div class="grid2">{card(R["pdx-west"], r)}{card(R["kress-building"], r)}</div>
 <div class="mt64">{card(R["nomad"], r, "r169")}</div>
@@ -121,7 +121,7 @@ def home():
 </section>
 
 <section class="wrap" style="padding-bottom:var(--sec)" id="interactive" data-name="Interactive Presentations">
-<div class="sec-head"><div class="col gap16"><span class="mono muted">[Interactive] ({len(CEROS):02d})</span><h2 class="l">{E(H["interactive_title"])}</h2></div>
+<div class="sec-head clean"><div class="col gap16"><span class="mono muted">[Interactive] ({len(CEROS):02d})</span><h2 class="l">{E(H["interactive_title"])}</h2></div>
 <p class="bm muted intro">{T(H["interactive_intro"])}</p></div>
 <div class="grid2">{"".join(playlist(p, r) for p in CEROS)}</div>
 <p class="mono-s muted mt40">Pages auto-advance like a playlist; click to open the case study. Only design pages are shown — market data, fees, team and client lists are left out.</p>
@@ -133,7 +133,7 @@ def home():
 <div class="g12 mt64"><span class="mono muted c1-4">[Expertise]</span><p class="s c4-13">{" · ".join(EXPERTISE)}</p></div></section>
 
 <section class="wrap sec" id="brand" data-name="02 Brand &amp; Ecommerce">
-<div class="sec-head"><div class="col gap16"><span class="mono muted">[02] ({len(BRAND):02d})</span><h2 class="l">Brand &amp; Ecommerce</h2></div>
+<div class="sec-head clean"><div class="col gap16"><span class="mono muted">[02] ({len(BRAND):02d})</span><h2 class="l">Brand &amp; Ecommerce</h2></div>
 <div class="col right" style="gap:20px;align-items:flex-end"><p class="bm muted intro" style="text-align:right">{T(H["brand_intro"])}</p>{btn("See all", "works.html#brand", "sec")}</div></div>
 <div class="grid3">{"".join(card(p, r, "r11", small=True) for p in brand_home)}</div></section>
 
@@ -148,14 +148,14 @@ def works():
     r = ''
     b = head('Works — Lauren Gonzalez', r) + nav(r) + f'''
 <section class="wrap case-cover" data-name="Works Hero"><span class="mono muted">[Works]</span><h1 class="xxl mt24">Works</h1></section>
-<section class="wrap" id="real-estate" style="padding-top:clamp(32px,4vw,64px)" data-name="Real Estate">
-<div class="sec-head"><div class="col gap16"><span class="mono muted">[01] ({len(PROJECTS):02d})</span><h2 class="xl">Real Estate</h2></div><p class="bm muted intro">{T(HOME["re_intro"])}</p></div>
+<section class="wrap" id="real-estate" style="padding-top:var(--s48)" data-name="Real Estate">
+<div class="sec-head clean"><div class="col gap16"><span class="mono muted">[01] ({len(PROJECTS):02d})</span><h2 class="xl">Real Estate</h2></div><p class="bm muted intro">{T(HOME["re_intro"])}</p></div>
 <div class="grid2">{"".join(card(p, r) for p in PROJECTS)}</div>
-<div class="works-sub" id="interactive"><div class="sec-head"><div class="col gap16"><span class="mono muted">[Interactive] ({len(CEROS):02d})</span><h2 class="l">{E(HOME["interactive_title"])}</h2></div><p class="bm muted intro">{T(HOME["interactive_intro"])}</p></div>
+<div class="works-sub" id="interactive"><div class="sec-head clean"><div class="col gap16"><span class="mono muted">[Interactive] ({len(CEROS):02d})</span><h2 class="l">{E(HOME["interactive_title"])}</h2></div><p class="bm muted intro">{T(HOME["interactive_intro"])}</p></div>
 <div class="grid2">{"".join(playlist(p, r) for p in CEROS)}</div></div>
 <p class="mono-s muted mt64">{T(HOME["re_note"])}</p></section>
 <section class="wrap sec" id="brand" data-name="Brand &amp; Ecommerce">
-<div class="sec-head"><div class="col gap16"><span class="mono muted">[02] ({len(BRAND):02d})</span><h2 class="xl">Brand &amp; Ecommerce</h2></div><p class="bm muted intro">{T(HOME["brand_intro"])}</p></div>
+<div class="sec-head clean"><div class="col gap16"><span class="mono muted">[02] ({len(BRAND):02d})</span><h2 class="xl">Brand &amp; Ecommerce</h2></div><p class="bm muted intro">{T(HOME["brand_intro"])}</p></div>
 <div class="grid3">{"".join(card(p, r, "r11", small=True) for p in BRAND)}</div></section>
 ''' + footer(r)
     write('works.html', b)
@@ -204,22 +204,46 @@ def contact():
 def fig(rel, alt, n, cap, r, cls=''):
     return f'<figure class="fig {cls}">{img(rel, alt, r)}<figcaption class="cap mono-s"><span>[{n:02d}]</span><span>{T(cap)}</span></figcaption></figure>'
 def shead(label, title, intro=''):
-    return f'<div class="sec-head"><div class="col gap16"><span class="mono muted">[{label}]</span><h2 class="m">{title}</h2></div>{f"<p class={chr(34)}bm muted intro{chr(34)}>{T(intro)}</p>" if intro else ""}</div>'
+    return f'<div class="sec-head"><div class="col"><span class="mono muted">[{label}]</span><h2 class="m">{title}</h2></div>{f"<p class={chr(34)}bm muted intro{chr(34)}>{T(intro)}</p>" if intro else ""}</div>'
 def auto_gallery(slug, files, r, start, title, portrait_three=True):
-    out = []; n = start
+    """Nomad rhythm: wide images run full width; the rest sit in rows of two (three for portrait page sets).
+    Row items are sized by aspect ratio so every row has one common height — no crops, no holes."""
+    n = start
     sizes = [size(f'assets/img/{slug}/{f}') for f in files]
-    portrait = sum(1 for w, h in sizes if h > w) > len(sizes) / 2
-    for i, (f, (w, h)) in enumerate(zip(files, sizes)):
-        wide = (not portrait) and (w / h > 2.0 or (i == 0 and w / h > 1.2))
-        out.append(fig(f'assets/img/{slug}/{f}', f'{title} — image {i+1}', n, f'{title} — {i+1:02d}', r, 'wide' if wide else ''))
-        n += 1
-    return f'<div class="gallery{" three" if portrait and portrait_three else ""}">{"".join(out)}</div>', n
+    portrait = portrait_three and sum(1 for w, h in sizes if h > w) > len(sizes) / 2
+    per = 3 if portrait else 2
+    rows, cur = [], []
+    for i, (w, h) in enumerate(sizes):
+        wide = (not portrait) and (w / h > 1.9 or (i == 0 and w / h > 1.2))
+        if wide:
+            if cur: rows.append(cur); cur = []
+            rows.append([i])
+        else:
+            cur.append(i)
+            if len(cur) == per: rows.append(cur); cur = []
+    if cur:
+        # a leftover single image joins the previous partial-free row structure: pair it with the previous row if that was a pair
+        if len(cur) == 1 and rows and len(rows[-1]) == per and per == 2 and sizes[cur[0]][0] / sizes[cur[0]][1] < 1.2:
+            rows[-1].append(cur[0])
+        else:
+            rows.append(cur)
+    out = []
+    for row in rows:
+        items = ''
+        for i in row:
+            w, h = sizes[i]
+            fg = fig(f'assets/img/{slug}/{files[i]}', f'{title} — image {i+1}', start + i, f'{title} — {i+1:02d}', r)
+            items += fg.replace('<figure class="fig ', f'<figure style="flex:{w/h:.4f} 1 0" class="fig ', 1)
+        out.append(f'<div class="g-row{" solo" if len(row) == 1 else ""}">{items}</div>')
+    return f'<div class="gallery">{"".join(out)}</div>', start + len(files)
 
 def case_head(p, r):
     lab = CAT_LABEL[p['cat']]
-    tcls = 'xxl' if len(p['title']) <= 12 else 'xl'
+    L = len(p['title'])
+    tcls = 'case-title' + ('' if L <= 6 else ' t2' if L <= 9 else ' t3' if L <= 24 else ' t4')
+    summ = T(p["summary"]) if p["cat"] != "brand" and p["slug"] != "fortis-net-lease" else T(first_sentence(p["summary"]))
     return f'''<section class="wrap case-cover" data-name="Case Cover"><div class="row" style="justify-content:space-between;gap:16px"><span class="mono muted">[Case Study] {lab}</span><a class="mono muted" href="{r}works.html">← All Works</a></div>
-<div class="g12 mt24" style="align-items:end"><h1 class="{tcls} c1-8">{E(p["title"])}</h1><p class="bl c8-13">{T(p["summary"]) if p["cat"] != "brand" and p["slug"] != "fortis-net-lease" else T(first_sentence(p["summary"]))}</p></div></section>'''
+<div class="g12"><h1 class="{tcls} c1-8">{E(p["title"])}</h1><p class="bl c8-13">{summ}</p></div></section>'''
 def first_sentence(s):
     m = re.match(r'(.+?[.!?])(\s|$)', s); return m.group(1) if m else s
 def meta_row(p):
@@ -229,25 +253,25 @@ def meta_row(p):
         items = [('Client', p['client']), ('Type', p['type']), ('Format', p['tool'] + ' interactive presentation'), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
     else:
         items = [('Client', p['client']), ('Type', p['type']), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
-    return '<section class="wrap" style="padding-top:clamp(32px,3.3vw,48px);padding-bottom:clamp(56px,6.7vw,96px)" data-name="Meta"><div class="meta-row">' + ''.join(
+    return '<section class="wrap case-meta" data-name="Meta"><div class="meta-row">' + ''.join(
         f'<div><span class="mono-s muted">[{k}]</span><span class="bm">{T(v)}</span></div>' for k, v in items if v) + '</div></section>'
 def psr(p):
     sol = ''.join(f'<p class="bl">{T(s)}</p>' for s in p['solution'])
-    note = f'<p class="mono-s muted" style="margin-bottom:24px">{T(p["draft_note"])}</p>' if p.get('draft_note') else ''
+    note = f'<p class="mono-s muted draft">{T(p["draft_note"])}</p>' if p.get('draft_note') else ''
     return f'''<section class="dark psr" data-name="Project / Solution / Results">{note}
-<div class="blk"><span class="mono muted lab">[01] Project</span><div class="txt"><p class="s">{T(p["project"])}</p></div></div>
-<div class="blk"><span class="mono muted lab">[02] Solution</span><div class="txt">{sol}</div></div>
-<div class="blk"><span class="mono muted lab">[03] Results</span><div class="txt"><p class="{'m' if len(strip_ph(p['results'])) < 220 else 's'}">{T(p["results"])}</p></div></div></section>'''
-def next_block(p, r):
+<div class="blk"><div class="lab"><span class="mono muted">[01]</span><span class="s">Project</span></div><div class="txt"><p class="s">{T(p["project"])}</p></div></div>
+<div class="blk"><div class="lab"><span class="mono muted">[02]</span><span class="s">Solution</span></div><div class="txt">{sol}</div></div>
+<div class="blk"><div class="lab"><span class="mono muted">[03]</span><span class="s">Results</span></div><div class="txt"><p class="{'m' if len(strip_ph(p['results'])) < 220 else 's'}">{T(p["results"])}</p></div></div></section>'''
+def next_block(p, r, bg="white"):
     i = ALL.index(p); nx = ALL[(i + 1) % len(ALL)]
-    return f'''<section class="wrap white sec next" data-name="Next Project"><div class="row" style="justify-content:space-between;align-items:end;margin-bottom:32px;gap:16px"><span class="mono muted">[Next Project]</span>{btn("All Works", r+"works.html", "sec")}</div>
-<a class="g12" href="{r}work/{nx["slug"]}.html" style="align-items:end"><div class="c1-7 col"><h2 class="xl">{E(nx["title"])}</h2><span class="mono mt16">{T(short_type(nx))} · {T(nx["year"])} →</span></div><div class="c7-13 ph">{img(card_img(nx["slug"]), nx["title"], r)}</div></a></section>'''
+    return f'''<section class="wrap {bg} next" data-name="Next Project"><div class="next-top"><span class="mono muted">[Next Project]</span>{btn("All Works", r+"works.html", "sec")}</div>
+<a class="g12" href="{r}work/{nx["slug"]}.html"><div class="c1-7 col"><h2 class="xl">{E(nx["title"])}</h2><span class="mono mt16">{T(short_type(nx))} · {T(nx["year"])} →</span></div><div class="c7-13 ph">{img(card_img(nx["slug"]), nx["title"], r)}</div></a></section>'''
 
 def case(p):
     r = '../'; s = p['slug']
     body = case_head(p, r)
     if p['cat'] == 'interactive':
-        body += f'<div class="wrap">{playlist(p, r, link=False)}</div>'
+        body += f'<div class="case-stage" data-name="Hero Playlist">{playlist(p, r, link=False)}</div><div class="wrap cap mono-s"><span>[01]</span><span>Selected screens, auto-playing</span></div>'
     else:
         body += f'<div class="case-hero" data-name="Hero Mockup">{img(f"assets/img/{s}/hero.jpg", p["title"]+" — hero mockup", r, eager=True)}</div><div class="wrap cap mono-s"><span>[01]</span><span>{"Mockup using the original artwork" if p["cat"] == "re" and s != "fortis-net-lease" else E(p["title"])}</span></div>'
     body += meta_row(p) + psr(p)
@@ -263,7 +287,7 @@ def case(p):
         g, _ = auto_gallery(s, imgs(s, 'g'), r, 2, p['title'], portrait_three=False)
         extra = f'<p class="mono-s note">{T(LOG[s]["note"])}</p>' if s in LOG and LOG[s].get('note') else ''
         body += f'<section class="wrap white sec" data-name="Gallery">{shead("Gallery 01", p.get("gallery_title","Selected work"))}{g}{extra}</section>'
-    body += next_block(p, r)
+    body += next_block(p, r, 'white' if s == 'nomad' else 'paper')
     extra_js = '<script src="../assets/js/page-flip.browser.js"></script>\n' if s == 'nomad' else ''
     page = head(f'{strip_ph(p["title"])} — Case Study — Lauren Gonzalez', r, strip_ph(first_sentence(p['summary']))) + nav(r, 'brand' if p['cat'] == 'brand' else 're') + body + footer(r)
     page = page.replace(f'<script src="{r}assets/js/site.js">', extra_js + f'<script src="{r}assets/js/site.js">')
@@ -281,11 +305,11 @@ def nomad_galleries(r):
     return f'''
 <section class="wrap white sec" data-name="Design System">{shead("Design system", "Design system", "Palette sampled from the printed pages; typefaces as embedded in the PDF.")}
 <div class="swatches">{sw}</div>
-<div class="gallery mt96">{F("ds_wordmark.jpg", "Display: heavy italic wordmark", 2)}{F("ds_title-box.jpg", "Headline: orange caps in an outlined title box", 3)}</div>
+<div class="gallery-2 mt96">{F("ds_wordmark.jpg", "Display: heavy italic wordmark", 2)}{F("ds_title-box.jpg", "Headline: orange caps in an outlined title box", 3)}</div>
 <div class="col gap8 mt40" style="padding-top:16px;border-top:1px solid var(--ink)"><span class="mono-s muted">[Type]</span><span class="bm">Acumin family (Variable Concept + Pro: Thin → Bold) for display and text, with Expressway, Freight Sans and Apparat in supporting roles.</span></div>
 <div class="split-57 mt96">{F("ds_divider-label.jpg", "Chapter tab: oversized red numeral on charcoal", 4)}<div class="split-13">{F("ds_hatch.jpg", "Diagonal hatch accent", 5)}{F("ds_icons.jpg", "Amenity icon set", 6)}</div></div></section>
 <section class="wrap sec" data-name="Gallery / The printed book">{shead("Gallery 01", "The printed book")}
-<div class="gallery">{F("n02.jpg", "Cover: property photography, NOMAD wordmark, hatch border", 7)}{F("n03.jpg", "Printed offering packages, ready for investor tours", 8)}</div></section>
+<div class="gallery-2">{F("n02.jpg", "Cover: property photography, NOMAD wordmark, hatch border", 7)}{F("n03.jpg", "Printed offering packages, ready for investor tours", 8)}</div></section>
 <section class="wrap white sec" data-name="Gallery / Inside the book">{shead("Gallery 02", "Inside the book", "The reading sequence as an investor meets it — chapter openers, amenities, floor plans, maps and market data. Turn the pages.")}
 <div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book">{pages}</div></div>
 <div class="fb-controls"><button class="fb-btn" id="fb-prev" aria-label="Previous page">←</button><span class="mono fb-counter" id="fb-counter" aria-live="polite">Cover</span><button class="fb-btn" id="fb-next" aria-label="Next page">→</button></div>

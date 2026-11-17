@@ -32,6 +32,7 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
   not in the repo). Contains the page selections and blur boxes (fractions of the page). You normally won't need it —
   just drop replacement images into `assets/img/<slug>/` with the same names.
 - Case template = the "Nomad v2" case layout: Cover → Hero mockup → Meta row → dark Project/Solution/Results → Galleries → Next project.
+- Spacing: one vertical rhythm in `assets/css/site.css` `:root` — `--sec` 120 · `--s96` · `--s72` · `--s48` · `--s32` (1440 values, scaling down via clamp). Case pages follow Figma frame 43:2 (Nomad case): cover 72/48 → 16:9 full-bleed hero → 12px caption → meta 48/96 → dark P/S/R 72 (blocks 48) → gallery sections 120 with ruled heads, alternating white/paper → Next project 96. Galleries are equal-height rows (items sized by aspect ratio), so nothing is cropped and no holes appear.
 - Responsive: one page serves desktop and mobile (breakpoints at 960 / 820 / 640px; fluid `clamp()` type).
 
 ## Open items (as of the initial commit)
