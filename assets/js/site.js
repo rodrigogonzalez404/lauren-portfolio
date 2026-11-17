@@ -1,0 +1,45 @@
+/* Shared site behaviour: mobile menu, auto-playing screen playlists, flip-book init. No dependencies. */
+(function(){
+  // mobile menu
+  var nav=document.querySelector('.nav'), mb=document.querySelector('.menu-btn');
+  if(nav&&mb){mb.addEventListener('click',function(){var o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false');mb.querySelector('span').textContent=o?'Close':'Menu';});}
+
+  // playlists: <div class="scr" data-interval="3200"><div class="scr-in"><img class="on">…</div> .scr-n  .scr-prog i</div>
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.scr').forEach(function(s,k){
+    var im=s.querySelectorAll('.scr-in img'), n=s.querySelector('.scr-n'), p=s.querySelector('.scr-prog i'), i=0, T=+(s.dataset.interval||3200), timer=null, paused=false;
+    if(im.length<2) return;
+    function pad(x){return (x<10?'0':'')+x}
+    function bar(){if(!p)return;p.style.transition='none';p.style.width='0';void p.offsetWidth;p.style.transition='width '+T+'ms linear';p.style.width='100%'}
+    function show(j){im[i].classList.remove('on');i=(j+im.length)%im.length;im[i].classList.add('on');if(n)n.textContent=pad(i+1)+' / '+pad(im.length);bar()}
+    function start(){if(reduce||timer)return;bar();timer=setInterval(function(){if(!paused)show(i+1)},T)}
+    s.addEventListener('mouseenter',function(){paused=true;if(p){p.style.transition='none';}});
+    s.addEventListener('mouseleave',function(){paused=false;bar()});
+    var prev=s.querySelector('.scr-prev'), next=s.querySelector('.scr-next');
+    if(prev)prev.addEventListener('click',function(e){e.preventDefault();show(i-1)}); if(next)next.addEventListener('click',function(e){e.preventDefault();show(i+1)});
+    setTimeout(start,k*600);
+  });
+
+  // flip-book (Nomad): needs assets/js/page-flip.browser.js loaded first
+  var el=document.getElementById('fb-book');
+  if(el&&window.St){
+    var pf=new St.PageFlip(el,{width:1100,height:850,size:'stretch',minWidth:260,maxWidth:1100,minHeight:200,maxHeight:850,
+      showCover:true,usePortrait:true,maxShadowOpacity:0.45,flippingTime:900,mobileScrollSupport:false,drawShadow:true,autoSize:true});
+    pf.loadFromHTML(el.querySelectorAll('.fb-page'));
+    window.pageFlip=pf;
+    var total=pf.getPageCount(), c=document.getElementById('fb-counter'), pv=document.getElementById('fb-prev'), nx=document.getElementById('fb-next');
+    function pad2(x){return (x<10?'0':'')+x}
+    function upd(){
+      var i=pf.getCurrentPageIndex(), o=pf.getOrientation(), t;
+      if(i===0) t='Cover'; else if(i===total-1) t='End';
+      else if(o==='landscape'){var a=(i%2===0)?i-1:i; t='Pages '+pad2(a)+'–'+pad2(Math.min(a+1,total-2))+' / '+pad2(total-2);}
+      else t='Page '+pad2(i)+' / '+pad2(total-2);
+      c.textContent=t; pv.disabled=(i===0); nx.disabled=(i>=total-1);
+    }
+    pf.on('flip',upd); pf.on('changeOrientation',upd); pf.on('init',upd); upd();
+    pv.onclick=function(){pf.flipPrev()}; nx.onclick=function(){pf.flipNext()};
+    function inView(){var r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight}
+    document.addEventListener('keydown',function(e){var t=e.target&&e.target.tagName;if(t==='INPUT'||t==='TEXTAREA'||!inView())return;
+      if(e.key==='ArrowRight'){pf.flipNext();e.preventDefault()} if(e.key==='ArrowLeft'){pf.flipPrev();e.preventDefault()}});
+  }
+})();
