@@ -31,8 +31,8 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 - `_src/images.py` — regenerates `assets/img/` from the original PDFs/mockups on the build box (paths under `/workspace/...`,
   not in the repo). Contains the page selections and blur boxes (fractions of the page). You normally won't need it —
   just drop replacement images into `assets/img/<slug>/` with the same names.
-- Case template = the "Nomad v2" case layout: Cover → Hero mockup → Meta row → dark Project/Solution/Results → Galleries → Next project.
-- Spacing: one vertical rhythm in `assets/css/site.css` `:root` — `--sec` 120 · `--s96` · `--s72` · `--s48` · `--s32` (1440 values, scaling down via clamp). Case pages follow Figma frame 43:2 (Nomad case): cover 72/48 → 16:9 full-bleed hero → 12px caption → meta 48/96 → dark P/S/R 72 (blocks 48) → gallery sections 120 with ruled heads, alternating white/paper → Next project 96. Galleries are equal-height rows (items sized by aspect ratio), so nothing is cropped and no holes appear.
+- Case template = Figma page "01 Rebuild (current site)", frame 7:2 "Case Study – Aafayaa" (same as the live Webflow case pages): full-bleed hero → grey info section (text cols 2–4, 2×2 meta cols 6–8) → white gallery (cols 2–7) → grey Next Project → footer. No captions/labels on any picture.
+- Spacing: 8-col grid (147/24 gutters/48 margins at 1440; 16 margins mobile). Tokens in `assets/css/site.css`: `--cs` 128 (info + gallery padding, equal top and bottom), `--cn` 80 (Next Project), hero clamp(360px,43.75vw,630px). Galleries are equal-height rows (full width / pairs / portrait triples, sized by aspect ratio) so nothing is cropped. Home/Works/About keep the `--sec`/`--s96…` rhythm. CSS/JS are cache-busted with `?v=<md5>` by build.py.
 - Responsive: one page serves desktop and mobile (breakpoints at 960 / 820 / 640px; fluid `clamp()` type).
 
 ## Open items (as of the initial commit)

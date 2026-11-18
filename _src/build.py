@@ -4,13 +4,14 @@ Writes index.html, works.html, about.html, contact.html and work/<slug>.html.
 Needs only Python 3 + Pillow (Pillow is used to read image sizes). Images must already be in assets/img/ (see _src/images.py).
 The generated HTML is committed, so GitHub Pages serves it with no build step.
 """
-import os, re, html, json, sys
+import os, re, html, json, sys, hashlib
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import *
 from confidentiality import LOG
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def _v(rel): return hashlib.md5(open(os.path.join(ROOT, rel), 'rb').read()).hexdigest()[:8]
 IMG = os.path.join(ROOT, 'assets', 'img')
 E = lambda s: html.escape(s, quote=False)
 
@@ -42,7 +43,7 @@ def head(title, r, desc='Portfolio of Lauren Elyse Gonzalez, graphic designer at
 <meta name="description" content="{html.escape(desc)}">
 <link rel="preload" href="{r}assets/fonts/Geist-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="{r}assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="{r}assets/css/site.css">
+<link rel="stylesheet" href="{r}assets/css/site.css?v={_v('assets/css/site.css')}">
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
 '''
@@ -64,7 +65,7 @@ def footer(r, line=None):
 <div class="c4-13 btns mt40">{btn("Let’s Get to Work", r+"contact.html", "ond")}{btn(EMAIL, "mailto:"+EMAIL, "sec", "↗", " long")}</div></div>
 <a class="big" href="{r}contact.html" aria-label="Contact"><span>Contact</span><span aria-hidden="true">↗</span></a>
 <div class="bottom"><a class="mono" href="mailto:{EMAIL}">[Contact] {EMAIL}</a><a class="mono" href="{LINKEDIN}" target="_blank" rel="noopener">[Social] LinkedIn ↗</a><span class="mono muted">©2026 All rights reserved.</span></div></footer>
-<script src="{r}assets/js/site.js"></script>
+<script src="{r}assets/js/site.js?v={_v('assets/js/site.js')}"></script>
 </body></html>
 '''
 def write(rel, body):
@@ -201,20 +202,21 @@ def contact():
     write('contact.html', b)
 
 # ---------------- CASE PAGES ----------------
-def fig(rel, alt, n, cap, r, cls=''):
-    return f'<figure class="fig {cls}">{img(rel, alt, r)}<figcaption class="cap mono-s"><span>[{n:02d}]</span><span>{T(cap)}</span></figcaption></figure>'
-def shead(label, title, intro=''):
-    return f'<div class="sec-head"><div class="col"><span class="mono muted">[{label}]</span><h2 class="m">{title}</h2></div>{f"<p class={chr(34)}bm muted intro{chr(34)}>{T(intro)}</p>" if intro else ""}</div>'
-def auto_gallery(slug, files, r, start, title, portrait_three=True):
-    """Nomad rhythm: wide images run full width; the rest sit in rows of two (three for portrait page sets).
-    Row items are sized by aspect ratio so every row has one common height — no crops, no holes."""
-    n = start
+# ---------------- CASE PAGES ----------------
+# Template = Figma page "01 Rebuild (current site)", frame 7:2 "Case Study – Aafayaa" (Lauren's live Webflow case page):
+#   full-bleed hero (630 desktop / 360 mobile) → grey info section (text cols 2–4, meta cols 6–8, 128px top+bottom)
+#   → white gallery section (cols 2–7, 128px top+bottom, 24px gaps, no captions) → grey Next Project (80px) → footer.
+def pic(rel, alt, r, flex=None):
+    st = f' style="flex:{flex:.4f} 1 0"' if flex else ''
+    return f'<figure class="pic"{st}>{img(rel, alt, r)}</figure>'
+def gallery(slug, files, r, title, portrait_three=True, wide_at=1.9):
+    """Rows: wide images full width; others in pairs (triples for portrait/square sets). Items in a row share one height."""
     sizes = [size(f'assets/img/{slug}/{f}') for f in files]
-    portrait = portrait_three and sum(1 for w, h in sizes if h > w) > len(sizes) / 2
+    portrait = portrait_three and sum(1 for w, h in sizes if h > w * 1.05) > len(sizes) / 2
     per = 3 if portrait else 2
     rows, cur = [], []
     for i, (w, h) in enumerate(sizes):
-        wide = (not portrait) and (w / h > 1.9 or (i == 0 and w / h > 1.2))
+        wide = (not portrait) and (w / h > wide_at or (i == 0 and w / h > 1.2))
         if wide:
             if cur: rows.append(cur); cur = []
             rows.append([i])
@@ -222,101 +224,94 @@ def auto_gallery(slug, files, r, start, title, portrait_three=True):
             cur.append(i)
             if len(cur) == per: rows.append(cur); cur = []
     if cur:
-        # a leftover single image joins the previous partial-free row structure: pair it with the previous row if that was a pair
-        if len(cur) == 1 and rows and len(rows[-1]) == per and per == 2 and sizes[cur[0]][0] / sizes[cur[0]][1] < 1.2:
+        if len(cur) == 1 and rows and len(rows[-1]) == 2 and per == 2 and sizes[cur[0]][0] / sizes[cur[0]][1] < 1.2:
             rows[-1].append(cur[0])
         else:
             rows.append(cur)
-    out = []
+    out = ''
     for row in rows:
-        items = ''
-        for i in row:
-            w, h = sizes[i]
-            fg = fig(f'assets/img/{slug}/{files[i]}', f'{title} — image {i+1}', start + i, f'{title} — {i+1:02d}', r)
-            items += fg.replace('<figure class="fig ', f'<figure style="flex:{w/h:.4f} 1 0" class="fig ', 1)
-        out.append(f'<div class="g-row{" solo" if len(row) == 1 else ""}">{items}</div>')
-    return f'<div class="gallery">{"".join(out)}</div>', start + len(files)
-
-def case_head(p, r):
-    lab = CAT_LABEL[p['cat']]
-    L = len(p['title'])
-    tcls = 'case-title' + ('' if L <= 6 else ' t2' if L <= 9 else ' t3' if L <= 24 else ' t4')
-    summ = T(p["summary"]) if p["cat"] != "brand" and p["slug"] != "fortis-net-lease" else T(first_sentence(p["summary"]))
-    return f'''<section class="wrap case-cover" data-name="Case Cover"><div class="row" style="justify-content:space-between;gap:16px"><span class="mono muted">[Case Study] {lab}</span><a class="mono muted" href="{r}works.html">← All Works</a></div>
-<div class="g12"><h1 class="{tcls} c1-8">{E(p["title"])}</h1><p class="bl c8-13">{summ}</p></div></section>'''
+        out += '<div class="g-row">' + ''.join(pic(f'assets/img/{slug}/{files[i]}', f'{title} — image {i+1}', r, sizes[i][0] / sizes[i][1]) for i in row) + '</div>'
+    return f'<div class="gallery">{out}</div>'
 def first_sentence(s):
     m = re.match(r'(.+?[.!?])(\s|$)', s); return m.group(1) if m else s
-def meta_row(p):
+def meta_items(p):
     if p['cat'] == 'brand' or p['slug'] == 'fortis-net-lease':
-        items = [('Client', p['client']), ('Industry', p['industry']), ('Service', p['service']), ('Year', p['year'])]
-    elif p['cat'] == 'interactive':
-        items = [('Client', p['client']), ('Type', p['type']), ('Format', p['tool'] + ' interactive presentation'), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
-    else:
-        items = [('Client', p['client']), ('Type', p['type']), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
-    return '<section class="wrap case-meta" data-name="Meta"><div class="meta-row">' + ''.join(
-        f'<div><span class="mono-s muted">[{k}]</span><span class="bm">{T(v)}</span></div>' for k, v in items if v) + '</div></section>'
-def psr(p):
-    sol = ''.join(f'<p class="bl">{T(s)}</p>' for s in p['solution'])
-    note = f'<p class="mono-s muted draft">{T(p["draft_note"])}</p>' if p.get('draft_note') else ''
-    return f'''<section class="dark psr" data-name="Project / Solution / Results">{note}
-<div class="blk"><div class="lab"><span class="mono muted">[01]</span><span class="s">Project</span></div><div class="txt"><p class="s">{T(p["project"])}</p></div></div>
-<div class="blk"><div class="lab"><span class="mono muted">[02]</span><span class="s">Solution</span></div><div class="txt">{sol}</div></div>
-<div class="blk"><div class="lab"><span class="mono muted">[03]</span><span class="s">Results</span></div><div class="txt"><p class="{'m' if len(strip_ph(p['results'])) < 220 else 's'}">{T(p["results"])}</p></div></div></section>'''
-def next_block(p, r, bg="white"):
-    i = ALL.index(p); nx = ALL[(i + 1) % len(ALL)]
-    return f'''<section class="wrap {bg} next" data-name="Next Project"><div class="next-top"><span class="mono muted">[Next Project]</span>{btn("All Works", r+"works.html", "sec")}</div>
-<a class="g12" href="{r}work/{nx["slug"]}.html"><div class="c1-7 col"><h2 class="xl">{E(nx["title"])}</h2><span class="mono mt16">{T(short_type(nx))} · {T(nx["year"])} →</span></div><div class="c7-13 ph">{img(card_img(nx["slug"]), nx["title"], r)}</div></a></section>'''
-
-def case(p):
-    r = '../'; s = p['slug']
-    body = case_head(p, r)
+        return [('Client', p['client']), ('Industry', p['industry']), ('Service', p['service']), ('Year', p['year'])]
     if p['cat'] == 'interactive':
-        body += f'<div class="case-stage" data-name="Hero Playlist">{playlist(p, r, link=False)}</div><div class="wrap cap mono-s"><span>[01]</span><span>Selected screens, auto-playing</span></div>'
-    else:
-        body += f'<div class="case-hero" data-name="Hero Mockup">{img(f"assets/img/{s}/hero.jpg", p["title"]+" — hero mockup", r, eager=True)}</div><div class="wrap cap mono-s"><span>[01]</span><span>{"Mockup using the original artwork" if p["cat"] == "re" and s != "fortis-net-lease" else E(p["title"])}</span></div>'
-    body += meta_row(p) + psr(p)
-    if s == 'nomad':
-        body += nomad_galleries(r)
-    elif p['cat'] == 're' and s != 'fortis-net-lease':
-        g, _ = auto_gallery(s, imgs(s, 'p'), r, 2, p['title'])
-        body += f'<section class="wrap white sec" data-name="Gallery / Pages">{shead("Gallery 01", E(p["pages_title"]), p["pages_intro"])}{g}<p class="mono-s note">{T(LOG[s]["note"])}</p></section>'
-    elif p['cat'] == 'interactive':
-        g, _ = auto_gallery(s, imgs(s, 's'), r, 1, p['title'])
-        body += f'<section class="wrap white sec" data-name="Gallery / Screens">{shead("Gallery 01", "Selected screens")}{g}<p class="mono-s note">{T(p["note"])}</p></section>'
-    else:
-        g, _ = auto_gallery(s, imgs(s, 'g'), r, 2, p['title'], portrait_three=False)
-        extra = f'<p class="mono-s note">{T(LOG[s]["note"])}</p>' if s in LOG and LOG[s].get('note') else ''
-        body += f'<section class="wrap white sec" data-name="Gallery">{shead("Gallery 01", p.get("gallery_title","Selected work"))}{g}{extra}</section>'
-    body += next_block(p, r, 'white' if s == 'nomad' else 'paper')
-    extra_js = '<script src="../assets/js/page-flip.browser.js"></script>\n' if s == 'nomad' else ''
-    page = head(f'{strip_ph(p["title"])} — Case Study — Lauren Gonzalez', r, strip_ph(first_sentence(p['summary']))) + nav(r, 'brand' if p['cat'] == 'brand' else 're') + body + footer(r)
-    page = page.replace(f'<script src="{r}assets/js/site.js">', extra_js + f'<script src="{r}assets/js/site.js">')
-    write(f'work/{s}.html', page)
+        return [('Client', p['client']), ('Type', p['type']), ('Format', p['tool'] + ' interactive presentation'), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
+    return [('Client', p['client']), ('Type', p['type']), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
+def info(p, r):
+    lab = CAT_LABEL[p['cat']]
+    own_summary = p['cat'] not in ('brand',) and p['slug'] != 'fortis-net-lease'   # brand summaries repeat the Project text
+    sol = ''.join(f'<p class="bm">{T(s)}</p>' for s in p['solution'])
+    draft = f'<p class="mono-s muted">{T(p["draft_note"])}</p>' if p.get('draft_note') else ''
+    meta = ''.join(f'<div><span class="mono-s muted">[{k}]</span><span class="bm">{T(v)}</span></div>' for k, v in meta_items(p) if v)
+    return f'''<section class="case-info" data-name="Case Info"><div class="wrap cg8">
+<div class="ci-text">
+<div class="ci-top"><span class="mono-s muted">[Case Study] {lab}</span><a class="mono-s muted" href="{r}works.html">← All Works</a></div>
+<h1 class="ci-title">{E(p["title"])}</h1>{f'<p class="bl muted">{T(p["summary"])}</p>' if own_summary else ''}
+<div class="ci-blk"><h2 class="ci-h">Project</h2><p class="bm">{T(p["project"])}</p></div>
+<div class="ci-blk"><h2 class="ci-h">Solution</h2>{sol}</div>
+<div class="ci-blk"><h2 class="ci-h">Results</h2><p class="bm">{T(p["results"])}</p></div>{draft}
+</div>
+<div class="ci-meta">{meta}</div>
+</div></section>'''
+def gsec(inner, head='', intro='', note=''):
+    h = f'<div class="g-head"><h2 class="ci-h">{head}</h2>{f"<p class={chr(34)}bm muted{chr(34)}>{T(intro)}</p>" if intro else ""}</div>' if head else ''
+    n = f'<p class="mono-s muted g-note">{T(note)}</p>' if note else ''
+    return f'<div class="g-block">{h}{inner}{n}</div>'
+def next_block(p, r):
+    i = ALL.index(p); nx = ALL[(i + 1) % len(ALL)]
+    return f'''<section class="case-next" data-name="Next Project"><div class="wrap cg8">
+<div class="cn-head"><h2 class="cn-title">Next Project</h2>{btn("All Works", r+"works.html", "sec sm")}</div>
+<a class="cn-card" href="{r}work/{nx["slug"]}.html"><div class="ph">{img(card_img(nx["slug"]), nx["title"], r)}</div>
+<div class="cn-meta"><span class="mono-s">{E(nx["title"])}</span><span class="mono-s">{T(nx["year"])}</span></div></a>
+</div></section>'''
 
 NOMAD_PAL = [('Signal Red', '#FF343B'), ('Orange', '#FF7B21'), ('Sun Yellow', '#FFC55E'), ('Charcoal', '#3C3839'), ('White', '#FFFFFF')]
 FLIP_ALTS = ['Cover', '01 Investment Summary', '01 Investment Summary', '02 Property Description', '02 Property Description', 'Site plan', 'Community amenities', 'Apartment amenities', 'Apartment amenities', 'Floor plans', 'Floor plans', '03 Market Overview', '03 Market Overview', 'Access map', 'Market supply chart', '04 The Comparables', '04 The Comparables']
-def nomad_galleries(r):
+def nomad_blocks(r):
     I = 'assets/img/nomad/'
-    F = lambda f, cap, n, alt=None: fig(I + f, alt or cap, n, cap, r)
+    def row(*fs): 
+        return '<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in fs) + '</div>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in NOMAD_PAL)
     pages = ''.join(f'<div class="fb-page"{" data-density=\"hard\"" if i == 0 else ""}><img alt="Nomad offering package — {a}" src="{r}{I}flip/f{i:02d}.jpg" draggable="false"></div>' for i, a in enumerate(FLIP_ALTS))
     pages += '<div class="fb-page fb-end" data-density="hard"><div class="fb-endin"><span class="mono">[End]</span><div><div class="fb-endt">Nomad</div><div class="mono" style="margin-top:14px">Investor Offering Package · 2026</div></div><span class="mono fb-endm">Colliers · Overlook, North Portland — selected pages; confidential pages omitted</span></div></div>'
     hint = '<span class="hd">Drag a page corner, click a page, or use the ← → keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
-    return f'''
-<section class="wrap white sec" data-name="Design System">{shead("Design system", "Design system", "Palette sampled from the printed pages; typefaces as embedded in the PDF.")}
-<div class="swatches">{sw}</div>
-<div class="gallery-2 mt96">{F("ds_wordmark.jpg", "Display: heavy italic wordmark", 2)}{F("ds_title-box.jpg", "Headline: orange caps in an outlined title box", 3)}</div>
-<div class="col gap8 mt40" style="padding-top:16px;border-top:1px solid var(--ink)"><span class="mono-s muted">[Type]</span><span class="bm">Acumin family (Variable Concept + Pro: Thin → Bold) for display and text, with Expressway, Freight Sans and Apparat in supporting roles.</span></div>
-<div class="split-57 mt96">{F("ds_divider-label.jpg", "Chapter tab: oversized red numeral on charcoal", 4)}<div class="split-13">{F("ds_hatch.jpg", "Diagonal hatch accent", 5)}{F("ds_icons.jpg", "Amenity icon set", 6)}</div></div></section>
-<section class="wrap sec" data-name="Gallery / The printed book">{shead("Gallery 01", "The printed book")}
-<div class="gallery-2">{F("n02.jpg", "Cover: property photography, NOMAD wordmark, hatch border", 7)}{F("n03.jpg", "Printed offering packages, ready for investor tours", 8)}</div></section>
-<section class="wrap white sec" data-name="Gallery / Inside the book">{shead("Gallery 02", "Inside the book", "The reading sequence as an investor meets it — chapter openers, amenities, floor plans, maps and market data. Turn the pages.")}
-<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book">{pages}</div></div>
+    ds = f'''<div class="gallery"><div class="swatches">{sw}</div>
+{row(("ds_wordmark.jpg", "Display: heavy italic wordmark"), ("ds_title-box.jpg", "Headline: orange caps in an outlined title box"))}
+<p class="bm"><span class="mono-s muted">[Type]</span><br>Acumin family (Variable Concept + Pro: Thin → Bold) for display and text, with Expressway, Freight Sans and Apparat in supporting roles.</p>
+{row(("ds_divider-label.jpg", "Chapter tab: oversized red numeral on charcoal"), ("ds_hatch.jpg", "Diagonal hatch accent"), ("ds_icons.jpg", "Amenity icon set"))}</div>'''
+    book = f'''<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book">{pages}</div></div>
 <div class="fb-controls"><button class="fb-btn" id="fb-prev" aria-label="Previous page">←</button><span class="mono fb-counter" id="fb-counter" aria-live="polite">Cover</span><button class="fb-btn" id="fb-next" aria-label="Next page">→</button></div>
-<div class="fb-foot"><span class="mono-s muted">[09]</span><span class="mono-s">Interactive flip-book: 16 selected pages of the offering package</span><span class="mono-s muted fb-hint">{hint}</span></div></div>
-<p class="mono-s note">{T(LOG["nomad"]["note"])}</p></section>
-<section class="wrap sec" data-name="Gallery / Maps &amp; data">{shead("Gallery 03", "Maps &amp; data", "Beyond the page: the neighborhood map on screen, and a close look at a chart drawn in the document palette.")}
-<div class="split-57">{F("n06.jpg", "Neighborhood amenities map, shown on screen", 10)}{F("n08.jpg", "Detail: market supply chart in the document palette", 11)}</div></section>'''
+<div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div></div>'''
+    return (gsec(ds, 'Design system', 'Palette sampled from the printed pages; typefaces as embedded in the PDF.')
+            + gsec(f'<div class="gallery">{row(("n02.jpg", "Cover: property photography, NOMAD wordmark, hatch border"), ("n03.jpg", "Printed offering packages, ready for investor tours"))}</div>', 'The printed book')
+            + gsec(book, 'Inside the book', 'The reading sequence as an investor meets it — chapter openers, amenities, floor plans, maps and market data. Turn the pages.', LOG["nomad"]["note"])
+            + gsec(f'<div class="gallery">{row(("n06.jpg", "Neighborhood amenities map, shown on screen"), ("n08.jpg", "Detail: market supply chart in the document palette"))}</div>', 'Maps &amp; data', 'Beyond the page: the neighborhood map on screen, and a close look at a chart drawn in the document palette.'))
+
+def case(p):
+    r = '../'; s = p['slug']
+    if p['cat'] == 'interactive':
+        ims = ''.join(f'<img src="{r}assets/img/{s}/{f}" alt="{E(p["title"])} — screen {i+1}"{" class=\"on\"" if i == 0 else ""} decoding="async">' for i, f in enumerate(imgs(s, 's')))
+        hero = f'<div class="case-hero scr" data-interval="3200" data-name="Hero Playlist"><div class="scr-in">{ims}</div></div>'
+    else:
+        hero = f'<div class="case-hero" data-name="Hero">{img(f"assets/img/{s}/hero.jpg", p["title"]+" — hero image", r, eager=True)}</div>'
+    body = hero + info(p, r)
+    if s == 'nomad':
+        g = nomad_blocks(r)
+    elif p['cat'] == 're' and s != 'fortis-net-lease':
+        g = gsec(gallery(s, imgs(s, 'p'), r, p['title']), E(p['pages_title']), p['pages_intro'], LOG[s]['note'])
+    elif p['cat'] == 'interactive':
+        g = gsec(gallery(s, imgs(s, 's'), r, p['title']), 'Selected screens', '', p['note'])
+    else:
+        g = gsec(gallery(s, imgs(s, 'g'), r, p['title'], wide_at=1.2), '', '', LOG.get(s, {}).get('note', ''))
+    body += f'<section class="case-gallery white" data-name="Gallery"><div class="wrap cg8"><div class="cg-col">{g}</div></div></section>'
+    body += next_block(p, r)
+    extra_js = '<script src="../assets/js/page-flip.browser.js"></script>\n' if s == 'nomad' else ''
+    page = head(f'{strip_ph(p["title"])} — Case Study — Lauren Gonzalez', r, strip_ph(first_sentence(p['summary']))) + nav(r, 'brand' if p['cat'] == 'brand' else 're') + body + footer(r)
+    page = page.replace(f'<script src="{r}assets/js/site.js', extra_js + f'<script src="{r}assets/js/site.js')
+    write(f'work/{s}.html', page)
 
 if __name__ == '__main__':
     home(); works(); about(); contact()
