@@ -240,22 +240,24 @@ def meta_items(p):
     if p['cat'] == 'interactive':
         return [('Client', p['client']), ('Type', p['type']), ('Format', p['tool'] + ' interactive presentation'), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
     return [('Client', p['client']), ('Type', p['type']), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
-def info(p, r):
+HERO_FIT = {"madison-plaza"}   # mockups on white: show whole image, no crop
+def case_head(p, r):
     lab = CAT_LABEL[p['cat']]
-    own_summary = p['cat'] not in ('brand',) and p['slug'] != 'fortis-net-lease'   # brand summaries repeat the Project text
-    sol = ''.join(f'<p class="bm">{T(s)}</p>' for s in p['solution'])
-    draft = f'<p class="mono-s muted">{T(p["draft_note"])}</p>' if p.get('draft_note') else ''
-    meta = ''.join(f'<div><span class="mono-s muted">[{k}]</span><span class="bm">{T(v)}</span></div>' for k, v in meta_items(p) if v)
-    return f'''<section class="case-info" data-name="Case Info"><div class="wrap cg8">
-<div class="ci-text">
-<div class="ci-top"><span class="mono-s muted">[Case Study] {lab}</span><a class="mono-s muted" href="{r}works.html">← All Works</a></div>
-<h1 class="ci-title">{E(p["title"])}</h1>{f'<p class="bl muted">{T(p["summary"])}</p>' if own_summary else ''}
-<div class="ci-blk"><h2 class="ci-h">Project</h2><p class="bm">{T(p["project"])}</p></div>
-<div class="ci-blk"><h2 class="ci-h">Solution</h2>{sol}</div>
-<div class="ci-blk"><h2 class="ci-h">Results</h2><p class="bm">{T(p["results"])}</p></div>{draft}
-</div>
-<div class="ci-meta">{meta}</div>
-</div></section>'''
+    L = len(p['title'])
+    tcls = 'case-title' + ('' if L <= 6 else ' t2' if L <= 9 else ' t3' if L <= 24 else ' t4')
+    summ = T(p["summary"]) if p["cat"] != "brand" and p["slug"] != "fortis-net-lease" else T(first_sentence(p["summary"]))
+    return f'''<section class="wrap case-cover" data-name="Case Cover"><div class="row" style="justify-content:space-between;gap:16px"><span class="mono muted">[Case Study] {lab}</span><a class="mono muted" href="{r}works.html">← All Works</a></div>
+<div class="g12"><h1 class="{tcls} c1-8">{E(p["title"])}</h1><p class="bl c8-13">{summ}</p></div></section>'''
+def meta_row(p):
+    return '<section class="wrap case-meta" data-name="Meta"><div class="meta-row">' + ''.join(
+        f'<div><span class="mono-s muted">[{k}]</span><span class="bm">{T(v)}</span></div>' for k, v in meta_items(p) if v) + '</div></section>'
+def psr(p):
+    sol = ''.join(f'<p class="bl">{T(s)}</p>' for s in p['solution'])
+    note = f'<p class="mono-s muted draft">{T(p["draft_note"])}</p>' if p.get('draft_note') else ''
+    return f'''<section class="dark psr" data-name="Project / Solution / Results">{note}
+<div class="blk"><div class="lab"><span class="mono muted">[01]</span><span class="s">Project</span></div><div class="txt"><p class="s">{T(p["project"])}</p></div></div>
+<div class="blk"><div class="lab"><span class="mono muted">[02]</span><span class="s">Solution</span></div><div class="txt">{sol}</div></div>
+<div class="blk"><div class="lab"><span class="mono muted">[03]</span><span class="s">Results</span></div><div class="txt"><p class="{'m' if len(strip_ph(p['results'])) < 220 else 's'}">{T(p["results"])}</p></div></div></section>'''
 def gsec(inner, head='', intro='', note=''):
     h = f'<div class="g-head"><h2 class="ci-h">{head}</h2>{f"<p class={chr(34)}bm muted{chr(34)}>{T(intro)}</p>" if intro else ""}</div>' if head else ''
     n = f'<p class="mono-s muted g-note">{T(note)}</p>' if note else ''
@@ -292,12 +294,12 @@ def nomad_blocks(r):
 
 def case(p):
     r = '../'; s = p['slug']
+    body = case_head(p, r)
     if p['cat'] == 'interactive':
-        ims = ''.join(f'<img src="{r}assets/img/{s}/{f}" alt="{E(p["title"])} — screen {i+1}"{" class=\"on\"" if i == 0 else ""} decoding="async">' for i, f in enumerate(imgs(s, 's')))
-        hero = f'<div class="case-hero scr" data-interval="3200" data-name="Hero Playlist"><div class="scr-in">{ims}</div></div>'
+        body += f'<div class="case-stage" data-name="Hero Playlist">{playlist(p, r, link=False)}</div>'
     else:
-        hero = f'<div class="case-hero" data-name="Hero">{img(f"assets/img/{s}/hero.jpg", p["title"]+" — hero image", r, eager=True)}</div>'
-    body = hero + info(p, r)
+        body += f'<div class="case-hero{" fit" if s in HERO_FIT and os.path.exists(f"/workspace/lauren-case-studies/mockups/{s}_hero-override.jpg") else ""}" data-name="Hero Mockup">{img(f"assets/img/{s}/hero.jpg", p["title"]+" — hero mockup", r, eager=True)}</div>'
+    body += meta_row(p) + psr(p)
     if s == 'nomad':
         g = nomad_blocks(r)
     elif p['cat'] == 're' and s != 'fortis-net-lease':

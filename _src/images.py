@@ -63,7 +63,8 @@ def main():
     if os.path.exists(OUT): shutil.rmtree(OUT)
     man={}
     for slug,(folder,mock,pages) in RE.items():
-        save(Image.open(MOCK+mock),slug,'hero.jpg')
+        ov=MOCK+slug+'_hero-override.jpg'   # mockup supplied by Rodrigo replaces the generated one
+        save(Image.open(ov if os.path.exists(ov) else MOCK+mock),slug,'hero.jpg')
         names=[]
         for k,spec in enumerate(pages,1):
             n,boxes=spec[0],spec[1]
