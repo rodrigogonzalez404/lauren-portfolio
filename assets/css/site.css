@@ -176,6 +176,13 @@ button{font:inherit;color:inherit}
 .fb-endin{position:absolute;inset:0;padding:8%;display:flex;flex-direction:column;justify-content:space-between}
 .fb-endt{font-weight:500;font-size:clamp(36px,8vw,112px);letter-spacing:-.05em;line-height:.9}
 .fb-endm{color:#949495}
+.fb-conf{background:#0F0F0F;color:#F2F2F2}
+.fb-confin{position:absolute;inset:0;display:flex;align-items:center;padding:0 7%}
+.fb-conf-l .fb-confin{justify-content:flex-end;text-align:right}.fb-conf-r .fb-confin{justify-content:flex-start;text-align:left}
+.fb-conft{font-weight:500;font-size:clamp(14px,2.6vw,38px);letter-spacing:-.03em;line-height:1.05}
+.fb-conf .po{display:none}.fb-confm{color:#949495}
+.fb-book.portrait .fb-conf .po{display:inline}.fb-book.portrait .fb-conf .la{display:none}
+.fb-book.portrait .fb-confin{justify-content:center;text-align:center;padding:0 10%}.fb-book.portrait .fb-conft{font-size:clamp(20px,6vw,40px)}
 .fb-controls{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:clamp(28px,3.3vw,48px)}
 .fb-btn{width:52px;height:52px;border-radius:999px;border:1px solid #0F0F0F;background:transparent;font:500 20px Geist,sans-serif;cursor:pointer;color:#0F0F0F;display:inline-flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
 @media (hover:hover){.fb-btn:hover{background:#0F0F0F;color:#F2F2F2}}

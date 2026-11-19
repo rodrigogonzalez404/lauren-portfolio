@@ -292,6 +292,41 @@ def nomad_blocks(r):
             + gsec(book, 'Inside the book', 'The reading sequence as an investor meets it — chapter openers, amenities, floor plans, maps and market data. Turn the pages.', LOG["nomad"]["note"])
             + gsec(f'<div class="gallery">{row(("n06.jpg", "Neighborhood amenities map, shown on screen"), ("n08.jpg", "Detail: market supply chart in the document palette"))}</div>', 'Maps &amp; data', 'Beyond the page: the neighborhood map on screen, and a close look at a chart drawn in the document palette.'))
 
+MADISON_PAL = [('Raspberry', '#B0144A'), ('Crimson', '#A41D41'), ('Plum Charcoal', '#37272C'), ('Warm Grey', '#ACA5A8'), ('White', '#FFFFFF')]
+def madison_blocks(r):
+    I = 'assets/img/madison-plaza/'
+    def row(*fs):
+        return '<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in fs) + '</div>'
+    seq = json.load(open(os.path.join(ROOT, '_src', 'madison_flip.json')))
+    pages = ''
+    k = 0
+    for i, e in enumerate(seq):
+        hard = ' data-density="hard"' if i in (0, len(seq) - 1) else ''
+        if e == 'BLACK':
+            side = 'l' if k == 0 else 'r'; k += 1
+            if side == 'l':
+                txt = '<span class="fb-conft">Confidential —<span class="po"> financial information omitted</span></span>'
+            else:
+                txt = '<span class="fb-conft la">financial information omitted</span><span class="mono-s fb-confm po">[03] The Financials · pages 24–33</span>'
+            pages += f'<div class="fb-page fb-conf fb-conf-{side}"><div class="fb-confin">{txt}</div></div>'
+        else:
+            tag, f = e.split(':')
+            alt = {'cover': 'Front cover', 'back': 'Back cover'}.get(tag, 'Page ' + tag[1:])
+            pages += f'<div class="fb-page"{hard}><img alt="Madison Plaza offering memorandum — {alt}" src="{r}{I}flip/{f}" draggable="false"></div>'
+    hint = '<span class="hd">Drag a page corner, click a page, or use the ← → keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
+    sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in MADISON_PAL)
+    ds = f"""<div class="gallery"><div class="swatches">{sw}</div>
+{row(("ds_wordmark.jpg", "Wordmark: spaced raspberry caps over a light italic deck"), ("ds_headline.jpg", "Headline: thin grey caps over bold raspberry caps"))}
+<p class="bm"><span class="mono-s muted">[Type]</span><br>Montserrat family (Thin → Bold) for headlines, section numerals and stats, with Open Sans for text and tables; Minion Pro and Myriad Pro in minor roles.</p>
+{row(("ds_divider.jpg", "Section opener: thin oversized numeral on a darkened photograph"), ("ds_stats.jpg", "Fact / meaning / why-it-matters stat columns"))}
+{row(("ds_band.jpg", "Plum charcoal data band"))}</div>"""
+    book = f"""<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book">{pages}</div></div>
+<div class="fb-controls"><button class="fb-btn" id="fb-prev" aria-label="Previous page">←</button><span class="mono fb-counter" id="fb-counter" aria-live="polite">Cover</span><button class="fb-btn" id="fb-next" aria-label="Next page">→</button></div>
+<div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div></div>"""
+    return (gsec(ds, 'Design system', 'Palette sampled from the printed pages; typefaces as embedded in the PDF.')
+            + gsec(f'<div class="gallery">{row(("book_mockup.jpg", "The printed offering memorandum"))}{row(("book_cover.jpg", "Front cover"), ("book_back.jpg", "Back cover"))}</div>', 'The printed book')
+            + gsec(book, 'Inside the book', 'The reading sequence as an investor meets it — executive summary, the property, amenities and floor plans, then the market. Turn the pages.', LOG["madison-plaza"]["note"]))
+
 def case(p):
     r = '../'; s = p['slug']
     body = case_head(p, r)
@@ -302,6 +337,8 @@ def case(p):
     body += meta_row(p) + psr(p)
     if s == 'nomad':
         g = nomad_blocks(r)
+    elif s == 'madison-plaza':
+        g = madison_blocks(r)
     elif p['cat'] == 're' and s != 'fortis-net-lease':
         g = gsec(gallery(s, imgs(s, 'p'), r, p['title']), E(p['pages_title']), p['pages_intro'], LOG[s]['note'])
     elif p['cat'] == 'interactive':
@@ -310,7 +347,7 @@ def case(p):
         g = gsec(gallery(s, imgs(s, 'g'), r, p['title'], wide_at=1.2), '', '', LOG.get(s, {}).get('note', ''))
     body += f'<section class="case-gallery white" data-name="Gallery"><div class="wrap cg8"><div class="cg-col">{g}</div></div></section>'
     body += next_block(p, r)
-    extra_js = '<script src="../assets/js/page-flip.browser.js"></script>\n' if s == 'nomad' else ''
+    extra_js = '<script src="../assets/js/page-flip.browser.js"></script>\n' if s in ('nomad', 'madison-plaza') else ''
     page = head(f'{strip_ph(p["title"])} — Case Study — Lauren Gonzalez', r, strip_ph(first_sentence(p['summary']))) + nav(r, 'brand' if p['cat'] == 'brand' else 're') + body + footer(r)
     page = page.replace(f'<script src="{r}assets/js/site.js', extra_js + f'<script src="{r}assets/js/site.js')
     write(f'work/{s}.html', page)

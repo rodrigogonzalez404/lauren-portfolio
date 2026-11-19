@@ -34,8 +34,8 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Madison Plaza
 
-- **Blurred:** nothing
-- **Omitted:** page 02 contacts; confidentiality page; offering summary (right half of page 03 cropped off); offering text with price guidance; operating text; pages 12–17 financials divider + financials; comps; pages 19–23 market statistics; page 24 back cover with broker names
+- **Blurred:** p02 broker names, emails and phones; p07 offering bullets (price guidance, NOI, lender); p08 operating text (opex, in-place vs market rents, NOI upside); p10–11 ground-rent and MFTE savings text; p40 "Clears 3x in-place rent ($1,864/mo …)" line; back cover broker names, emails and phones
+- **Omitted:** PDF pages 13–17 = printed pp. 24–33 (unit mix & market rents, tax bill, income & expenses, pro forma notes, 10-year cash flow, rent comparables); replaced in the flip-book by a black "Confidential — financial information omitted" spread right after the 03 The Financials divider (pp. 22–23, kept)
 
 ## Redmond Gateway
 

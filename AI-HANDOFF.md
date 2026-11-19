@@ -44,3 +44,11 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 - Portland Office Market Report: only cover + contents shown; the report may be public — confirm before adding data pages.
 - Fortis Net Lease sits under Real Estate (works page only, not on Home); its location is `[[National]]`.
 - Zulay Kitchen and CGK case copy contain sales metrics that are on Lauren's live site; Home no longer mentions 8-figure / Target / Walmart (Rodrigo's request) — confirm whether the case pages should keep them.
+
+## Madison Plaza (Nov 19) — "like Nomad"
+- Hero, intro, meta row and dark [01]/[02]/[03] are unchanged (hero = Rodrigo's mockup via `_src/set_hero.py`).
+- Below that: Design system (palette sampled from the PDF: #B0144A, #A41D41, #37272C, #ACA5A8, #FFFFFF; Montserrat / Open Sans) → The printed book → Inside the book (same PageFlip component as Nomad).
+- Assets come from `_src/madison_book.py` (also run by images.py); page order is saved in `_src/madison_flip.json`.
+- Flip-book order: cover, printed pages 2–23 (PDF pages 2–12; PDF 12 is the "03 The Financials" divider and is kept), then a black HTML spread reading "Confidential — financial information omitted", then printed pages 34–45 (PDF pages 18–23), then the back cover (PDF 24).
+- PDF pages 13–17 (printed pages 24–33) are financials and are never published.
+- Blur boxes are defined in `madison_book.py` and logged in CONFIDENTIALITY.md.

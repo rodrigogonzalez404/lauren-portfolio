@@ -34,6 +34,7 @@
       if(i===0) t='Cover'; else if(i===total-1) t='End';
       else if(o==='landscape'){var a=(i%2===0)?i-1:i; t='Pages '+pad2(a)+'–'+pad2(Math.min(a+1,total-2))+' / '+pad2(total-2);}
       else t='Page '+pad2(i)+' / '+pad2(total-2);
+      el.classList.toggle('portrait',o==='portrait');
       c.textContent=t; pv.disabled=(i===0); nx.disabled=(i>=total-1);
     }
     pf.on('flip',upd); pf.on('changeOrientation',upd); pf.on('init',upd); upd();
