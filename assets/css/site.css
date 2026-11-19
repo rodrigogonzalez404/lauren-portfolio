@@ -166,17 +166,19 @@ button{font:inherit;color:inherit}
 .scr-prog i{display:block;height:100%;width:0;background:#F2F2F2}
 @media (prefers-reduced-motion:reduce){.scr-in img{transition:none}.card .ph img{transition:none}}
 /* flip-book (StPageFlip, MIT) */
-.fb-stage{background:linear-gradient(180deg,#EDEDEB 0%,#E2E2DF 100%);border:1px solid #E0E0DD;padding:clamp(28px,6.1vw,88px) clamp(8px,5vw,72px) 0}
-.fb-wrap{max-width:1216px;margin:0 auto}
-.fb-wrap .stf__item{box-shadow:0 28px 48px -24px rgba(15,15,15,.38),0 2px 6px rgba(15,15,15,.08)}
+.fb-stage{position:relative;color:#F2F2F2;background-color:#1B1918;background-image:radial-gradient(120% 90% at 50% 38%,rgba(255,244,230,.07) 0%,rgba(0,0,0,0) 55%,rgba(0,0,0,.38) 100%),url("../img/ui/desk-charcoal.jpg");background-size:100% 100%,cover;background-position:center;border:1px solid #2A2725;box-shadow:inset 0 1px 0 rgba(255,255,255,.04);padding:clamp(28px,6.1vw,88px) clamp(8px,5vw,72px) 0}
+.fb-wrap{position:relative;max-width:1216px;margin:0 auto}
+.fb-wrap::after{content:"";position:absolute;left:6%;right:6%;bottom:-18px;height:36px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.62),rgba(0,0,0,0));filter:blur(6px);pointer-events:none;z-index:0}
+.fb-book{position:relative;z-index:1}
+.fb-wrap .stf__item{box-shadow:0 30px 50px -22px rgba(0,0,0,.75),0 6px 14px -4px rgba(0,0,0,.5),0 1px 2px rgba(0,0,0,.45)}
 .fb-book{margin:0 auto}
 .fb-page{background:#fff;overflow:hidden}
 .fb-page img{display:block;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none;pointer-events:none}
-.fb-end{background:#0F0F0F;color:#F2F2F2}
+.fb-end{background:#0F0F0F;color:#F2F2F2;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
 .fb-endin{position:absolute;inset:0;padding:8%;display:flex;flex-direction:column;justify-content:space-between}
 .fb-endt{font-weight:500;font-size:clamp(36px,8vw,112px);letter-spacing:-.05em;line-height:.9}
 .fb-endm{color:#949495}
-.fb-conf{background:#0F0F0F;color:#F2F2F2}
+.fb-conf{background:#0A0A0A;color:#F2F2F2;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
 .fb-confin{position:absolute;inset:0;display:flex;align-items:center;padding:0 7%}
 .fb-conf-l .fb-confin{justify-content:flex-end;text-align:right}.fb-conf-r .fb-confin{justify-content:flex-start;text-align:left}
 .fb-conft{font-weight:500;font-size:clamp(14px,2.6vw,38px);letter-spacing:-.03em;line-height:1.05}
@@ -184,12 +186,13 @@ button{font:inherit;color:inherit}
 .fb-book.portrait .fb-conf .po{display:inline}.fb-book.portrait .fb-conf .la{display:none}
 .fb-book.portrait .fb-confin{justify-content:center;text-align:center;padding:0 10%}.fb-book.portrait .fb-conft{font-size:clamp(20px,6vw,40px)}
 .fb-controls{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:clamp(28px,3.3vw,48px)}
-.fb-btn{width:52px;height:52px;border-radius:999px;border:1px solid #0F0F0F;background:transparent;font:500 20px Geist,sans-serif;cursor:pointer;color:#0F0F0F;display:inline-flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
-@media (hover:hover){.fb-btn:hover{background:#0F0F0F;color:#F2F2F2}}
-.fb-btn:disabled{opacity:.3;cursor:default;background:transparent;color:#0F0F0F}
-.fb-counter{min-width:170px;text-align:center}
-.fb-foot{display:flex;justify-content:center;text-align:center;gap:16px;align-items:baseline;margin-top:clamp(32px,3.9vw,56px);padding:18px 0 22px;border-top:1px solid rgba(15,15,15,.14)}
+.fb-btn{width:52px;height:52px;border-radius:999px;border:1px solid rgba(242,242,242,.7);background:transparent;font:500 20px Geist,sans-serif;cursor:pointer;color:#F2F2F2;display:inline-flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+@media (hover:hover){.fb-btn:hover{background:#F2F2F2;color:#0F0F0F}}
+.fb-btn:disabled{opacity:.3;cursor:default;background:transparent;color:#F2F2F2}
+.fb-counter{min-width:170px;text-align:center;color:#F2F2F2}
+.fb-foot{display:flex;justify-content:center;text-align:center;gap:16px;align-items:baseline;margin-top:clamp(32px,3.9vw,56px);padding:18px 0 22px;border-top:1px solid rgba(242,242,242,.16)}
 .fb-hint .hm{display:none}
+.fb-stage .fb-hint,.fb-stage .muted{color:#A9A6A3}
 @media (max-width:700px){.fb-hint .hd{display:none}.fb-hint .hm{display:inline}.fb-stage{margin:0 calc(-1 * var(--m));border-left:0;border-right:0}}
 /* contact */
 .contact-list>div{display:flex;flex-direction:column;gap:8px;padding:24px 0;border-top:1px solid var(--ink)}

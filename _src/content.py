@@ -77,7 +77,7 @@ PROJECTS = [
  re_proj('the-grid','The Grid (Kirkland 405)','Naming & Identity','Kirkland, WA','2025','[[Placeholder: Name and logo concepts for a Kirkland office building — The Grid, Stage One and The Pulse.]]', pages_title='Name & logo concepts', pages_intro='Three naming routes, each with a mark and key messages, shown in the building.'),
  re_proj('pacific-center','Pacific Center','Leasing Brochure','Portland, OR','2026','[[Placeholder: A leasing brochure for a downtown Portland office tower.]]'),
  re_proj('leftbank','The Leftbank Project','Leasing Flyer','Portland, OR','2026','[[Placeholder: A leasing flyer for a historic creative-office block in Lower Albina.]]'),
- re_proj('madison-plaza','Madison Plaza','Investor Offering Package','Kent, WA','2026','[[Placeholder: An investor offering package for a 157-unit apartment community next to Kent Station.]]'),
+ re_proj('madison-plaza','Madison Plaza','Investor Offering Package','Kent, WA','2026','An investor offering package for a 157-unit apartment community next to Kent Station.'),
  re_proj('redmond-gateway','Redmond Gateway','Investor Offering Package','Redmond, WA','2026','[[Placeholder: An offering memorandum for a two-parcel development site in downtown Redmond.]]'),
  re_proj('springwood','Springwood of Beaverton','Investor Offering Package','Beaverton, OR','2026','[[Placeholder: An offering memorandum for a manufactured-home community in Beaverton.]]'),
  re_proj('pointe-at-bridgeport','The Pointe at Bridgeport','Leasing Flyer','Tualatin, OR','2026','[[Placeholder: A leasing flyer for office space above retail at Bridgeport Village.]]'),
