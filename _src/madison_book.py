@@ -45,15 +45,6 @@ def main():
     for tag, im in seq:
         if im is None: names.append('BLACK'); continue
         nm = f'f{i:02d}.jpg'; save(im, SLUG + '/flip', nm, 1600); names.append(tag + ':' + nm); i += 1
-    # design system crops (fractions of the PDF page)
-    def crop(n, b, nm, maxw=1400):
-        im = pg(n); W, H = im.size
-        save(im.crop((int(b[0]*W), int(b[1]*H), int(b[2]*W), int(b[3]*H))), SLUG, nm, maxw)
-    crop(1, (0.03, 0.05, 0.42, 0.28), 'ds_wordmark.jpg')
-    crop(21, (0.0, 0.035, 0.285, 0.2), 'ds_headline.jpg')
-    crop(8, (0.70, 0.62, 1.0, 0.97), 'ds_divider.jpg')
-    crop(21, (0.0, 0.29, 0.285, 0.52), 'ds_stats.jpg')
-    crop(21, (0.30, 0.80, 0.70, 0.95), 'ds_band.jpg')
     # printed book
     save(Image.open(MOCK + 'madison-plaza_om-cover.jpg'), SLUG, 'book_mockup.jpg')
     save(pg(1), SLUG, 'book_cover.jpg', 1600)

@@ -315,17 +315,13 @@ def madison_blocks(r):
             pages += f'<div class="fb-page"{hard}><img alt="Madison Plaza offering memorandum — {alt}" src="{r}{I}flip/{f}" draggable="false"></div>'
     hint = '<span class="hd">Drag a page corner, click a page, or use the ← → keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in MADISON_PAL)
-    ds = f"""<div class="gallery"><div class="swatches">{sw}</div>
-{row(("ds_wordmark.jpg", "Wordmark: spaced raspberry caps over a light italic deck"), ("ds_headline.jpg", "Headline: thin grey caps over bold raspberry caps"))}
-<p class="bm"><span class="mono-s muted">[Type]</span><br>Montserrat family (Thin → Bold) for headlines, section numerals and stats, with Open Sans for text and tables; Minion Pro and Myriad Pro in minor roles.</p>
-{row(("ds_divider.jpg", "Section opener: thin oversized numeral on a darkened photograph"), ("ds_stats.jpg", "Fact / meaning / why-it-matters stat columns"))}
-{row(("ds_band.jpg", "Plum charcoal data band"))}</div>"""
+    ds = f'<div class="gallery"><div class="swatches">{sw}</div></div>'
     book = f"""<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book">{pages}</div></div>
 <div class="fb-controls"><button class="fb-btn" id="fb-prev" aria-label="Previous page">←</button><span class="mono fb-counter" id="fb-counter" aria-live="polite">Cover</span><button class="fb-btn" id="fb-next" aria-label="Next page">→</button></div>
 <div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div></div>"""
-    return (gsec(ds, 'Design system', 'Palette sampled from the printed pages; typefaces as embedded in the PDF.')
+    return (gsec(ds, 'Design system')
             + gsec(f'<div class="gallery">{row(("book_mockup.jpg", "The printed offering memorandum"))}{row(("book_cover.jpg", "Front cover"), ("book_back.jpg", "Back cover"))}</div>', 'The printed book')
-            + gsec(book, 'Inside the book', 'The reading sequence as an investor meets it — executive summary, the property, amenities and floor plans, then the market. Turn the pages.', LOG["madison-plaza"]["note"]))
+            + gsec(book, 'Inside the book', 'The reading sequence as an investor meets it — executive summary, the property, amenities and floor plans, then the market. Turn the pages.'))
 
 def case(p):
     r = '../'; s = p['slug']
