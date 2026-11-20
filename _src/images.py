@@ -42,7 +42,7 @@ def page(folder, n):
 # slug: (pdf folder, hero mockup, [(page, blur boxes)])
 RE={
  'kress-building':('kress-building','kress-building_brochure.jpg',[(1,[(0.725,0.05,0.982,0.163),(0.035,0.805,0.32,0.92)]),(2,[(0.068,0.866,0.175,0.897)]),(3,[]),(4,[]),(6,[]),(9,[])]),
- 'pdx-west':('pdx-west-flyer','pdx-west_site-sign.jpg',[]),  # sheets + card: see _src/flyer_sheets.py / flyer_card.py
+ 'pdx-west':('pdx-west-flyer',None,[]),  # sheets: _src/flyer_sheets.py; hero, card, mock_spread: _src/flyer_mockups.py
  'the-grid':('kirkland-405-brand','the-grid_lobby-sign.jpg',[(i,[]) for i in range(1,9)]),
  'pacific-center':('pacific-center-flyer','pacific-center_poster.jpg',[(i,[]) for i in range(1,6)]),
  'leftbank':('leftbank-flyer','leftbank_flyer.jpg',[]),  # sheets for the stack: see _src/flyer_sheets.py
@@ -64,7 +64,7 @@ def main():
     man={}
     for slug,(folder,mock,pages) in RE.items():
         ov=MOCK+slug+'_hero-override.jpg'   # mockup supplied by Rodrigo replaces the generated one
-        save(Image.open(ov if os.path.exists(ov) else MOCK+mock),slug,'hero.jpg')
+        if mock or os.path.exists(ov): save(Image.open(ov if os.path.exists(ov) else MOCK+mock),slug,'hero.jpg')
         names=[]
         for k,spec in enumerate(pages,1):
             n,boxes=spec[0],spec[1]
@@ -94,6 +94,7 @@ def main():
     for f in ('about_portrait.jpg','about_educator.jpg'): save(Image.open(RD+f),'about',f.replace('about_',''))
     import madison_book; madison_book.main()
     import flyer_sheets; flyer_sheets.main()
+    import runpy; runpy.run_path(os.path.join(os.path.dirname(__file__),'desk_texture.py'))   # ui/desk-charcoal.jpg (OUT is wiped above)
     json.dump(man,open(os.path.join(os.path.dirname(__file__),'image_manifest.json'),'w'),indent=1)
     print('done')
 if __name__=='__main__': main()

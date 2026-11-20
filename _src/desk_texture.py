@@ -17,4 +17,5 @@ base = np.array([27, 25, 24], float)                  # warm charcoal, sits betw
 img = base[None, None, :] + (v[..., None] - 0.5) * np.array([11, 10, 9])[None, None, :]
 im = Image.fromarray(np.clip(img, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.6))
 out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'img', 'ui', 'desk-charcoal.jpg')
+os.makedirs(os.path.dirname(out), exist_ok=True)
 im.save(out, 'JPEG', quality=78, optimize=True, progressive=True); print(out, os.path.getsize(out))

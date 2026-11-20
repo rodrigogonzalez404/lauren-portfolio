@@ -349,7 +349,7 @@ def pdx_blocks(r):
         return '<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in fs) + '</div>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in PDX_PAL)
     return (gsec(f'<div class="gallery"><div class="swatches">{sw}</div></div>', 'Design system')
-            + gsec(f'<div class="gallery">{row(("hero.jpg", "The flyer cover as site signage"), ("card.jpg", "The printed flyer"))}{row(("sheets/s01.jpg", "Front sheet"), ("sheets/s09.jpg", "Back sheet"))}</div>', 'The printed piece')
+            + gsec(f'<div class="gallery">{row(("mock_spread.jpg", "Three inside sheets of the printed flyer fanned out on a table"), ("card.jpg", "The printed flyer cover, with a second sheet underneath"))}{row(("sheets/s01.jpg", "Front sheet"), ("sheets/s09.jpg", "Back sheet"))}</div>', 'The printed piece')
             + gsec(sheet_stack('pdx-west', 'PDX West Logistics Center', 9, r, LOG['pdx-west']['note']), 'Inside the flyer', 'Nine sheets, in the order a tenant or broker reads them — the building, its specifications and site plan, the neighbors and submarket, then access, workforce and reach. Slide them off the stack.'))
 
 def case(p):

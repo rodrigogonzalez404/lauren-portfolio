@@ -64,8 +64,13 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 
 ## PDX West (Nov 20) — same sheet stack as Leftbank
 - Swatches: #76A48E Sage, #505F69 Slate, #374B4E Deep Slate, #ECF3F0 Mist, #FFFFFF White.
-- The printed piece: the site-sign mockup (the hero, unchanged), the card, then the flat front sheet (s01) and back sheet (s09).
+- There is no signage for PDX West; it is a leasing flyer only. Don't mention signs or billboards in its copy or alt text.
+- Mockups are all self-made by `_src/flyer_mockups.py` (PIL mesh warp, lifted-corner curl, thin paper rim, soft shadows, procedural beige surface; no stock), from the already-blurred sheets:
+  - `hero.jpg`: the cover on top of the property-highlights sheet, with a pen, on beige. 2304×1728; the key content sits inside the 16:9 band that the hero crop shows.
+  - `mock_spread.jpg` (The printed piece): three inside sheets (site plan, submarket, building) fanned out.
+  - `card.jpg`: Kress framing; one thin cover sheet with a lifted corner and a second sheet peeking out underneath.
+- The printed piece: mock_spread + card, then the flat front sheet (s01) and back sheet (s09).
 - Sheet stack shows PDF pages 1–9; page 1's broker strip is blurred. Page 10 (back cover with broker contacts) is omitted.
-- `card.jpg` (Home, Works and Next Project thumbnail) is made by `_src/flyer_card.py`: blurred sheet 1, perspective-warped onto a self-made beige paper texture to match the Kress card. It is re-run by `flyer_sheets.py`.
+- `flyer_sheets.py` re-runs `flyer_mockups.pdx()` after rendering the sheets.
 - Project and Solution copy is written from the flyer (no rents, prices or deal figures). Results stays `[[ ]]`.
 - `sheet_stack(..., note)` prints the confidentiality line under the stack. Leftbank and PDX pass `LOG[slug]['note']` (the STD text).
