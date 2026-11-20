@@ -61,3 +61,11 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
   - Behaviour: the "sheet stack" block in site.js. Arrows, click, drag/swipe and ← → keys all work; it respects prefers-reduced-motion.
   - Images: `assets/img/<slug>/sheets/sNN.jpg`, rendered fresh from the PDF at 200 dpi by `_src/flyer_sheets.py`. Add new flyers to its FLYERS dict, with optional blur boxes.
 - Leftbank PDF page 7 (broker contacts) is never shown. Sheets 1–6 need no blurs.
+
+## PDX West (Nov 20) — same sheet stack as Leftbank
+- Swatches: #76A48E Sage, #505F69 Slate, #374B4E Deep Slate, #ECF3F0 Mist, #FFFFFF White.
+- The printed piece: the site-sign mockup (the hero, unchanged), the card, then the flat front sheet (s01) and back sheet (s09).
+- Sheet stack shows PDF pages 1–9; page 1's broker strip is blurred. Page 10 (back cover with broker contacts) is omitted.
+- `card.jpg` (Home, Works and Next Project thumbnail) is made by `_src/flyer_card.py`: blurred sheet 1, perspective-warped onto a self-made beige paper texture to match the Kress card. It is re-run by `flyer_sheets.py`.
+- Project and Solution copy is written from the flyer (no rents, prices or deal figures). Results stays `[[ ]]`.
+- `sheet_stack(..., note)` prints the confidentiality line under the stack. Leftbank and PDX pass `LOG[slug]['note']` (the STD text).

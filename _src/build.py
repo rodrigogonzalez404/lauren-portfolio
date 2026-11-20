@@ -325,13 +325,13 @@ def madison_blocks(r):
 
 # Sheet stack (flyers): loose sheets on the desk; reusable — sheet_stack(slug, title, n, r)
 SHEET_JITTER = [(-1.6, -10, 6), (1.2, 12, -8), (-0.6, -4, -12), (2.0, 8, 10), (-2.2, -14, 2), (0.8, 4, 12), (-1.0, 10, -4), (1.6, -8, 8)]
-def sheet_stack(slug, title, n, r):
+def sheet_stack(slug, title, n, r, note=''):
     I = f'assets/img/{slug}/sheets/'
     sh = ''.join(f'<figure class="ss-sheet" style="--r:{SHEET_JITTER[i % 8][0]}deg;--x:{SHEET_JITTER[i % 8][1]}px;--y:{SHEET_JITTER[i % 8][2]}px;z-index:{n - i}"><img src="{r}{I}s{i+1:02d}.jpg" alt="{E(title)} flyer — sheet {i+1}" width="2000" height="1545" draggable="false"></figure>' for i in range(n))
     hint = '<span class="hd">Click or drag the top sheet, or use the ← → keys</span><span class="hm">Swipe the sheet or tap the arrows</span>'
     return f"""<div class="fb-stage ss-stage" data-name="Sheet stack"><div class="ss-wrap"><div class="ss" tabindex="0" role="group" aria-roledescription="sheet stack" aria-label="{E(title)} flyer sheets">{sh}</div></div>
 <div class="fb-controls"><button class="fb-btn ss-prev" aria-label="Previous sheet">←</button><span class="mono fb-counter ss-counter" aria-live="polite">Sheet 01 / {n:02d}</span><button class="fb-btn ss-next" aria-label="Next sheet">→</button></div>
-<div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div></div>"""
+<div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div>{f'<p class="mono-s ss-note">{T(note)}</p>' if note else ''}</div>"""
 LEFTBANK_PAL = [('Burnt Orange', '#CB5625'), ('Black', '#000000'), ('Leaf Green', '#50B848'), ('Map Grey', '#ECEBF0'), ('White', '#FFFFFF')]
 def leftbank_blocks(r):
     I = 'assets/img/leftbank/'
@@ -340,7 +340,17 @@ def leftbank_blocks(r):
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in LEFTBANK_PAL)
     return (gsec(f'<div class="gallery"><div class="swatches">{sw}</div></div>', 'Design system')
             + gsec(f'<div class="gallery">{row(("hero.jpg", "The printed flyer"))}{row(("sheets/s01.jpg", "Front sheet"), ("sheets/s06.jpg", "Back sheet"))}</div>', 'The printed piece')
-            + gsec(sheet_stack('leftbank', 'The Leftbank Project', 6, r), 'Inside the flyer', 'Six loose sheets, in the order a prospective tenant reads them — the building, its history, the spaces, then the neighborhood. Slide them off the stack.'))
+            + gsec(sheet_stack('leftbank', 'The Leftbank Project', 6, r, LOG['leftbank']['note']), 'Inside the flyer', 'Six loose sheets, in the order a prospective tenant reads them — the building, its history, the spaces, then the neighborhood. Slide them off the stack.'))
+
+PDX_PAL = [('Sage', '#76A48E'), ('Slate', '#505F69'), ('Deep Slate', '#374B4E'), ('Mist', '#ECF3F0'), ('White', '#FFFFFF')]
+def pdx_blocks(r):
+    I = 'assets/img/pdx-west/'
+    def row(*fs):
+        return '<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in fs) + '</div>'
+    sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in PDX_PAL)
+    return (gsec(f'<div class="gallery"><div class="swatches">{sw}</div></div>', 'Design system')
+            + gsec(f'<div class="gallery">{row(("hero.jpg", "The flyer cover as site signage"), ("card.jpg", "The printed flyer"))}{row(("sheets/s01.jpg", "Front sheet"), ("sheets/s09.jpg", "Back sheet"))}</div>', 'The printed piece')
+            + gsec(sheet_stack('pdx-west', 'PDX West Logistics Center', 9, r, LOG['pdx-west']['note']), 'Inside the flyer', 'Nine sheets, in the order a tenant or broker reads them — the building, its specifications and site plan, the neighbors and submarket, then access, workforce and reach. Slide them off the stack.'))
 
 def case(p):
     r = '../'; s = p['slug']
@@ -356,6 +366,8 @@ def case(p):
         g = madison_blocks(r)
     elif s == 'leftbank':
         g = leftbank_blocks(r)
+    elif s == 'pdx-west':
+        g = pdx_blocks(r)
     elif p['cat'] == 're' and s != 'fortis-net-lease':
         g = gsec(gallery(s, imgs(s, 'p'), r, p['title']), E(p['pages_title']), p['pages_intro'], LOG[s]['note'])
     elif p['cat'] == 'interactive':

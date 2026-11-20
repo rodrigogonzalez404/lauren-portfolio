@@ -4,8 +4,8 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## PDX West Logistics Center
 
-- **Blurred:** p01 cover: broker names/phones/emails strip
-- **Omitted:** page 08 demographic statistics; page 10 broker contacts
+- **Blurred:** p01 cover: broker names/phones/emails strip (sheet stack, printed piece and the card thumbnail)
+- **Omitted:** page 10 back cover: broker names, phones and emails + disclaimer (no pricing, financials or rent comps anywhere in the flyer)
 
 ## Kress Building
 

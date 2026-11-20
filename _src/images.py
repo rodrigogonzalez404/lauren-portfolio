@@ -42,7 +42,7 @@ def page(folder, n):
 # slug: (pdf folder, hero mockup, [(page, blur boxes)])
 RE={
  'kress-building':('kress-building','kress-building_brochure.jpg',[(1,[(0.725,0.05,0.982,0.163),(0.035,0.805,0.32,0.92)]),(2,[(0.068,0.866,0.175,0.897)]),(3,[]),(4,[]),(6,[]),(9,[])]),
- 'pdx-west':('pdx-west-flyer','pdx-west_site-sign.jpg',[(1,[(0.039,0.843,0.586,0.932)]),(2,[]),(3,[]),(4,[]),(5,[]),(6,[]),(7,[]),(9,[])]),
+ 'pdx-west':('pdx-west-flyer','pdx-west_site-sign.jpg',[]),  # sheets + card: see _src/flyer_sheets.py / flyer_card.py
  'the-grid':('kirkland-405-brand','the-grid_lobby-sign.jpg',[(i,[]) for i in range(1,9)]),
  'pacific-center':('pacific-center-flyer','pacific-center_poster.jpg',[(i,[]) for i in range(1,6)]),
  'leftbank':('leftbank-flyer','leftbank_flyer.jpg',[]),  # sheets for the stack: see _src/flyer_sheets.py

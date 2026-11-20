@@ -5,8 +5,8 @@ Rule (Rodrigo): leave anything confidential out; if leaving it out would look ba
 STD = 'Confidential pages — pricing, financials, rent comps and broker contacts — are left out; contact details are blurred.'
 LOG = {
  'pdx-west': dict(note=STD,
-    blurred=['p01 cover: broker names/phones/emails strip'],
-    omitted=['page 08 demographic statistics','page 10 broker contacts'], mockup='site-sign crop excludes contacts'),
+    blurred=['p01 cover: broker names/phones/emails strip (sheet stack, printed piece and the card thumbnail)'],
+    omitted=['page 10 back cover: broker names, phones and emails + disclaimer (no pricing, financials or rent comps anywhere in the flyer)'], mockup='site-sign crop excludes contacts'),
  'kress-building': dict(note=STD,
     blurred=['p01 cover: commission callout + broker contacts','p02: "$28/SF FSG" rent figure','hero mockup: commission callout + contacts'],
     omitted=['page 05','pages 07–08 floor plans carrying the $28/SF FSG rate','page 10 broker contacts']),
