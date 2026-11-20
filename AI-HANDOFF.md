@@ -65,8 +65,8 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 ## PDX West (Nov 20) — same sheet stack as Leftbank
 - Swatches: #76A48E Sage, #505F69 Slate, #374B4E Deep Slate, #ECF3F0 Mist, #FFFFFF White.
 - There is no signage for PDX West; it is a leasing flyer only. Don't mention signs or billboards in its copy or alt text.
-- Mockups are all self-made by `_src/flyer_mockups.py` (PIL mesh warp, lifted-corner curl, thin paper rim, soft shadows, procedural beige surface; no stock), from the already-blurred sheets:
-  - `hero.jpg`: the cover on top of the property-highlights sheet, with a pen, on beige. 2304×1728; the key content sits inside the 16:9 band that the hero crop shows.
+- Mockups are all self-made by `_src/flyer_mockups.py` from the already-blurred sheets, with no stock and no props. The pen was removed on Nov 20 because it looked fake. Each sheet is one exact perspective warp rendered at 4× and downsampled with LANCZOS. The source is edge-padded, so the anti-aliased edge keeps the artwork's own colour: no rim, fringe or seams. Shadows are multiply layers (ambient, contact and two soft offsets, with the light from the top-left). A raised corner is suggested only through light and shadow. The beige surface is procedural.
+  - `hero.jpg`: the cover on top of the property-highlights sheet, on beige. 2304×1728; the key content sits inside the 16:9 band that the hero crop shows.
   - `mock_spread.jpg` (The printed piece): three inside sheets (site plan, submarket, building) fanned out.
   - `card.jpg`: Kress framing; one thin cover sheet with a lifted corner and a second sheet peeking out underneath.
 - The printed piece: mock_spread + card, then the flat front sheet (s01) and back sheet (s09).
