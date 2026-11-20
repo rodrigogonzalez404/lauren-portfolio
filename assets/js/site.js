@@ -1,4 +1,4 @@
-/* Shared site behaviour: mobile menu, auto-playing screen playlists, flip-book init. No dependencies. */
+/* Shared site behaviour: mobile menu, auto-playing screen playlists, flip-book init, sheet stack. No dependencies. */
 (function(){
   // mobile menu
   var nav=document.querySelector('.nav'), mb=document.querySelector('.menu-btn');
@@ -43,4 +43,33 @@
     document.addEventListener('keydown',function(e){var t=e.target&&e.target.tagName;if(t==='INPUT'||t==='TEXTAREA'||!inView())return;
       if(e.key==='ArrowRight'){pf.flipNext();e.preventDefault()} if(e.key==='ArrowLeft'){pf.flipPrev();e.preventDefault()}});
   }
+
+  // sheet stack (flyers): <div class="ss"><figure class="ss-sheet">… + .ss-prev/.ss-next/.ss-counter inside the same .ss-stage
+  document.querySelectorAll('.ss-stage').forEach(function(st){
+    var box=st.querySelector('.ss'), sh=[].slice.call(box.querySelectorAll('.ss-sheet')), N=sh.length, order=sh.map(function(_,i){return i}), busy=false;
+    var cnt=st.querySelector('.ss-counter'), pv=st.querySelector('.ss-prev'), nx=st.querySelector('.ss-next'), T=reduce?220:720;
+    function pad(x){return (x<10?'0':'')+x}
+    function paint(){order.forEach(function(k,pos){sh[k].style.zIndex=N-pos;sh[k].classList.toggle('top',pos===0);sh[k].setAttribute('aria-hidden',pos===0?'false':'true')});
+      if(cnt)cnt.textContent='Sheet '+pad(order[0]+1)+' / '+pad(N)}
+    function next(dir){if(busy||N<2)return;busy=true;var t=sh[order[0]];t.classList.remove('drag');t.style.transform='';
+      t.classList.add(dir<0?'out-l':'out');
+      setTimeout(function(){order.push(order.shift());paint();t.classList.remove('out','out-l');setTimeout(function(){busy=false},T*.6)},T*.75)}
+    function prev(){if(busy||N<2)return;busy=true;var k=order.pop(),t=sh[k];t.classList.add('now','out-l');order.unshift(k);paint();void t.offsetWidth;
+      t.classList.remove('now');setTimeout(function(){t.classList.remove('out-l');setTimeout(function(){busy=false},T)},20)}
+    pv.addEventListener('click',prev); nx.addEventListener('click',function(){next(1)});
+    // drag / swipe the top sheet; a plain click advances
+    var x0=null,y0=0,dx=0,moved=false,cur=null;
+    box.addEventListener('pointerdown',function(e){if(busy)return;cur=sh[order[0]];x0=e.clientX;y0=e.clientY;dx=0;moved=false;cur.classList.add('drag');box.setPointerCapture&&box.setPointerCapture(e.pointerId)});
+    box.addEventListener('pointermove',function(e){if(x0===null)return;dx=e.clientX-x0;var dy=e.clientY-y0;if(Math.abs(dx)>6)moved=true;
+      if(moved)cur.style.transform='translate('+dx+'px,'+dy*.2+'px) rotate('+dx/40+'deg)'});
+    function end(){if(x0===null)return;var w=box.clientWidth;x0=null;
+      if(!moved){cur.classList.remove('drag');cur.style.transform='';next(1);return}
+      if(Math.abs(dx)>w*.18){if(dx>0)next(1);else next(-1)}else{cur.classList.remove('drag');cur.style.transform=''}}
+    box.addEventListener('pointerup',end); box.addEventListener('pointercancel',end);
+    function inView(){var r=box.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight}
+    document.addEventListener('keydown',function(e){var g=e.target&&e.target.tagName;if(g==='INPUT'||g==='TEXTAREA'||!inView()||document.getElementById('fb-book'))return;
+      if(e.key==='ArrowRight'){next(1);e.preventDefault()} if(e.key==='ArrowLeft'){prev();e.preventDefault()}});
+    window.sheetStack=window.sheetStack||[]; window.sheetStack.push({next:next,prev:prev,order:order});
+    paint();
+  });
 })();

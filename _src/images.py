@@ -45,7 +45,7 @@ RE={
  'pdx-west':('pdx-west-flyer','pdx-west_site-sign.jpg',[(1,[(0.039,0.843,0.586,0.932)]),(2,[]),(3,[]),(4,[]),(5,[]),(6,[]),(7,[]),(9,[])]),
  'the-grid':('kirkland-405-brand','the-grid_lobby-sign.jpg',[(i,[]) for i in range(1,9)]),
  'pacific-center':('pacific-center-flyer','pacific-center_poster.jpg',[(i,[]) for i in range(1,6)]),
- 'leftbank':('leftbank-flyer','leftbank_flyer.jpg',[(i,[]) for i in range(1,7)]),
+ 'leftbank':('leftbank-flyer','leftbank_flyer.jpg',[]),  # sheets for the stack: see _src/flyer_sheets.py
  'madison-plaza':('madison-plaza-om','madison-plaza_om-cover.jpg',[]),  # page gallery replaced by the Nomad-style book: see _src/madison_book.py
  'redmond-gateway':('redmond-assemblage-om','redmond-gateway_om-stack.jpg',[(1,[]),(2,[]),(6,[(0.035,0.24,0.315,0.43)]),(7,[(0.035,0.24,0.315,0.43)]),(14,[]),(15,[])]),  # parcel text names owners + lease dates -> blurred),
  'springwood':('springwood-om','springwood_om-cover.jpg',[(1,[(0.581,0.894,0.938,0.927)]),(2,[]),(3,[]),(6,[]),(8,[]),(9,[]),(10,[]),(11,[]),(12,[]),(16,[]),(18,[])]),
@@ -93,6 +93,7 @@ def main():
     # about / misc
     for f in ('about_portrait.jpg','about_educator.jpg'): save(Image.open(RD+f),'about',f.replace('about_',''))
     import madison_book; madison_book.main()
+    import flyer_sheets; flyer_sheets.main()
     json.dump(man,open(os.path.join(os.path.dirname(__file__),'image_manifest.json'),'w'),indent=1)
     print('done')
 if __name__=='__main__': main()

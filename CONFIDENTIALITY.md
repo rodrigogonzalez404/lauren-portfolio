@@ -29,8 +29,8 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## The Leftbank Project
 
-- **Blurred:** nothing
-- **Omitted:** page 7 broker contacts
+- **Blurred:** none — sheets 1–6 checked (Nov 20): no rents, prices, contacts or deal figures; only the 500–6,500+ SF space range
+- **Omitted:** page 7 broker contacts (names, phones) — not in the sheet stack
 
 ## Madison Plaza
 

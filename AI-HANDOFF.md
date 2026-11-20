@@ -52,3 +52,12 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 - Flip-book order: cover, printed pages 2–23 (PDF pages 2–12; PDF 12 is the "03 The Financials" divider and is kept), then a black HTML spread reading "Confidential — financial information omitted", then printed pages 34–45 (PDF pages 18–23), then the back cover (PDF 24).
 - PDF pages 13–17 (printed pages 24–33) are financials and are never published.
 - Blur boxes are defined in `madison_book.py` and logged in CONFIDENTIALITY.md.
+
+## Leftbank (Nov 20) — flyer as a sheet stack
+- Same intro as every case page. Below it: Design system (swatches #CB5625 Burnt Orange, #000000 Black, #50B848 Leaf Green, #ECEBF0 Map Grey, #FFFFFF White) → The printed piece (flyer mockup + flat front sheet and back sheet) → Inside the flyer (sheet stack).
+- Sheet stack is a reusable component:
+  - Build: `sheet_stack(slug, title, n, r)` in build.py.
+  - Styles: `.ss-*` in site.css, sitting on the shared `.fb-stage` desk.
+  - Behaviour: the "sheet stack" block in site.js. Arrows, click, drag/swipe and ← → keys all work; it respects prefers-reduced-motion.
+  - Images: `assets/img/<slug>/sheets/sNN.jpg`, rendered fresh from the PDF at 200 dpi by `_src/flyer_sheets.py`. Add new flyers to its FLYERS dict, with optional blur boxes.
+- Leftbank PDF page 7 (broker contacts) is never shown. Sheets 1–6 need no blurs.

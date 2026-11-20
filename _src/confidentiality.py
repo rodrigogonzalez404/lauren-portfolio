@@ -15,7 +15,7 @@ LOG = {
     omitted=['offering/price pages, financials, rent comps, contacts, page-04 offering table (nomad_om-spread.jpg not published)']),
  'the-grid': dict(note='Name and logo concepts shown as presented.', blurred=[], omitted=[]),
  'pacific-center': dict(note=STD, blurred=[], omitted=['page 6 availabilities (suites, SF, rates)','page 7 broker contacts']),
- 'leftbank': dict(note=STD, blurred=[], omitted=['page 7 broker contacts']),
+ 'leftbank': dict(note=STD, blurred=['none — sheets 1–6 checked (Nov 20): no rents, prices, contacts or deal figures; only the 500–6,500+ SF space range'], omitted=['page 7 broker contacts (names, phones) — not in the sheet stack']),
  'madison-plaza': dict(note='Section 03 Financials (pages 24–33) is left out; contacts and deal figures elsewhere are blurred.',
     blurred=['p02 broker names, emails and phones','p07 offering bullets (price guidance, NOI, lender)','p08 operating text (opex, in-place vs market rents, NOI upside)','p10–11 ground-rent and MFTE savings text','p40 "Clears 3x in-place rent ($1,864/mo …)" line','back cover broker names, emails and phones'],
     omitted=['PDF pages 13–17 = printed pp. 24–33 (unit mix & market rents, tax bill, income & expenses, pro forma notes, 10-year cash flow, rent comparables); replaced in the flip-book by a black "Confidential — financial information omitted" spread right after the 03 The Financials divider (pp. 22–23, kept)']),
