@@ -116,8 +116,8 @@ def home():
 <div class="grid2">{card(R["pdx-west"], r)}{card(R["kress-building"], r)}</div>
 <div class="mt64">{card(R["nomad"], r, "r169")}</div>
 <div class="grid2 mt64">{card(R["the-grid"], r)}{card(R["pacific-center"], r)}</div>
-<div class="grid3 mt64">{card(R["leftbank"], r, small=True)}{card(R["madison-plaza"], r, small=True)}{card(R["redmond-gateway"], r, small=True)}</div>
-<div class="grid3 mt64">{card(R["springwood"], r, small=True)}{card(R["pointe-at-bridgeport"], r, small=True)}{card(R["portland-office-market-report"], r, small=True)}</div>
+<div class="grid2 mt64">{card(R["leftbank"], r)}{card(R["madison-plaza"], r)}</div>
+<div class="grid2 mt64">{card(R["springwood"], r)}{card(R["pointe-at-bridgeport"], r)}</div>
 <div class="row mt64" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px"><p class="mono-s muted">{T(H["re_note"])}</p>{btn("All Real Estate work", "works.html#real-estate", "sec")}</div>
 </section>
 
@@ -209,9 +209,19 @@ def contact():
 def pic(rel, alt, r, flex=None):
     st = f' style="flex:{flex:.4f} 1 0"' if flex else ''
     return f'<figure class="pic"{st}>{img(rel, alt, r)}</figure>'
+# Fixed row layouts taken from the original Figma case frames (index lists into the gallery files; optional row class)
+FIG_ROWS = {
+    # Figma 12:2 "Case Study – Wild Naturals · Desktop 1440": 1002-wide column — full 1002x899 · pair 489x489 · full 1002x665 ·
+    # pair 489x355 (set 40px into 455-tall frames) · full 1002x452 · full 1002x256 · full 1002x709
+    'wild-naturals': [([0], ''), ([1, 2], ''), ([3], ''), ([4, 5], 'g-inset'), ([6], ''), ([7], ''), ([8], '')],
+}
 def gallery(slug, files, r, title, portrait_three=True, wide_at=1.9):
     """Rows: wide images full width; others in pairs (triples for portrait/square sets). Items in a row share one height."""
     sizes = [size(f'assets/img/{slug}/{f}') for f in files]
+    if slug in FIG_ROWS and sum(len(x) for x, _ in FIG_ROWS[slug]) == len(files):
+        out = ''.join(f'<div class="g-row{" " + c if c else ""}">' + ''.join(pic(f'assets/img/{slug}/{files[i]}', f'{title} — image {i+1}', r, sizes[i][0] / sizes[i][1]) for i in row) + '</div>' for row, c in FIG_ROWS[slug])
+        return f'<div class="gallery">{out}</div>'
+
     portrait = portrait_three and sum(1 for w, h in sizes if h > w * 1.05) > len(sizes) / 2
     per = 3 if portrait else 2
     rows, cur = [], []
@@ -281,13 +291,11 @@ def nomad_blocks(r):
     pages += '<div class="fb-page fb-end" data-density="hard"><div class="fb-endin"><span class="mono">[End]</span><div><div class="fb-endt">Nomad</div><div class="mono" style="margin-top:14px">Investor Offering Package · 2026</div></div><span class="mono fb-endm">Colliers · Overlook, North Portland — selected pages; confidential pages omitted</span></div></div>'
     hint = '<span class="hd">Drag a page corner, click a page, or use the ← → keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
     ds = f'''<div class="gallery"><div class="swatches">{sw}</div>
-{row(("ds_wordmark.jpg", "Display: heavy italic wordmark"), ("ds_title-box.jpg", "Headline: orange caps in an outlined title box"))}
-<p class="bm"><span class="mono-s muted">[Type]</span><br>Acumin family (Variable Concept + Pro: Thin → Bold) for display and text, with Expressway, Freight Sans and Apparat in supporting roles.</p>
-{row(("ds_divider-label.jpg", "Chapter tab: oversized red numeral on charcoal"), ("ds_hatch.jpg", "Diagonal hatch accent"), ("ds_icons.jpg", "Amenity icon set"))}</div>'''
+</div>'''
     book = f'''<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book">{pages}</div></div>
 <div class="fb-controls"><button class="fb-btn" id="fb-prev" aria-label="Previous page">←</button><span class="mono fb-counter" id="fb-counter" aria-live="polite">Cover</span><button class="fb-btn" id="fb-next" aria-label="Next page">→</button></div>
 <div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div></div>'''
-    return (gsec(ds, 'Design system', 'Palette sampled from the printed pages; typefaces as embedded in the PDF.')
+    return (gsec(ds, 'Design system', 'Palette sampled from the printed pages.')
             + gsec(f'<div class="gallery">{row(("n02.jpg", "Cover: property photography, NOMAD wordmark, hatch border"), ("n03.jpg", "Printed offering packages, ready for investor tours"))}</div>', 'The printed book')
             + gsec(book, 'Inside the book', 'The reading sequence as an investor meets it — chapter openers, amenities, floor plans, maps and market data. Turn the pages.', LOG["nomad"]["note"])
             + gsec(f'<div class="gallery">{row(("n06.jpg", "Neighborhood amenities map, shown on screen"), ("n08.jpg", "Detail: market supply chart in the document palette"))}</div>', 'Maps &amp; data', 'Beyond the page: the neighborhood map on screen, and a close look at a chart drawn in the document palette.'))
@@ -349,8 +357,8 @@ def pdx_blocks(r):
         return '<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in fs) + '</div>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in PDX_PAL)
     return (gsec(f'<div class="gallery"><div class="swatches">{sw}</div></div>', 'Design system')
-            + gsec(f'<div class="gallery">{row(("mock_spread.jpg", "Three inside sheets of the printed flyer fanned out on a table"), ("mock_cover.jpg", "The printed flyer cover, with a second sheet underneath"))}{row(("sheets/s01.jpg", "Front sheet"), ("sheets/s09.jpg", "Back sheet"))}</div>', 'The printed piece')
-            + gsec(sheet_stack('pdx-west', 'PDX West Logistics Center', 9, r, LOG['pdx-west']['note']), 'Inside the flyer', 'Nine sheets, in the order a tenant or broker reads them — the building, its specifications and site plan, the neighbors and submarket, then access, workforce and reach. Slide them off the stack.'))
+            + gsec(f'<div class="gallery">{row(("mock_spread.jpg", "Three inside sheets of the printed flyer fanned out on a table"), ("mock_cover.jpg", "The printed flyer cover, with a second sheet underneath"))}{row(("sheets/s01.jpg", "Front sheet"), ("sheets/s07.jpg", "Back sheet"))}</div>', 'The printed piece')
+            + gsec(sheet_stack('pdx-west', 'PDX West Logistics Center', 7, r, LOG['pdx-west']['note']), 'Inside the flyer', 'Seven sheets, in the order a tenant or broker reads them — the building, its specifications and site plan, the submarket, then access, workforce and reach. Slide them off the stack.'))
 
 def case(p):
     r = '../'; s = p['slug']
@@ -386,12 +394,16 @@ if __name__ == '__main__':
     for p in ALL: case(p)
     md = ['# Confidentiality log (generated by _src/build.py from _src/confidentiality.py)\n',
           'Rule: leave anything confidential out; if leaving it out would look bad, blur it. The site is PUBLIC (GitHub Pages), marked noindex.\n\n**Updated rule (Rodrigo, Nov 23):** "Anything in the front pages is not confidential. Confidential means financials." Covers, thumbnails and hero mockups are shown unblurred (contacts, headlines, addresses, broker strips). Only financial data (pricing, rents, rent comps, operating figures, taxes, deal financials such as Madison section 03) stays blurred or omitted. Interior pages blurred only for contacts are listed below and wait for confirmation.\n']
+    from content import UNPUBLISHED
     for slug, d in LOG.items():
+        if slug in UNPUBLISHED: continue
         md.append(f"## {BY[slug]['title'] if slug in BY else slug}\n")
         md.append('- **Blurred:** ' + ('; '.join(d.get('blurred') or []) or 'nothing') )
         md.append('- **Omitted:** ' + ('; '.join(d.get('omitted') or []) or 'nothing') + '\n')
     md.append('## Brand & Ecommerce (Aafayaa, Abundant Earth, Wild Naturals, TokSuite, Farm & Bee, Zulay Kitchen, CGK Unlimited)\n')
     md.append('- Images and copy as already published on Lauren’s live Webflow site; visually checked — no prices, phones, emails or contacts.\n')
+    md.append('## Removed from the site (Nov 23, Rodrigo)\n')
+    md.append('- Redmond Gateway and Portland Office Market Report: no page, card or link; source entries kept in _src (content.UNPUBLISHED), images not generated.\n')
     md.append('## Projects not on the site (confidential / excluded)\n')
     md.append('- The Galt (BOV), 8210 Mauzey Court, Fruit Valley, Pomeroy, Overland AI, W+K timeline, American Brush / REMS, Houghton RFQ; Apex skipped.\n')
     open(os.path.join(ROOT, 'CONFIDENTIALITY.md'), 'w').write('\n'.join(md))

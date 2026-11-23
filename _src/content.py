@@ -92,6 +92,10 @@ PROJECTS.append(dict(slug='fortis-net-lease', title='Fortis Net Lease', cat='re'
      client=fc['client'], industry=fc['industry'], service=fc['service'], role=None,
      summary=fc['project'], project=fc['project'], solution=fc['solution'], results=' '.join(fc['results']), gallery_title='Selected work'))
 
+# Nov 23 (Rodrigo): removed from the site. Entries kept above as source; not published (no page, card, nav or Next link).
+UNPUBLISHED = {'redmond-gateway', 'portland-office-market-report'}
+PROJECTS = [p for p in PROJECTS if p['slug'] not in UNPUBLISHED]
+
 CEROS = [
  dict(slug='big-pink', title='Big Pink', cat='interactive', type='[[Interactive Pitch]]', place='Portland, OR', year='[[Year]]', tool='Ceros',
       summary='[[Placeholder: A click-through Ceros pitch for the U.S. Bancorp Tower (“Big Pink”) — the building, amenity additions, activation concepts, a sample re-naming and a marketing approach.]]'),

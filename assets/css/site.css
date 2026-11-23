@@ -218,3 +218,5 @@ button{font:inherit;color:inherit}
 @media (max-width:700px){.ss-sheet{transform:translate(calc(var(--x) * .45),calc(var(--y) * .45)) rotate(calc(var(--r) * .6))}.ss-sheet.out{transform:translate(112%,-2%) rotate(6deg)}.ss-sheet.out-l{transform:translate(-112%,-2%) rotate(-6deg)}}
 @media (prefers-reduced-motion:reduce){.ss-sheet{transition:opacity .2s linear}.ss-sheet.out,.ss-sheet.out-l{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r))}}
 .ss-note{margin:0 auto;padding:0 0 22px;max-width:760px;text-align:center;color:#A9A6A3;letter-spacing:.04em}
+.g-row.g-inset{padding:3.992% 0 5.988%}
+@media (max-width:640px){.g-row.g-inset{padding:0}}

@@ -6,7 +6,7 @@ STD = 'Confidential pages — pricing, financials, rent comps and broker contact
 LOG = {
  'pdx-west': dict(note=STD,
     blurred=['none — Nov 23: cover broker strip unblurred (sheet stack, printed piece); Rodrigo\'s hero/card mockup shown with contacts readable (front pages are not confidential)'],
-    omitted=['page 10 back cover: broker names, phones and emails + disclaimer (no pricing, financials or rent comps anywhere in the flyer)'], mockup='hero + card = Rodrigo\'s mockup on the cream surface (unblurred); printed piece = self-made mockups from the sheets'),
+    omitted=['pages 4 (corporate neighbors) and 7 (regional logistics hubs): removed from the sheet stack Nov 23 at Rodrigo\'s request (editorial, not confidentiality)', 'page 10 back cover: broker names, phones and emails + disclaimer (no pricing, financials or rent comps anywhere in the flyer)'], mockup='hero + card = Rodrigo\'s mockup on the cream surface (unblurred); printed piece = self-made mockups from the sheets'),
  'kress-building': dict(note=STD,
     blurred=['p02: "$28/SF FSG" rent figure (Nov 23: p01 cover + hero mockup unblurred — commission callout and broker contacts are front-page content)'],
     omitted=['page 05','pages 07–08 floor plans carrying the $28/SF FSG rate','page 10 broker contacts']),

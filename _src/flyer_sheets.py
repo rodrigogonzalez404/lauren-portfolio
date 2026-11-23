@@ -6,7 +6,7 @@ import os, subprocess, tempfile, glob
 from PIL import Image
 from images import save, blur
 FLYERS = {'leftbank': ('/workspace/lauren-case-studies/source/extracted/Leftbank_Flyer.pdf', range(1, 7), {}),
-          'pdx-west': ('/workspace/lauren-case-studies/source/extracted/PDXWestFlyer_For Lease.pdf', range(1, 10), {})}  # PDX p10 = broker contacts -> omitted; p1 broker strip unblurred Nov 23 (front pages not confidential)  # slug: (pdf, pages, {page: blur boxes})
+          'pdx-west': ('/workspace/lauren-case-studies/source/extracted/PDXWestFlyer_For Lease.pdf', [1, 2, 3, 5, 6, 8, 9], {})}  # Nov 23: PDF p4 (corporate neighbors) + p7 (logistics hubs) removed from the stack (Rodrigo); PDX p10 = broker contacts -> omitted; p1 broker strip unblurred Nov 23 (front pages not confidential)  # slug: (pdf, pages, {page: blur boxes})
 def main():
     for slug, (pdf, pages, boxes) in FLYERS.items():
         with tempfile.TemporaryDirectory() as d:

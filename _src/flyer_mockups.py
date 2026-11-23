@@ -3,10 +3,11 @@ Run: python3 _src/flyer_mockups.py   (needs assets/img/<slug>/sheets/sNN.jpg fro
 Writes for PDX West: mock_cover.jpg (cover sheet with a second sheet under it) and mock_spread.jpg (three inside sheets fanned out, for 'The printed piece')."""
 import os, math, numpy as np
 from PIL import Image, ImageDraw, ImageFilter
+import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from palette import CREAM
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 W, H = 2304, 1728
 
-def surface(base=(214, 207, 198), seed=3, light=(0.3, 0.2)):
+def surface(base=CREAM, seed=3, light=(0.3, 0.2)):
     rng = np.random.default_rng(seed)
     def up(n, f): return np.array(Image.fromarray(rng.standard_normal((max(2, H // f), max(2, W // f))).astype(np.float32)).resize((W, H), Image.BICUBIC))
     v = rng.standard_normal((H, W)) * 6 + up(0, 3) * 3.5 + up(0, 240) * 1.5
@@ -14,6 +15,7 @@ def surface(base=(214, 207, 198), seed=3, light=(0.3, 0.2)):
     yy, xx = np.mgrid[0:H, 0:W]
     d = np.hypot(xx / W - light[0], yy / H - light[1])
     img = img * (1.05 - 0.13 * d)[..., None]
+    img = img * (np.array(base, float) / np.median(img.reshape(-1, 3), 0))  # median lands exactly on base
     return Image.fromarray(np.clip(img, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.8))
 
 def coeffs(dst, src):
@@ -107,9 +109,10 @@ def pdx():
     out(cv, 'pdx-west', 'mock_cover.jpg')   # printed piece; card.jpg + hero.jpg now come from pdx_rodrigo_mockup.py
     # printed piece: three inside sheets fanned out
     cv = surface(seed=21, light=(0.5, 0.2))
+    # S = stack sheets s01..s07 = PDF pages 1,2,3,5,6,8,9 -> S[2]=p3 site plan, S[5]=p8, S[3]=p5 (same pages as before)
     place(cv, S[2], rect(700, 930, 1040, -7), shadow=.8)
-    place(cv, S[7], rect(1610, 930, 1040, 7), shadow=.8)
-    place(cv, S[4], rect(1155, 870, 1180, 1.5), lift_corner=2, lift=30)
+    place(cv, S[5], rect(1610, 930, 1040, 7), shadow=.8)
+    place(cv, S[3], rect(1155, 870, 1180, 1.5), lift_corner=2, lift=30)
     out(cv, 'pdx-west', 'mock_spread.jpg')
     import pdx_rodrigo_mockup; pdx_rodrigo_mockup.main()   # Rodrigo's mockup (Nov 23) replaces hero.jpg + card.jpg
 

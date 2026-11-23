@@ -55,7 +55,7 @@ RE={
  'portland-office-market-report':('portland-office-report-q1-2026','portland-office-report_laptop.jpg',[(1,[]),(2,[])]),
 }
 NOMAD_FLIP=['p00_cover.jpg','page-03_L.jpg','page-03_R.jpg','page-07_L.jpg','page-07_R.jpg','page-10_L.jpg','page-10_R.jpg','page-11_L.jpg','page-11_R.jpg','page-12_L.jpg','page-12_R.jpg','page-15_L.jpg','page-15_R.jpg','page-17_L.jpg','page-19_R.jpg','page-22_L.jpg','page-22_R.jpg']
-NOMAD_IMG=['n01_hero_spread-investment-summary.jpg','n02_cover-on-desk.jpg','n03_printed-stack.jpg','n06_tablet-neighborhood-map.jpg','n08_detail-supply-chart.jpg','ds_wordmark.jpg','ds_title-box.jpg','ds_divider-label.jpg','ds_hatch.jpg','ds_icons.jpg']
+NOMAD_IMG=['n01_hero_spread-investment-summary.jpg','n02_cover-on-desk.jpg','n03_printed-stack.jpg','n06_tablet-neighborhood-map.jpg','n08_detail-supply-chart.jpg']  # Nov 23: design-system crops (ds_*) removed from the page (Rodrigo)
 CEROS={'big-pink':['bigpink-%02d'%i for i in (1,2,3,6,7,16,18,19,20,23)],
        'marketplace':['marketplace-%02d'%i for i in (1,2,3,5,9,11,13,15,16)]}
 # brand galleries: ordered as on the live Webflow case pages (already public there)
@@ -64,7 +64,9 @@ DROP={'RealEstate_Examples','8-FNL'}   # Fortis: readable listing prices, cap ra
 def main():
     if os.path.exists(OUT): shutil.rmtree(OUT)
     man={}
+    from content import UNPUBLISHED   # Redmond Gateway + Portland report: removed Nov 23, images not published
     for slug,(folder,mock,pages) in RE.items():
+        if slug in UNPUBLISHED: continue
         ov=MOCK+slug+'_hero-override.jpg'   # mockup supplied by Rodrigo replaces the generated one
         if mock or os.path.exists(ov): save(Image.open(ov if os.path.exists(ov) else MOCK+mock),slug,'hero.jpg')
         names=[]
@@ -96,6 +98,7 @@ def main():
     for f in ('about_portrait.jpg','about_educator.jpg'): save(Image.open(RD+f),'about',f.replace('about_',''))
     import madison_book; madison_book.main()
     import flyer_sheets; flyer_sheets.main()
+    import madison_card; madison_card.main()   # Madison home/works card on the shared cream (hero stays Rodrigo's white original)
     import runpy; runpy.run_path(os.path.join(os.path.dirname(__file__),'desk_texture.py'))   # ui/desk-charcoal.jpg (OUT is wiped above)
     json.dump(man,open(os.path.join(os.path.dirname(__file__),'image_manifest.json'),'w'),indent=1)
     print('done')

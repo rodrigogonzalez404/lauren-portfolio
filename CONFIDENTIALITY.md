@@ -7,7 +7,7 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 ## PDX West Logistics Center
 
 - **Blurred:** none — Nov 23: cover broker strip unblurred (sheet stack, printed piece); Rodrigo's hero/card mockup shown with contacts readable (front pages are not confidential)
-- **Omitted:** page 10 back cover: broker names, phones and emails + disclaimer (no pricing, financials or rent comps anywhere in the flyer)
+- **Omitted:** pages 4 (corporate neighbors) and 7 (regional logistics hubs): removed from the sheet stack Nov 23 at Rodrigo's request (editorial, not confidentiality); page 10 back cover: broker names, phones and emails + disclaimer (no pricing, financials or rent comps anywhere in the flyer)
 
 ## Kress Building
 
@@ -39,11 +39,6 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 - **Blurred:** p02 broker names, emails and phones; p07 offering bullets (price guidance, NOI, lender); p08 operating text (opex, in-place vs market rents, NOI upside); p10–11 ground-rent and MFTE savings text; p40 "Clears 3x in-place rent ($1,864/mo …)" line; back cover broker names, emails and phones
 - **Omitted:** PDF pages 13–17 = printed pp. 24–33 (unit mix & market rents, tax bill, income & expenses, pro forma notes, 10-year cash flow, rent comparables); replaced in the flip-book by a black "Confidential — financial information omitted" spread right after the 03 The Financials divider (pp. 22–23, kept)
 
-## Redmond Gateway
-
-- **Blurred:** p03/p04 parcel pages: paragraph naming the owners and tenant lease dates
-- **Omitted:** executive summary; investment highlights table; page 05 parcel SF table; pages 08–10 rent/sale comps; pages 11–13 statistics; page 16 broker contacts
-
 ## Springwood of Beaverton
 
 - **Blurred:** p01 cover: "75 Sites | 100% Occupied | $1,035 Avg. Rent" line (also blurred on the hero mockup)
@@ -53,11 +48,6 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 - **Blurred:** none — Nov 23: p01 cover broker strip + hero mockup unblurred (front page)
 - **Omitted:** pages 5–6 demographics; page 9 broker contacts
-
-## Portland Office Market Report Q1 2026
-
-- **Blurred:** nothing
-- **Omitted:** pages 03–16 market data and sales
 
 ## Fortis Net Lease
 
@@ -77,6 +67,10 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 ## Brand & Ecommerce (Aafayaa, Abundant Earth, Wild Naturals, TokSuite, Farm & Bee, Zulay Kitchen, CGK Unlimited)
 
 - Images and copy as already published on Lauren’s live Webflow site; visually checked — no prices, phones, emails or contacts.
+
+## Removed from the site (Nov 23, Rodrigo)
+
+- Redmond Gateway and Portland Office Market Report: no page, card or link; source entries kept in _src (content.UNPUBLISHED), images not generated.
 
 ## Projects not on the site (confidential / excluded)
 
