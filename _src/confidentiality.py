@@ -5,10 +5,10 @@ Rule (Rodrigo): leave anything confidential out; if leaving it out would look ba
 STD = 'Confidential pages — pricing, financials, rent comps and broker contacts — are left out; contact details are blurred.'
 LOG = {
  'pdx-west': dict(note=STD,
-    blurred=['p01 cover: broker names/phones/emails strip (sheet stack, printed piece and the card thumbnail)'],
-    omitted=['page 10 back cover: broker names, phones and emails + disclaimer (no pricing, financials or rent comps anywhere in the flyer)'], mockup='self-made flyer mockups (hero, card, fanned sheets) are built from the blurred sheets'),
+    blurred=['none — Nov 23: cover broker strip unblurred (sheet stack, printed piece); Rodrigo\'s hero/card mockup shown with contacts readable (front pages are not confidential)'],
+    omitted=['page 10 back cover: broker names, phones and emails + disclaimer (no pricing, financials or rent comps anywhere in the flyer)'], mockup='hero + card = Rodrigo\'s mockup on the cream surface (unblurred); printed piece = self-made mockups from the sheets'),
  'kress-building': dict(note=STD,
-    blurred=['p01 cover: commission callout + broker contacts','p02: "$28/SF FSG" rent figure','hero mockup: commission callout + contacts'],
+    blurred=['p02: "$28/SF FSG" rent figure (Nov 23: p01 cover + hero mockup unblurred — commission callout and broker contacts are front-page content)'],
     omitted=['page 05','pages 07–08 floor plans carrying the $28/SF FSG rate','page 10 broker contacts']),
  'nomad': dict(note='Confidential chapters — pricing, financials, rent comps and broker contacts — are left out.',
     blurred=['none (Rodrigo: "remove the blur" on the flip-book pages)'],
@@ -26,7 +26,7 @@ LOG = {
     blurred=['p01 cover: "75 Sites | 100% Occupied | $1,035 Avg. Rent" line (also blurred on the hero mockup)'],
     omitted=['pages 04, 05, 07 (summary/offering text)','pages 13–15 financials','page 17 comps','pages 19–20 statistics','page 21 rent-control text','page 22 contacts']),
  'pointe-at-bridgeport': dict(note=STD,
-    blurred=['p01 cover: broker contacts strip (also blurred on the hero mockup)'],
+    blurred=['none — Nov 23: p01 cover broker strip + hero mockup unblurred (front page)'],
     omitted=['pages 5–6 demographics','page 9 broker contacts']),
  'portland-office-market-report': dict(note='Data pages (statistics, sale prices, tenants) are left out of this portfolio.',
     blurred=[], omitted=['pages 03–16 market data and sales']),

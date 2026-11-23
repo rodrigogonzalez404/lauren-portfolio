@@ -2,14 +2,16 @@
 
 Rule: leave anything confidential out; if leaving it out would look bad, blur it. The site is PUBLIC (GitHub Pages), marked noindex.
 
+**Updated rule (Rodrigo, Nov 23):** "Anything in the front pages is not confidential. Confidential means financials." Covers, thumbnails and hero mockups are shown unblurred (contacts, headlines, addresses, broker strips). Only financial data (pricing, rents, rent comps, operating figures, taxes, deal financials such as Madison section 03) stays blurred or omitted. Interior pages blurred only for contacts are listed below and wait for confirmation.
+
 ## PDX West Logistics Center
 
-- **Blurred:** p01 cover: broker names/phones/emails strip (sheet stack, printed piece and the card thumbnail)
+- **Blurred:** none — Nov 23: cover broker strip unblurred (sheet stack, printed piece); Rodrigo's hero/card mockup shown with contacts readable (front pages are not confidential)
 - **Omitted:** page 10 back cover: broker names, phones and emails + disclaimer (no pricing, financials or rent comps anywhere in the flyer)
 
 ## Kress Building
 
-- **Blurred:** p01 cover: commission callout + broker contacts; p02: "$28/SF FSG" rent figure; hero mockup: commission callout + contacts
+- **Blurred:** p02: "$28/SF FSG" rent figure (Nov 23: p01 cover + hero mockup unblurred — commission callout and broker contacts are front-page content)
 - **Omitted:** page 05; pages 07–08 floor plans carrying the $28/SF FSG rate; page 10 broker contacts
 
 ## Nomad
@@ -49,7 +51,7 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## The Pointe at Bridgeport
 
-- **Blurred:** p01 cover: broker contacts strip (also blurred on the hero mockup)
+- **Blurred:** none — Nov 23: p01 cover broker strip + hero mockup unblurred (front page)
 - **Omitted:** pages 5–6 demographics; page 9 broker contacts
 
 ## Portland Office Market Report Q1 2026

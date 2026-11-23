@@ -40,8 +40,10 @@ def page(folder, n):
     raise FileNotFoundError(folder+str(n))
 
 # slug: (pdf folder, hero mockup, [(page, blur boxes)])
+# Rule (Rodrigo, Nov 23): front-page/cover content (contacts, headlines, addresses, broker strips) is NOT confidential;
+# only financial data (pricing, rents, rent comps, operating figures, taxes, deal financials) is blurred or omitted.
 RE={
- 'kress-building':('kress-building','kress-building_brochure.jpg',[(1,[(0.725,0.05,0.982,0.163),(0.035,0.805,0.32,0.92)]),(2,[(0.068,0.866,0.175,0.897)]),(3,[]),(4,[]),(6,[]),(9,[])]),
+ 'kress-building':('kress-building','kress-building_brochure.jpg',[(1,[]),(2,[(0.068,0.866,0.175,0.897)]),(3,[]),(4,[]),(6,[]),(9,[])]),
  'pdx-west':('pdx-west-flyer',None,[]),  # sheets: _src/flyer_sheets.py; hero, card, mock_spread: _src/flyer_mockups.py
  'the-grid':('kirkland-405-brand','the-grid_lobby-sign.jpg',[(i,[]) for i in range(1,9)]),
  'pacific-center':('pacific-center-flyer','pacific-center_poster.jpg',[(i,[]) for i in range(1,6)]),
@@ -49,7 +51,7 @@ RE={
  'madison-plaza':('madison-plaza-om','madison-plaza_om-cover.jpg',[]),  # page gallery replaced by the Nomad-style book: see _src/madison_book.py
  'redmond-gateway':('redmond-assemblage-om','redmond-gateway_om-stack.jpg',[(1,[]),(2,[]),(6,[(0.035,0.24,0.315,0.43)]),(7,[(0.035,0.24,0.315,0.43)]),(14,[]),(15,[])]),  # parcel text names owners + lease dates -> blurred),
  'springwood':('springwood-om','springwood_om-cover.jpg',[(1,[(0.581,0.894,0.938,0.927)]),(2,[]),(3,[]),(6,[]),(8,[]),(9,[]),(10,[]),(11,[]),(12,[]),(16,[]),(18,[])]),
- 'pointe-at-bridgeport':('the-pointe-bridgeport','the-pointe_flyer-stack.jpg',[(1,[(0.049,0.852,0.557,0.941)]),(2,[]),(3,[]),(4,[]),(7,[]),(8,[])]),
+ 'pointe-at-bridgeport':('the-pointe-bridgeport','the-pointe_flyer-stack.jpg',[(1,[]),(2,[]),(3,[]),(4,[]),(7,[]),(8,[])]),
  'portland-office-market-report':('portland-office-report-q1-2026','portland-office-report_laptop.jpg',[(1,[]),(2,[])]),
 }
 NOMAD_FLIP=['p00_cover.jpg','page-03_L.jpg','page-03_R.jpg','page-07_L.jpg','page-07_R.jpg','page-10_L.jpg','page-10_R.jpg','page-11_L.jpg','page-11_R.jpg','page-12_L.jpg','page-12_R.jpg','page-15_L.jpg','page-15_R.jpg','page-17_L.jpg','page-19_R.jpg','page-22_L.jpg','page-22_R.jpg']

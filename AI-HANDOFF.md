@@ -66,11 +66,18 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 - Swatches: #76A48E Sage, #505F69 Slate, #374B4E Deep Slate, #ECF3F0 Mist, #FFFFFF White.
 - There is no signage for PDX West; it is a leasing flyer only. Don't mention signs or billboards in its copy or alt text.
 - Mockups are all self-made by `_src/flyer_mockups.py` from the already-blurred sheets, with no stock and no props. The pen was removed on Nov 20 because it looked fake. Each sheet is one exact perspective warp rendered at 4× and downsampled with LANCZOS. The source is edge-padded, so the anti-aliased edge keeps the artwork's own colour: no rim, fringe or seams. Shadows are multiply layers (ambient, contact and two soft offsets, with the light from the top-left). A raised corner is suggested only through light and shadow. The beige surface is procedural.
-  - `hero.jpg`: the cover on top of the property-highlights sheet, on beige. 2304×1728; the key content sits inside the 16:9 band that the hero crop shows.
+  - `hero.jpg` + `card.jpg` (Nov 23): Rodrigo's own mockup (standing cover, tablet with Property Highlights, flat back sheet), source `/workspace/lauren-case-studies/mockups/pdx-west_rodrigo-mockup.png`. `_src/pdx_rodrigo_mockup.py` puts it on the cream surface. Nothing is blurred: contacts are readable per the Nov 23 rule; the traced contact quads are kept as `CONTACTS_TRACED`. Background and shadow pixels are multiplied onto the cream, so the studio shadows carry over and the edges have no white halo. Object pixels are kept as they are. The object mask is saturated or dark pixels with the holes filled, plus traced polygons for the standing pad's page stack and easel and for the flat sheet. In the hero, the objects sit inside the wide central band the case-hero crop shows (about 58% of the height). In the card (4:3, shown whole), they fill about 86% of the width. If Rodrigo sends a new version of this mockup, re-trace `STAND`/`FLAT` in that script.
   - `mock_spread.jpg` (The printed piece): three inside sheets (site plan, submarket, building) fanned out.
-  - `card.jpg`: Kress framing; one thin cover sheet with a lifted corner and a second sheet peeking out underneath.
-- The printed piece: mock_spread + card, then the flat front sheet (s01) and back sheet (s09).
+  - `mock_cover.jpg` (The printed piece; this was the card until Nov 23): one thin cover sheet with a lifted corner and a second sheet peeking out underneath.
+- The printed piece: mock_spread + mock_cover, then the flat front sheet (s01) and back sheet (s09).
 - Sheet stack shows PDF pages 1–9; page 1's broker strip is blurred. Page 10 (back cover with broker contacts) is omitted.
 - `flyer_sheets.py` re-runs `flyer_mockups.pdx()` after rendering the sheets.
 - Project and Solution copy is written from the flyer (no rents, prices or deal figures). Results stays `[[ ]]`.
 - `sheet_stack(..., note)` prints the confidentiality line under the stack. Leftbank and PDX pass `LOG[slug]['note']` (the STD text).
+
+## Confidentiality rule change (Rodrigo, Nov 23)
+- Rodrigo: "Anything in the front pages is not confidential. Confidential means financials."
+- Covers, thumbnails, cards and hero mockups are shown unblurred: contacts, headlines, addresses, broker strips and the Kress commission callout. Done in `/workspace/mk/run.py` (Kress, Pointe mockups), `_src/images.py` (Kress/Pointe p01), `_src/flyer_sheets.py` (PDX s01) and `_src/pdx_rodrigo_mockup.py`.
+- Still blurred or omitted, because it's financial: Kress p02 "$28/SF FSG"; the Springwood cover "$1,035 Avg. Rent" line (cover and hero); Madison section 03 and its financial blurs; omitted rent, comp and financial pages everywhere.
+- Interior blurs that cover only contacts or names are unchanged and waiting for Rodrigo to confirm: Madison p02 and back cover broker contacts, and Redmond p03/p04 owner names and lease dates.
+- The STD stack disclaimer ("...contact details are blurred.") is Rodrigo's verbatim wording and is still printed under the PDX and Leftbank stacks. It is not accurate any more, so wait for his call before changing it.

@@ -1,7 +1,6 @@
 """Self-made flyer mockups (no stock): thin printed sheets on a textured surface, with lifted corners and soft shadows.
 Run: python3 _src/flyer_mockups.py   (needs assets/img/<slug>/sheets/sNN.jpg from flyer_sheets.py; cover contacts already blurred)
-Writes for PDX West: hero.jpg (2304x1728, key content inside the 16:9 band the hero shows), card.jpg (Kress-style
-thumbnail) and mock_spread.jpg (three inside sheets fanned out, for 'The printed piece')."""
+Writes for PDX West: mock_cover.jpg (cover sheet with a second sheet under it) and mock_spread.jpg (three inside sheets fanned out, for 'The printed piece')."""
 import os, math, numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -99,22 +98,19 @@ def out(im, slug, name): p = os.path.join(ROOT, 'assets', 'img', slug, name); im
 
 def pdx():
     S = sheets('pdx-west')
-    # hero: cover on top of the property-highlights sheet; content kept inside the central 16:9 band
-    cv = surface(seed=11, light=(0.35, 0.25))
-    place(cv, S[1], rect(1300, 820, 1120, -7), shadow=.8)
-    place(cv, S[0], rect(1050, 880, 1180, 3.5), lift_corner=2, lift=34)
-    out(cv, 'pdx-west', 'hero.jpg')
+    # hero.jpg + card.jpg: Rodrigo's mockup, composited onto the cream surface by pdx_rodrigo_mockup.py (Nov 23)
     # card: Kress framing, single thin cover with a lifted corner and a second sheet peeking underneath
     k = W / 1024
     cv = surface(seed=3)
     place(cv, S[1], rect(498 * k, 372 * k, 540 * k, 3.0), shadow=.6)
     place(cv, S[0], rect(532 * k, 400 * k, 565 * k, -6.5), lift_corner=2, lift=42)
-    out(cv, 'pdx-west', 'card.jpg')
+    out(cv, 'pdx-west', 'mock_cover.jpg')   # printed piece; card.jpg + hero.jpg now come from pdx_rodrigo_mockup.py
     # printed piece: three inside sheets fanned out
     cv = surface(seed=21, light=(0.5, 0.2))
     place(cv, S[2], rect(700, 930, 1040, -7), shadow=.8)
     place(cv, S[7], rect(1610, 930, 1040, 7), shadow=.8)
     place(cv, S[4], rect(1155, 870, 1180, 1.5), lift_corner=2, lift=30)
     out(cv, 'pdx-west', 'mock_spread.jpg')
+    import pdx_rodrigo_mockup; pdx_rodrigo_mockup.main()   # Rodrigo's mockup (Nov 23) replaces hero.jpg + card.jpg
 
 if __name__ == '__main__': pdx()
