@@ -101,7 +101,7 @@ def main():
     import flyer_sheets; flyer_sheets.main()
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'grid')); import grid_assets; grid_assets.main()   # The Grid identity case
     import madison_card; madison_card.main()   # Madison home/works card on the shared cream (hero stays Rodrigo's white original)
-    # (ui/cream-surface.jpg retired Nov 23 PM: the viewers are flat stone #ECEAE6 in CSS, no texture)
+    os.makedirs(os.path.join(OUT, 'ui'), exist_ok=True); import flyer_mockups as FM; FM.surface(seed=7, light=(0.5, 0.15)).resize((1600, 1200), Image.LANCZOS).save(os.path.join(OUT, 'ui', 'stone-surface.jpg'), quality=84, optimize=True, progressive=True)   # iPad viewer stage: textured pale stone (t78u)
     import runpy; runpy.run_path(os.path.join(os.path.dirname(__file__),'desk_texture.py'))   # ui/desk-charcoal.jpg (OUT is wiped above)
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'bigpink')); import bp_assets; bp_assets.main()   # Big Pink (OnePink identity + Ceros laptop) and Marketplace
     json.dump(man,open(os.path.join(os.path.dirname(__file__),'image_manifest.json'),'w'),indent=1)

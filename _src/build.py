@@ -122,12 +122,6 @@ def home():
 <div class="row mt64" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px"><p class="mono-s muted">{T(H["re_note"])}</p>{btn("All Real Estate work", "works.html#real-estate", "sec")}</div>
 </section>
 
-<section class="wrap" style="padding-bottom:var(--sec)" id="interactive" data-name="Interactive Presentations">
-<div class="sec-head clean"><div class="col gap16"><span class="mono muted">[Interactive] ({len(CEROS):02d})</span><h2 class="l">{E(H["interactive_title"])}</h2></div>
-<p class="bm muted intro">{T(H["interactive_intro"])}</p></div>
-<div>{card(BY["marketplace"], r, "r169", src="assets/img/marketplace/hero.jpg")}</div>
-<p class="mono-s muted mt24">Big Pink, the other Ceros pitch, is featured above in Real Estate — <a href="work/big-pink.html" style="text-decoration:underline">see the case</a>.</p>
-</section>
 
 <section class="dark wrap sec" data-name="Approach">
 <div class="g12"><span class="mono muted c1-4">{T(H["approach_label"])}</span><h2 class="l c4-13">{T(H["approach"])}</h2></div>
@@ -494,7 +488,7 @@ if __name__ == '__main__':
     md.append('## Brand & Ecommerce (Aafayaa, Abundant Earth, Wild Naturals, TokSuite, Farm & Bee, Zulay Kitchen, CGK Unlimited)\n')
     md.append('- Images and copy as already published on Lauren’s live Webflow site; visually checked — no prices, phones, emails or contacts.\n')
     md.append('## Removed from the site (Nov 23, Rodrigo)\n')
-    md.append('- Redmond Gateway and Portland Office Market Report: no page, card or link; source entries kept in _src (content.UNPUBLISHED), images not generated.\n')
+    md.append('- Redmond Gateway, Portland Office Market Report and Marketplace I & II (removed Nov 23 PM): no page, card or link; source entries kept in _src (content.UNPUBLISHED), images not generated.\n')
     md.append('## Projects not on the site (confidential / excluded)\n')
     md.append('- The Galt (BOV), 8210 Mauzey Court, Fruit Valley, Pomeroy, Overland AI, W+K timeline, American Brush / REMS, Houghton RFQ; Apex skipped.\n')
     open(os.path.join(ROOT, 'CONFIDENTIALITY.md'), 'w').write('\n'.join(md))

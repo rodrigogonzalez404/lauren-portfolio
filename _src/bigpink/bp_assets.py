@@ -82,12 +82,15 @@ def main():
             subprocess.run(['pdftoppm', '-f', str(n), '-l', str(n), '-r', '240', '-png', '-singlefile', PDF, f'{t}/p'], check=True, stderr=subprocess.DEVNULL)
             im = Image.open(f'{t}/p.png')
             save(trim_white(im, 0) if name == 'moodboard' else im, name + '.jpg', 2400)
-    # Marketplace: the curated design screens already used on the site (16:9 captures)
+    hero()
+    # Marketplace I & II: REMOVED from the site Nov 23 PM (Rodrigo t78u). Sources kept; marketplace_assets() is not called.
+    print('big-pink assets ->', OUT)
+def marketplace_assets():
+    """(unused since t78u) the curated Marketplace design screens + laptop hero/card."""
     sel = '/workspace/redesign/img/ceros/sel/'
     for i, f in enumerate(['marketplace-%02d.jpg' % k for k in (1, 2, 3, 5, 9, 11, 13, 15, 16)], 1):
         p = os.path.join(ROOT, 'assets', 'img', 'marketplace', 'scr', f's{i:02d}.jpg'); os.makedirs(os.path.dirname(p), exist_ok=True)
         Image.open(sel + f).convert('RGB').save(p, 'JPEG', quality=84, optimize=True, progressive=True)
-    hero()
     for n in ('hero', 'card'): shutil.copy(REND + f'marketplace-{n}.jpg', os.path.join(ROOT, 'assets', 'img', 'marketplace', f'{n}.jpg'))
-    print('big-pink assets ->', OUT)
+
 if __name__ == '__main__': main()

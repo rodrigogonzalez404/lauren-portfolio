@@ -221,8 +221,8 @@ button{font:inherit;color:inherit}
 .g-row.g-inset{padding:3.992% 0 5.988%}
 @media (max-width:640px){.g-row.g-inset{padding:0}}
 .fb-wrap.tall{max-width:1000px}
-/* iPad viewer (digital brochures) — CSS-drawn iPad Pro on the shared stone #ECEAE6 (no paper texture; neutral vignette + shadows — Nov 23 PM); JS in site.js */
-.tab-stage{position:relative;background-color:#ECEAE6;background-image:radial-gradient(120% 95% at 45% 30%,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 55%,rgba(0,0,0,.045) 100%);background-size:100% 100%;background-position:center;padding:clamp(32px,6.4vw,92px) clamp(12px,5.6vw,80px) 0;color:#0F0F0F}
+/* iPad viewer (digital brochures) — CSS-drawn iPad Pro on the shared stone #ECEAE6 (textured stone surface ui/stone-surface.jpg; neutral vignette + shadows — Nov 23 PM); JS in site.js */
+.tab-stage{position:relative;background-color:#ECEAE6;background-image:radial-gradient(120% 95% at 45% 30%,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 55%,rgba(0,0,0,.07) 100%),url("../img/ui/stone-surface.jpg");background-size:100% 100%,cover;background-position:center;padding:clamp(32px,6.4vw,92px) clamp(12px,5.6vw,80px) 0;color:#0F0F0F}
 .tab-wrap{position:relative;max-width:1040px;margin:0 auto;container-type:inline-size}
 .tab-wrap::after{content:"";position:absolute;left:7%;right:7%;bottom:-2.4cqw;height:4.2cqw;border-radius:50%;background:radial-gradient(closest-side,rgba(18,18,20,.42),rgba(18,18,20,0));filter:blur(1.2cqw);pointer-events:none;z-index:0}
 .tab{position:relative;z-index:1;border-radius:5.4cqw;padding:.3cqw;background:linear-gradient(160deg,#B9B9BE 0%,#6E6E74 22%,#9C9CA2 50%,#5C5C61 78%,#A9A9AF 100%);

@@ -106,7 +106,7 @@ PROJECTS.append(dict(slug='fortis-net-lease', title='Fortis Net Lease', cat='re'
      summary=fc['project'], project=fc['project'], solution=fc['solution'], results=' '.join(fc['results']), gallery_title='Selected work'))
 
 # Nov 23 (Rodrigo): removed from the site. Entries kept above as source; not published (no page, card, nav or Next link).
-UNPUBLISHED = {'redmond-gateway', 'portland-office-market-report'}
+UNPUBLISHED = {'redmond-gateway', 'portland-office-market-report', 'marketplace'}   # marketplace: removed Nov 23 PM (Rodrigo t78u)
 PROJECTS = [p for p in PROJECTS if p['slug'] not in UNPUBLISHED]
 
 CEROS = [
@@ -130,6 +130,7 @@ for slug,title in BRAND_ORDER:
                       service=c['service'],role=None,summary=c['project'],project=c['project'],solution=c['solution'],results=' '.join(c['results']),
                       home=slug in ('aafayaa','abundant-earth','wild-naturals'),gallery_title='Selected work'))
 
+CEROS = [c for c in CEROS if c['slug'] not in UNPUBLISHED]
 ALL = PROJECTS + CEROS + BRAND   # case-page order (also drives "Next project")
 
 # Big Pink copy (Nov 23; leads with OnePink — never say the client chose it; Colliers did not win, so no Results) — written from the Ceros presentation and Lauren's logo-concepts deck

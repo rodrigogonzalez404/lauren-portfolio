@@ -66,8 +66,8 @@ def grid_blocks(r, gsec, swatches, img_rows):
     typ = tile('<div class="gr-type"><span class="gr-aa">Aa</span><div class="gr-tw"><span class="l">Open Sans Light</span><span class="s">Open Sans Semibold</span>'
                '<span class="abc">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><span class="abc">abcdefghijklmnopqrstuvwxyz</span><span class="abc">0123456789 — &amp; @ ’ “ ”</span></div></div>',
                'white bordered gr-band', 'Supporting typeface', 'Open Sans Light and Semibold')
-    app = img_rows('the-grid', [[('sign_blade.jpg', 'The Grid on an exterior blade sign'), ('sign_lobby.jpg', 'The Grid in dimensional letters on a lobby feature wall')],
-                                [('card.jpg', 'The Grid logo panel in the building lobby'), ('cards.jpg', 'The Grid business cards, front and back')]], r)
+    # the entrance sign (sign_blade) is the hero and card since t78u, so In place shows the lobby wall and the cards
+    app = img_rows('the-grid', [[('sign_lobby.jpg', 'The Grid in dimensional letters on a lobby feature wall'), ('cards.jpg', 'The Grid business cards, front and back')]], r)
     con = ''
     for name, title, tag, keys, why, pre in CONCEPTS:
         chosen = pre is None
@@ -81,6 +81,6 @@ def grid_blocks(r, gsec, swatches, img_rows):
             + gsec(var, 'Versions', 'One mark, set for every background it meets: stone and white, dark panels and the building’s own grey.')
             + gsec(swatches(GRID_PAL), 'Color')
             + gsec(typ, 'Typography', 'The wordmark is drawn, not typeset; Open Sans, the naming deck’s typeface, carries everything around it.')
-            + gsec(app, 'In place', 'The identity on the building — exterior signage and the lobby wall — and on a business card.')
+            + gsec(app, 'In place', 'The identity inside the building — dimensional letters on the lobby wall — and on a business card; the entrance sign opens the page.')
             + gsec(f'<div class="gr-concepts">{con}</div>', 'Concept exploration', 'Three names were developed all the way to a logo, each with its own key messages and the reasoning behind it, alongside a wider list that included Node113, 405Xchange and Kirkland Hub. The Grid was chosen; Stage One and The Pulse remain concepts.')
             + '</div>')

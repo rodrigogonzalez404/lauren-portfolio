@@ -38,7 +38,7 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 ## Open items (as of the initial commit)
 - All Real Estate case copy (Project / Solution / Results / summary / role / client team) is `[[placeholder]]` — needs Lauren.
 - Nomad copy is a draft written from the document — Lauren to review. Results unknown.
-- Ceros: Big Pink settled Nov 23 (see below). Marketplace: Portland, OR / 2026 set; type, role and copy still `[[ ]]`.
+- Ceros: Big Pink settled Nov 23 (see below). Marketplace I & II removed from the site Nov 23 PM (sources kept).
 - Home "Approach" section is placeholder copy.
 - Contact page has no form (GitHub Pages is static) — email + LinkedIn only.
 - Portland Office Market Report: only cover + contents shown; the report may be public — confirm before adding data pages.
@@ -156,3 +156,21 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
   In place mockup (white), Big Pink hero (navy), brand cards, Zulay, CGK, Contact.
 - Backups of the cream versions: `/workspace/lauren-case-studies/mockups-pre-stone-nov23/`,
   `/workspace/redesign/img/nomad-pre-stone-nov23/`, `/workspace/bigpink/rendered-pre-stone/`, `/workspace/mk/mock.py.pre-stone`.
+
+## Texture back, no blur; The Grid on an entrance wall; Marketplace removed (Rodrigo t78u, Nov 23 PM)
+- Rodrigo: the smoothed stone "looks blurred"; he wants "pale stone but with texture and context". **Supersedes the
+  "No paper texture" / "smooths its texture" lines above.** Rule now: colour-grade only — never denoise, blur or flatten.
+- `mk/mock.py` restored from `mock.py.pre-stone` (smoothed one kept as `mock.py.smoothed-073932d`); grade = backdrop
+  chroma ×0.55, gain toward CREAM hue at luminance `min(stone, median×1.08)` (keeps the scene's own light and grain).
+  Re-run: `run.py kress pacific leftbank madison springwood pointe nomad pacific-book`.
+- `_src/nomad_surface.py`: same grade, mask only (edge walls + border-connected regions), no blur.
+- `flyer_mockups.surface()` has a real neutral grain/mottle again (blur 0.8, colourless); images.py writes
+  `ui/stone-surface.jpg` (seed 7) and `.tab-stage` uses it under the neutral vignette.
+- **The Grid card + hero** = Lauren's deck entrance mockup (`sign_blade.jpg`: black panel on the stone-clad facade beside
+  the glass doors), `grid_assets.entrance()`: card 4:3 right crop, hero 16:9 (y0 8%, keeps the panel top), a 50% white
+  balance of the light cladding toward stone. Native size is only 1760 px wide (deck image), so that is the hero width.
+  The old lobby-sign card and vector `hero()` are retired; In place = lobby wall letters + business cards.
+- **Marketplace I & II removed** from the site (content.py `UNPUBLISHED`; home Interactive section and the Big Pink
+  pointer line deleted; works index Interactive now lists only Big Pink). Sources kept: `bp_assets.marketplace_assets()`
+  (not called), `/workspace/bigpink/rendered/marketplace-*.jpg`, the confidentiality LOG entry.
+- Note: the page background (`--paper` #F2F2F2) was never changed; only mockup/viewer surfaces are #ECEAE6.

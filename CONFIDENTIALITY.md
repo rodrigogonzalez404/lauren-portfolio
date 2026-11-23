@@ -59,18 +59,13 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 - **Blurred:** nothing
 - **Omitted:** [03] The Market — submarket figures, absorption, rents and concessions (black screen in viewer); [04] The Competition — competitive set with rents (black screen in viewer); [06] Fee Proposal — fee terms (black screen in viewer); team, client-list, reference, lease-map and services screens; the empty SWOT screen and the repositioning screen (carries copy from another project); no live embed of, or link to, the Ceros presentation
 
-## Marketplace I & II
-
-- **Blurred:** nothing
-- **Omitted:** all Ceros pages outside the curated 9 (market data, fees, team, client lists); no live embed of, or link to, the Ceros presentation
-
 ## Brand & Ecommerce (Aafayaa, Abundant Earth, Wild Naturals, TokSuite, Farm & Bee, Zulay Kitchen, CGK Unlimited)
 
 - Images and copy as already published on Lauren’s live Webflow site; visually checked — no prices, phones, emails or contacts.
 
 ## Removed from the site (Nov 23, Rodrigo)
 
-- Redmond Gateway and Portland Office Market Report: no page, card or link; source entries kept in _src (content.UNPUBLISHED), images not generated.
+- Redmond Gateway, Portland Office Market Report and Marketplace I & II (removed Nov 23 PM): no page, card or link; source entries kept in _src (content.UNPUBLISHED), images not generated.
 
 ## Projects not on the site (confidential / excluded)
 

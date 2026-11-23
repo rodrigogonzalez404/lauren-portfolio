@@ -10,15 +10,15 @@ W, H = 2304, 1728
 def surface(base=CREAM, seed=3, light=(0.3, 0.2)):
     rng = np.random.default_rng(seed)
     def up(n, f): return np.array(Image.fromarray(rng.standard_normal((max(2, H // f), max(2, W // f))).astype(np.float32)).resize((W, H), Image.BICUBIC))
-    # Nov 23 PM (stone): the paper texture is gone — only a faint neutral grain (against JPEG banding) and a soft,
-    # colourless light falloff remain, so nothing reads tan.
-    v = rng.standard_normal((H, W)) * 1.1
+    # pale stone WITH texture (Rodrigo t78u): the original paper/stone grain (fine + medium + broad mottling) is back,
+    # but colourless (equal on R, G, B) so it reads as stone, not tan; soft neutral light falloff.
+    v = rng.standard_normal((H, W)) * 6 + up(0, 3) * 3.5 + up(0, 240) * 1.5
     img = np.array(base, float)[None, None, :] + v[..., None]
     yy, xx = np.mgrid[0:H, 0:W]
     d = np.hypot(xx / W - light[0], yy / H - light[1])
-    img = img * (1.03 - 0.07 * d)[..., None]
+    img = img * (1.05 - 0.13 * d)[..., None]
     img = img * (np.array(base, float) / np.median(img.reshape(-1, 3), 0))  # median lands exactly on base
-    return Image.fromarray(np.clip(img, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.6))
+    return Image.fromarray(np.clip(img, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.8))
 
 def coeffs(dst, src):
     A, B = [], []

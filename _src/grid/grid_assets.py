@@ -12,6 +12,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 HERE = os.path.dirname(os.path.abspath(__file__)); SRC = os.path.dirname(HERE); ROOT = os.path.dirname(SRC)
 sys.path.insert(0, SRC)
 import flyer_mockups as FM
+from palette import CREAM
 OUT = os.path.join(ROOT, 'assets', 'img', 'the-grid')
 DECK = '/workspace/lauren-case-studies/source/extracted/Kirkland Brand Design/Kirkland405_Logo-NameIdeas_draft1.pdf'
 MOCK = '/workspace/lauren-case-studies/mockups/the-grid_lobby-sign.jpg'
@@ -87,9 +88,25 @@ def cards():
     FM.place(cv, card_art(True), crect(W * .39, H * .40, W * .44, -7), shadow=0.9)
     save(cv, 'cards.jpg', 86)
 
+def entrance():
+    """Card + hero (Rodrigo t78u: "should be on a wall, looking like the logo of an entrance of a building"): the
+    entrance mockup from Lauren's naming deck p.3 — the mounted panel on the stone-clad facade beside the glass doors,
+    sidewalk below. Photographic, sharp, native resolution (the deck image is 1774 px wide). The old self-made
+    lobby-sign (MOCK) and the vector-logo hero() are retired."""
+    im = Image.open(os.path.join(OUT, 'sign_blade.jpg')).convert('RGB'); W, H = im.size
+    # gentle white balance toward pale stone (the cladding reads cool blue-grey): 50% of the way, by lightness only on
+    # light pixels, so the black panel, the glass and the texture are untouched
+    a = np.asarray(im, np.float32); L = a.mean(2)
+    lightm = L > 150; med = np.median(a[lightm], 0); st = np.array(CREAM, np.float32)
+    gain = 1 + 0.5 * ((st / st.mean()) / (med / med.mean()) - 1)
+    wgt = np.clip((L - 120) / 80, 0, 1)[..., None]
+    im = Image.fromarray(np.clip(a * (1 - wgt) + a * gain * wgt, 0, 255).astype(np.uint8))
+    cw = round(H * 4 / 3); save(im.crop((W - cw, 0, W, H)), 'card.jpg', 90)            # 4:3, keeps the panel and the doors
+    ch = round(W * 9 / 16); y0 = round((H - ch) * 0.08)   # 16:9, keeps the panel's top edge
+    save(im.crop((0, y0, W, y0 + ch)), 'hero.jpg', 90)
+
 def main():
     os.makedirs(OUT, exist_ok=True)
-    hero(); deck_crops(); cards()
-    save(Image.open(MOCK), 'card.jpg', 84)
+    deck_crops(); cards(); entrance()
     print('the-grid assets ->', OUT)
 if __name__ == '__main__': main()
