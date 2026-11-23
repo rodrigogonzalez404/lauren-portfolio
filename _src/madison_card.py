@@ -66,7 +66,9 @@ def compose(a, w, obj, W, H, fill, seed, light):
 # Financials (CONFIDENTIALITY: Madison p08 operating text is blurred in the flip-book) — the phone screen shows the same
 # opex paragraph ("T12 operating expenses of $9,875 per unit ...") and is now large enough to read, so it is blurred
 # here too; only neutral (text-on-white) pixels inside the rectangles, so the brochure's sky/photo is untouched.
-BLUR = [(2766, 1452, 3214, 1618), (3050, 1612, 3214, 1700)]
+# Rodrigo t80u (Nov 23, 2:52 PM PT): "please ensure nothing is blur on this image" — he approved showing the phone
+# paragraph on the card, so no rectangles are blurred any more (kept for reference: (2766,1452,3214,1618), (3050,1612,3214,1700)).
+BLUR = []
 def blur_financials(a):
     for x0, y0, x1, y1 in BLUR:
         r = a[y0:y1, x0:x1].astype(np.float32)
@@ -77,7 +79,7 @@ def blur_financials(a):
     return a
 
 def main():
-    a = blur_financials(cv2.imread(SRC))
+    a = cv2.imread(SRC)   # no blur (Rodrigo t80u)
     w, obj = object_weight(a)
     d = os.path.join(ROOT, 'assets/img/madison-plaza')
     compose(a, w, obj, 2400, 1350, 0.94, 11, (0.45, 0.25)).save(os.path.join(d, 'card-wide.jpg'), quality=88, optimize=True, progressive=True)

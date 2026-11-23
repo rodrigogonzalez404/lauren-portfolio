@@ -185,3 +185,5 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
   (2400×1350, group 94% wide) and card.jpg (4:3, works index). The phone's opex paragraph is blurred (financial, = p08).
 - Nomad card = Rodrigo's cover-on-stone image `_src/nomad_card_src.png`, white screenshot border trimmed, resized to
   1440×1080 → `assets/img/nomad/card.jpg` (images.py; home + works). Source is only ~1120 px wide. Nomad hero unchanged.
+- **Nov 23, 2:52 PM PT (Rodrigo t80u): "please ensure nothing is blur on this image"** — the phone paragraph blur on the
+  Madison card is removed (`madison_card.BLUR = []`); recorded as an approved exception in confidentiality.py/CONFIDENTIALITY.md.

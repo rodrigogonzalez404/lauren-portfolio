@@ -484,6 +484,7 @@ if __name__ == '__main__':
         if slug in UNPUBLISHED: continue
         md.append(f"## {BY[slug]['title'] if slug in BY else slug}\n")
         md.append('- **Blurred:** ' + ('; '.join(d.get('blurred') or []) or 'nothing') )
+        if d.get('exception'): md.append('- **Approved exception:** ' + d['exception'])
         md.append('- **Omitted:** ' + ('; '.join(d.get('omitted') or []) or 'nothing') + '\n')
     md.append('## Brand & Ecommerce (Aafayaa, Abundant Earth, Wild Naturals, TokSuite, Farm & Bee, Zulay Kitchen, CGK Unlimited)\n')
     md.append('- Images and copy as already published on Lauren’s live Webflow site; visually checked — no prices, phones, emails or contacts.\n')
