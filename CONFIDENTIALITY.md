@@ -11,8 +11,8 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Kress Building
 
-- **Blurred:** p02: "$28/SF FSG" rent figure (Nov 23: p01 cover + hero mockup unblurred — commission callout and broker contacts are front-page content)
-- **Omitted:** page 05; pages 07–08 floor plans carrying the $28/SF FSG rate; page 10 broker contacts
+- **Blurred:** "$28/SF FSG" asking rate — p02 availability bullets, p07 2nd-floor plan bullets, p08 3rd-floor plan bullets (Nov 23 iPad viewer; nothing else blurred — the cover commission callout and broker contacts are front-page content)
+- **Omitted:** nothing — all 10 pages are in the iPad viewer (Nov 23)
 
 ## Nomad
 
@@ -22,7 +22,7 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 ## The Grid (Kirkland 405)
 
 - **Blurred:** nothing
-- **Omitted:** nothing
+- **Omitted:** the client feedback email itself (paraphrased in Results; no names of individuals shown); full deck pages — the logos are shown from the deck’s own vector artwork and the signage mockups are cropped from it
 
 ## Pacific Center
 
@@ -31,8 +31,8 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## The Leftbank Project
 
-- **Blurred:** none — sheets 1–6 checked (Nov 20): no rents, prices, contacts or deal figures; only the 500–6,500+ SF space range
-- **Omitted:** page 7 broker contacts (names, phones) — not in the sheet stack
+- **Blurred:** none — pages 1–7 checked: no rents, prices or deal figures; only the 500–6,500+ SF space range. Page 7 (back cover, leasing team contacts) is shown — front-page content, not financial (Rodrigo, Nov 23)
+- **Omitted:** nothing
 
 ## Madison Plaza
 
@@ -41,8 +41,8 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Springwood of Beaverton
 
-- **Blurred:** p01 cover: "75 Sites | 100% Occupied | $1,035 Avg. Rent" line (also blurred on the hero mockup)
-- **Omitted:** pages 04, 05, 07 (summary/offering text); pages 13–15 financials; page 17 comps; pages 19–20 statistics; page 21 rent-control text; page 22 contacts
+- **Blurred:** p01 cover: "$1,035 Avg. Rent" only (Nov 23 — "75 Sites | 100% Occupied" now readable, cover + hero mockup); p04: lot-rent range "$949 to $1,236"; p05: rent-upside paragraph ("Current rents are at minimum 20% below market … turnover … projected at 31%"); p07: property tax figure
+- **Omitted:** PDF 14–15 Financial Overview (financial summary, rent roll) — replaced by a black "Confidential — financial information omitted" screen after the kept 03 divider; PDF 17 Rent Comparables — black screen after the kept 04 divider
 
 ## The Pointe at Bridgeport
 

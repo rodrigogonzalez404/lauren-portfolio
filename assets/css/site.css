@@ -221,3 +221,97 @@ button{font:inherit;color:inherit}
 .g-row.g-inset{padding:3.992% 0 5.988%}
 @media (max-width:640px){.g-row.g-inset{padding:0}}
 .fb-wrap.tall{max-width:1000px}
+/* iPad viewer (digital brochures) — CSS-drawn iPad Pro on the shared cream #D2CEC8; JS in site.js */
+.tab-stage{position:relative;background-color:#D2CEC8;background-image:radial-gradient(120% 95% at 45% 30%,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 55%,rgba(60,50,40,.10) 100%),url("../img/ui/cream-surface.jpg");background-size:100% 100%,cover;background-position:center;padding:clamp(32px,6.4vw,92px) clamp(12px,5.6vw,80px) 0;color:#0F0F0F}
+.tab-wrap{position:relative;max-width:1040px;margin:0 auto;container-type:inline-size}
+.tab-wrap::after{content:"";position:absolute;left:7%;right:7%;bottom:-2.4cqw;height:4.2cqw;border-radius:50%;background:radial-gradient(closest-side,rgba(40,32,24,.42),rgba(40,32,24,0));filter:blur(1.2cqw);pointer-events:none;z-index:0}
+.tab{position:relative;z-index:1;border-radius:5.4cqw;padding:.3cqw;background:linear-gradient(160deg,#B9B9BE 0%,#6E6E74 22%,#9C9CA2 50%,#5C5C61 78%,#A9A9AF 100%);
+  box-shadow:0 .25cqw .5cqw rgba(20,16,12,.28),0 1.6cqw 3.2cqw -1cqw rgba(20,16,12,.40),0 4.4cqw 7cqw -3.4cqw rgba(30,24,18,.45)}
+.tab-glass{position:relative;border-radius:5.1cqw;background:#0A0A0B;padding:2.75cqw;box-shadow:inset 0 0 0 .08cqw rgba(255,255,255,.08),inset 0 .12cqw .2cqw rgba(255,255,255,.06)}
+.tab-cam{position:absolute;top:1.25cqw;left:50%;width:.62cqw;height:.62cqw;margin-left:-.31cqw;border-radius:50%;background:radial-gradient(circle at 38% 35%,#3A4250 0%,#15181D 45%,#050506 75%);box-shadow:0 0 0 .1cqw #161618}
+.tab-screen{position:relative;aspect-ratio:4/3;border-radius:2.4cqw;overflow:hidden;background:#000;touch-action:pan-y;cursor:grab;outline:none;-webkit-tap-highlight-color:transparent;isolation:isolate}
+.tab-screen:focus-visible{box-shadow:0 0 0 .35cqw rgba(15,15,15,.0),0 0 0 3px #F2F2F2}
+.tab-screen.drag{cursor:grabbing}
+.tab-track{display:flex;height:100%;will-change:transform;transition:transform .56s cubic-bezier(.22,.61,.36,1)}
+.tab-screen.drag .tab-track{transition:none}
+.tab-page{flex:0 0 100%;height:100%;margin:0;display:flex;align-items:center;justify-content:center;background:#000}
+.tab-page img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.tab-screen::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(125deg,rgba(255,255,255,.045) 0%,rgba(255,255,255,0) 38%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+/* reduced motion: cross-fade instead of sliding */
+.tab-screen.fade .tab-track{display:block;transform:none!important;transition:none}
+.tab-screen.fade .tab-page{position:absolute;inset:0;opacity:0;transition:opacity .22s linear}
+.tab-screen.fade .tab-page.cur{opacity:1}
+.tab-controls{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:clamp(36px,4.4vw,60px)}
+.tab-btn{width:52px;height:52px;border-radius:999px;border:1px solid rgba(15,15,15,.55);background:transparent;font:500 20px Geist,sans-serif;cursor:pointer;color:#0F0F0F;display:inline-flex;align-items:center;justify-content:center;transition:background .2s,color .2s,opacity .2s}
+@media (hover:hover){.tab-btn:hover:not(:disabled){background:#0F0F0F;color:#F2F2F2}}
+.tab-btn:disabled{opacity:.28;cursor:default}
+.tab-counter{min-width:150px;text-align:center;color:#0F0F0F}
+.tab-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+.tab-dots i{width:6px;height:6px;border-radius:50%;background:rgba(15,15,15,.22);transition:background .3s,transform .3s}
+.tab-dots i.on{background:#0F0F0F;transform:scale(1.15)}
+.tab-foot{display:flex;justify-content:center;text-align:center;margin-top:clamp(24px,3vw,40px);padding:18px 0 22px;border-top:1px solid rgba(15,15,15,.14)}
+.tab-hint{color:#55524E}.tab-hint .hm{display:none}
+.tab-note{text-align:center;color:#55524E;margin:0;padding:0 0 22px;max-width:none}
+@media (max-width:700px){.tab-hint .hd{display:none}.tab-hint .hm{display:inline}.tab-stage{margin:0 calc(-1 * var(--m));padding-left:14px;padding-right:14px}}
+.tab-conf{background:#0A0A0A;color:#F2F2F2}
+.tab-confin{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.2cqw;text-align:center;padding:0 8%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.tab-conft{font-weight:500;font-size:clamp(18px,3.6cqw,40px);letter-spacing:-.03em;line-height:1.08}
+.tab-confm{color:#949495}
+
+/* ---- The Grid (Kirkland 405) identity case (Nov 23) ---- */
+@font-face{font-family:'Open Sans';font-weight:300 800;font-display:swap;src:url(../fonts/OpenSans-Var.woff2) format('woff2')}
+.gr-panel{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;aspect-ratio:4/3;color:#777C80}
+.gr-panel.stone{background:#EAE7E3}
+.gr-panel.white{background:#fff}
+.gr-panel.bordered{box-shadow:inset 0 0 0 1px rgba(15,15,15,.12)}
+.gr-panel.grey{background:#777C80}
+.gr-panel.graphite{background:#1D1D1F}
+.gr-panel.on-dark{color:#fff}
+.gr-panel.ink{color:#0F0F0F}
+.gr-hero-mark{aspect-ratio:16/9;background-image:linear-gradient(rgba(119,124,128,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(119,124,128,.07) 1px,transparent 1px);background-size:4.6875% 8.3333%;background-position:center center}
+.gr-logo{display:block;height:auto;overflow:visible}
+.gr-logo.crop{overflow:hidden}
+.gr-panel.gr-wide{aspect-ratio:16/9}
+.gr-cell+.gr-two,.gr-two+.gr-cell{margin-top:var(--g)}
+.gr-logo.w52{width:52%}.gr-logo.w34{width:30%}.gr-logo.w62{width:58%}.gr-logo.w58{width:40%}.gr-logo.w60{width:62%}.gr-logo.w46{width:50%}
+.gr-two{display:grid;grid-template-columns:1fr 1fr;gap:var(--g)}
+.grid-case .gr-hero-mark+.gr-two{margin-top:var(--g)}
+.gr-two+.gr-cell{margin-top:var(--g)}
+.gr-cell{min-width:0}
+.gr-lab{display:flex;justify-content:space-between;gap:16px;padding-top:12px}
+.gr-clear{width:74%;height:auto;display:block}
+.gr-clear .z{fill:rgba(119,124,128,.08)}
+.gr-clear .in{fill:none;stroke:#BABABA;stroke-width:.5;stroke-dasharray:2 2}
+.gr-clear .out{fill:none;stroke:#777C80;stroke-width:.5;stroke-dasharray:3 2}
+.gr-clear .d{stroke:#777C80;stroke-width:.45}
+.gr-clear .t{font:italic 400 8px Geist,system-ui,sans-serif;fill:#777C80}
+.gr-clear .lg{color:#777C80}
+.gr-avpanel{aspect-ratio:auto;padding:56px 24px}
+.gr-avs{display:flex;align-items:center;justify-content:center;gap:clamp(16px,3vw,44px);flex-wrap:wrap}
+.gr-av{flex:none;border-radius:50%;background:#777C80;color:#fff;display:flex;align-items:center;justify-content:center}
+.gr-av .gr-logo{width:46%}
+.gr-type{display:flex;align-items:center;justify-content:center;gap:6%;width:84%;font-family:'Open Sans',sans-serif;color:#1D1D1F}
+.gr-aa{font-weight:300;font-size:clamp(72px,11vw,190px);line-height:1;letter-spacing:-.02em;color:#777C80}
+.gr-tw{display:flex;flex-direction:column;gap:8px;min-width:0}
+.gr-tw .l{font-weight:300;font-size:clamp(20px,2.2vw,34px)}
+.gr-tw .s{font-weight:600;font-size:clamp(20px,2.2vw,34px)}
+.gr-tw .abc{font-weight:300;font-size:clamp(11px,1.05vw,16px);line-height:1.6;letter-spacing:.04em;color:#777C80;margin-top:2px}
+.gr-tw .s+.abc{margin-top:10px}
+.gr-panel.gr-band{aspect-ratio:2.2/1}
+.gr-tw .abc+.abc{margin-top:-6px}
+.gr-concepts{display:flex;flex-direction:column;gap:var(--g)}
+.gr-concept{display:grid;grid-template-columns:1fr 1fr;gap:var(--g);align-items:center}
+.gr-concepts .gr-concept:not(:first-child){margin-top:calc(var(--cb) * .5);padding-top:calc(var(--cb) * .5);border-top:1px solid rgba(15,15,15,.12)}
+.gr-ctext{display:flex;flex-direction:column;gap:14px;max-width:440px}
+.gr-ch{font-weight:500;font-size:clamp(24px,1.95vw,28px);line-height:1.16;letter-spacing:-.015em}
+.gr-keys{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:4px 0}
+.gr-keys li{font:400 12px/1 'PT Mono',monospace;text-transform:uppercase;letter-spacing:.02em;padding:7px 10px;border:1px solid rgba(15,15,15,.16);border-radius:999px}
+.gr-concept.chosen .gr-keys li{background:#1D1D1F;color:#fff;border-color:#1D1D1F}
+@media (max-width:700px){
+  .gr-two,.gr-concept{grid-template-columns:1fr}
+  .gr-avpanel{padding:36px 16px}
+  .gr-type{width:88%}
+  .gr-lab{flex-direction:column;gap:4px}
+  .gr-panel.gr-band{aspect-ratio:auto;padding:40px 0}
+  .gr-av{transform:scale(.8)}
+}

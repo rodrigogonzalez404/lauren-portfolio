@@ -365,6 +365,53 @@ def sheet_stack(slug, title, n, r, note=''):
     return f"""<div class="fb-stage ss-stage" data-name="Sheet stack"><div class="ss-wrap"><div class="ss" tabindex="0" role="group" aria-roledescription="sheet stack" aria-label="{E(title)} flyer sheets">{sh}</div></div>
 <div class="fb-controls"><button class="fb-btn ss-prev" aria-label="Previous sheet">←</button><span class="mono fb-counter ss-counter" aria-live="polite">Sheet 01 / {n:02d}</span><button class="fb-btn ss-next" aria-label="Next sheet">→</button></div>
 <div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div>{f'<p class="mono-s ss-note">{T(note)}</p>' if note else ''}</div>"""
+# iPad viewer (digital brochures, Nov 23): a CSS-drawn iPad Pro (landscape) on the shared cream; pages slide like a tablet.
+# Reusable: ipad_viewer(slug, title, files, r, note). JS in site.js (".tab-stage"); CSS "iPad viewer" block in site.css.
+def ipad_viewer(slug, title, files, r, note='', label='digital brochure'):
+    """files: image names under assets/img/<slug>/, or ('CONF', section) for a black 'Confidential — financial
+    information omitted' screen (Madison pattern)."""
+    n = len(files)
+    def page(i, f):
+        hid = '' if i == 0 else ' aria-hidden="true"'
+        if isinstance(f, tuple):
+            return (f'<figure class="tab-page tab-conf" role="group" aria-roledescription="page" aria-label="Page {i+1} of {n}: confidential, financial information omitted"{hid}>'
+                    f'<div class="tab-confin"><span class="tab-conft">Confidential —<br>financial information omitted</span><span class="mono-s tab-confm">{E(f[1])}</span></div></figure>')
+        att = 'src' if i < 2 else 'data-src'
+        return (f'<figure class="tab-page{" cur" if i == 0 else ""}" role="group" aria-roledescription="page" aria-label="Page {i+1} of {n}"{hid}>'
+                f'<img {att}="{r}assets/img/{slug}/{f}" alt="{E(title)} {label} — page {i+1}" draggable="false"></figure>')
+    pages = ''.join(page(i, f) for i, f in enumerate(files))
+    dots = ''.join('<i class="on"></i>' if i == 0 else '<i></i>' for i in range(n))
+    hint = '<span class="hd">Swipe or drag the page, click its edge, or use the ← → keys</span><span class="hm">Swipe the screen or tap the arrows</span>'
+    return f"""<div class="tab-stage" data-name="iPad viewer"><div class="tab-wrap"><div class="tab"><div class="tab-glass"><span class="tab-cam" aria-hidden="true"></span>
+<div class="tab-screen" tabindex="0" role="region" aria-roledescription="carousel" aria-label="{E(title)} {label}, {n} pages"><div class="tab-track">{pages}</div></div></div></div></div>
+<div class="tab-controls"><button class="tab-btn tab-prev" aria-label="Previous page" disabled>←</button><span class="mono tab-counter" aria-live="polite">Page 01 / {n:02d}</span><button class="tab-btn tab-next" aria-label="Next page">→</button></div>
+<div class="tab-dots" aria-hidden="true">{dots}</div>
+<div class="tab-foot"><span class="mono-s tab-hint">{hint}</span></div>{f'<p class="mono-s tab-note">{T(note)}</p>' if note else ''}</div>"""
+
+def swatches(pal):
+    sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in pal)
+    return f'<div class="gallery"><div class="swatches">{sw}</div></div>'
+def img_rows(slug, rows, r):
+    I = f'assets/img/{slug}/'
+    return '<div class="gallery">' + ''.join('<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in row) + '</div>' for row in rows) + '</div>'
+
+KRESS_PAL = [('Kress Green', '#002B29'), ('Rust', '#B45832'), ('Sand', '#C6AC8A'), ('Parchment', '#FBF5EC'), ('White', '#FFFFFF')]
+SPRINGWOOD_PAL = [('Charcoal', '#2C3132'), ('Deep Teal', '#285D64'), ('Teal', '#347179'), ('Mist', '#F8F5F8'), ('White', '#FFFFFF')]
+def kress_blocks(r):
+    files = [f'p{i:02d}.jpg' for i in range(1, 11)]
+    return (gsec(swatches(KRESS_PAL), 'Design system')
+            + gsec(img_rows('kress-building', [[('p01.jpg', 'Front cover'), ('p10.jpg', 'Back cover')]], r), 'The brochure')
+            + gsec(ipad_viewer('kress-building', 'Kress Building', files, r, LOG['kress-building']['note']), 'Inside the brochure',
+                   'Ten pages, in the order a tenant tours the building — the landmark and its renovation, the street, the neighborhood and the parking, the office design, then the floor plans. Swipe through them on the iPad.'))
+def springwood_blocks(r):
+    # p01..p19 = PDF pages 1-13, 16, 18-22 (see images.py); PDF 14-15 financials and 17 rent comps are replaced by black screens
+    f = [f'p{i:02d}.jpg' for i in range(1, 20)]
+    files = f[:13] + [('CONF', '[03] Financial Overview · pages 14–15')] + f[13:14] + [('CONF', '[04] Market Comparables · page 17')] + f[14:]
+    return (gsec(swatches(SPRINGWOOD_PAL), 'Design system')
+            + gsec(img_rows('springwood', [[('p01.jpg', 'Front cover'), ('p19.jpg', 'Back cover')]], r), 'The offering memorandum')
+            + gsec(ipad_viewer('springwood', 'Springwood of Beaverton', files, r, LOG['springwood']['note'], 'offering memorandum'), 'Inside the memorandum',
+                   'The memorandum as an investor reads it — executive summary, property overview, then the location. The financial overview and the rent comparables stay confidential. Swipe through it on the iPad.'))
+
 LEFTBANK_PAL = [('Burnt Orange', '#CB5625'), ('Black', '#000000'), ('Leaf Green', '#50B848'), ('Map Grey', '#ECEBF0'), ('White', '#FFFFFF')]
 def leftbank_blocks(r):
     I = 'assets/img/leftbank/'
@@ -372,8 +419,8 @@ def leftbank_blocks(r):
         return '<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in fs) + '</div>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in LEFTBANK_PAL)
     return (gsec(f'<div class="gallery"><div class="swatches">{sw}</div></div>', 'Design system')
-            + gsec(f'<div class="gallery">{row(("hero.jpg", "The printed flyer"))}{row(("sheets/s01.jpg", "Front sheet"), ("sheets/s06.jpg", "Back sheet"))}</div>', 'The printed piece')
-            + gsec(sheet_stack('leftbank', 'The Leftbank Project', 6, r, LOG['leftbank']['note']), 'Inside the flyer', 'Six loose sheets, in the order a prospective tenant reads them — the building, its history, the spaces, then the neighborhood. Slide them off the stack.'))
+            + gsec(f'<div class="gallery">{row(("sheets/s01.jpg", "Front page"), ("sheets/s07.jpg", "Back page"))}</div>', 'The brochure')
+            + gsec(ipad_viewer('leftbank', 'The Leftbank Project', [f'sheets/s{i:02d}.jpg' for i in range(1, 8)], r, LOG['leftbank']['note']), 'Inside the brochure', 'Seven pages, in the order a prospective tenant reads them — the building, its history, the spaces, the neighborhood and what is changing around it. Swipe through them on the iPad.'))
 
 PDX_PAL = [('Sage', '#76A48E'), ('Slate', '#505F69'), ('Deep Slate', '#374B4E'), ('Mist', '#ECF3F0'), ('White', '#FFFFFF')]
 def pdx_blocks(r):
@@ -382,8 +429,8 @@ def pdx_blocks(r):
         return '<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in fs) + '</div>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in PDX_PAL)
     return (gsec(f'<div class="gallery"><div class="swatches">{sw}</div></div>', 'Design system')
-            + gsec(f'<div class="gallery">{row(("mock_spread.jpg", "Three inside sheets of the printed flyer fanned out on a table"), ("mock_cover.jpg", "The printed flyer cover, with a second sheet underneath"))}{row(("sheets/s01.jpg", "Front sheet"), ("sheets/s07.jpg", "Back sheet"))}</div>', 'The printed piece')
-            + gsec(sheet_stack('pdx-west', 'PDX West Logistics Center', 7, r, LOG['pdx-west']['note']), 'Inside the flyer', 'Seven sheets, in the order a tenant or broker reads them — the building, its specifications and site plan, the submarket, then access, workforce and reach. Slide them off the stack.'))
+            + gsec(f'<div class="gallery">{row(("mock_spread.jpg", "Three inside pages of the brochure fanned out on a table"), ("mock_cover.jpg", "The brochure cover, with a second page underneath"))}{row(("sheets/s01.jpg", "Front page"), ("sheets/s07.jpg", "Back page"))}</div>', 'The brochure')
+            + gsec(ipad_viewer('pdx-west', 'PDX West Logistics Center', [f'sheets/s{i:02d}.jpg' for i in range(1, 8)], r, LOG['pdx-west']['note']), 'Inside the brochure', 'Seven pages, in the order a tenant or broker reads them — the building, its specifications and site plan, the submarket, then access, workforce and reach. Swipe through them on the iPad.'))
 
 def case(p):
     r = '../'; s = p['slug']
@@ -397,12 +444,18 @@ def case(p):
         g = nomad_blocks(r)
     elif s == 'madison-plaza':
         g = madison_blocks(r)
+    elif s == 'kress-building':
+        g = kress_blocks(r)
+    elif s == 'springwood':
+        g = springwood_blocks(r)
     elif s == 'pacific-center':
         g = pacific_blocks(r)
     elif s == 'leftbank':
         g = leftbank_blocks(r)
     elif s == 'pdx-west':
         g = pdx_blocks(r)
+    elif s == 'the-grid':
+        import grid_blocks; g = grid_blocks.grid_blocks(r, gsec, swatches, img_rows)
     elif p['cat'] == 're' and s != 'fortis-net-lease':
         g = gsec(gallery(s, imgs(s, 'p'), r, p['title']), E(p['pages_title']), p['pages_intro'], LOG[s]['note'])
     elif p['cat'] == 'interactive':
