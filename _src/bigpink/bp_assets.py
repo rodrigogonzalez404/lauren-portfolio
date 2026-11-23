@@ -2,8 +2,8 @@
   /workspace/bigpink/cap/cNN.png      Ceros screens captured from the preview link (1600x900 canvas, headless Chrome)
   /workspace/bigpink/media/*          original Ceros media (logo-1/2/4.jpg concept boards, marketing-material mockup)
   /workspace/uploads/big-pink.pdf     Lauren's logo-concepts deck (Jul 2025)
-  /workspace/bigpink/rendered/*.jpg  laptop renders (render_laptops.js -> CSS laptop on the shared cream): big-pink card,
-                                       marketplace hero + card. Re-run render_laptops.js only if the cover screens change.
+  /workspace/bigpink/rendered/*.jpg  laptop renders (render_laptops.js -> CSS laptop on the shared cream): marketplace hero + card (the Big Pink
+                                       card is the white OnePink mockup since t76u). Re-run render_laptops.js only if the cover screens change.
 OnePink wordmark: onepink-h.svg / onepink-vertical.svg, traced (trace_onepink.py, potrace) from the white letters on the
 Ceros concept board media/logo-4.jpg; path .w1 = ONE, .w2 = PINK.
 Writes assets/img/big-pink/ and assets/img/marketplace/."""
@@ -56,10 +56,27 @@ def hero():
     im.paste(L, ((W - L.width) // 2, (H - L.height) // 2), L)
     save(im, 'hero.jpg', q=88)
 
+def white_frame(im, ratio, margin=0.04):
+    """Fit the whole mockup (no device cropped) into `ratio`, padding with white around the content."""
+    a = np.asarray(im.convert('L')); ys, xs = np.nonzero(a < 245)
+    x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
+    m = int((x1 - x0) * margin); x0, x1, y0, y1 = x0 - m, x1 + m, y0 - m, y1 + m
+    w, h = x1 - x0, y1 - y0
+    if w / h > ratio: h = round(w / ratio)
+    else: w = round(h * ratio)
+    cx, cy = (x0 + x1) // 2, (y0 + y1) // 2
+    out = Image.new('RGB', (w, h), (255, 255, 255))
+    out.paste(im, (w // 2 - cx, h // 2 - cy))
+    return out
+
 def main():
     for i, c in enumerate(SCREENS, 1): save(Image.open(CAP + c + '.png'), f'scr/s{i:02d}.jpg', 1600)
     for n, f in (('oneeleven', 'logo-1.jpg'), ('bigpink', 'logo-2.jpg'), ('onepink', 'logo-4.jpg')): save(Image.open(MED + f), f'concept_{n}.jpg', 2400)
-    save(on_cream(trim_white(Image.open(MED + 'bigpink-marketingmaterial-mockup-copy.jpg'), 120)), 'material.jpg', 2400)
+    # sample marketing material on its ORIGINAL white (Rodrigo t76u: no beige) — also the home/works card
+    mk = Image.open(MED + 'bigpink-marketingmaterial-mockup-copy.jpg').convert('RGB')
+    save(trim_white(mk, 160), 'material.jpg', 2400)
+    save(white_frame(mk, 16 / 9), 'card-wide.jpg', 2400)   # home featured slot (Nomad's old place)
+    save(white_frame(mk, 4 / 3), 'card.jpg', 1600)        # works index, Next Project
     with tempfile.TemporaryDirectory() as t:
         for n, name in ((2, 'moodboard'), (5, 'concept_prism')):
             subprocess.run(['pdftoppm', '-f', str(n), '-l', str(n), '-r', '240', '-png', '-singlefile', PDF, f'{t}/p'], check=True, stderr=subprocess.DEVNULL)
@@ -71,7 +88,6 @@ def main():
         p = os.path.join(ROOT, 'assets', 'img', 'marketplace', 'scr', f's{i:02d}.jpg'); os.makedirs(os.path.dirname(p), exist_ok=True)
         Image.open(sel + f).convert('RGB').save(p, 'JPEG', quality=84, optimize=True, progressive=True)
     hero()
-    shutil.copy(REND + 'big-pink-card.jpg', os.path.join(OUT, 'card.jpg'))
     for n in ('hero', 'card'): shutil.copy(REND + f'marketplace-{n}.jpg', os.path.join(ROOT, 'assets', 'img', 'marketplace', f'{n}.jpg'))
     print('big-pink assets ->', OUT)
 if __name__ == '__main__': main()

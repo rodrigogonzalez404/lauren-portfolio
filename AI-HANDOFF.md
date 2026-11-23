@@ -129,3 +129,12 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 - Sources off-repo: `/workspace/bigpink/cap/` (Ceros captures), `/workspace/bigpink/media/` (Ceros media),
   `/workspace/uploads/big-pink.pdf` (logo-concepts deck). Screen selection + exclusions are commented in bp_assets.py.
 - Viewer hints: arrows wrapped in `.kb` (Geist) — PT Mono has no ← → glyphs and showed dots.
+- **Rodrigo t76u (Nov 23):** Big Pink took Nomad's place as the featured full-width card on Home (Real Estate, after
+  PDX/Kress); Nomad moved down to the second full-width slot (after The Grid/Pacific). Big Pink's card is the OnePink
+  marketing mockup on its ORIGINAL white (`card-wide.jpg` 16:9 for Home, `card.jpg` 4:3 for Works / Next Project — both
+  padded with white, nothing cropped; built in bp_assets `white_frame`). Home Interactive section now shows Marketplace
+  full width (its 16:9 laptop hero) plus a one-line pointer to Big Pink; Works keeps both Ceros cards.
+  Inside: a `[Contents]` TOC (`.toc`, mono [NN] labels, charcoal rules, anchors + the site's smooth scroll) opens the
+  gallery. Order: The mark, Versions, Moodboard, Color, Typography, Concept exploration, Naming, In place, The presentation
+  (last) — set by the `secs` list in bigpink_blocks.py (the TOC is generated from it). In place mockup = `material.jpg`
+  on white (no cream multiply). Client line = "Colliers".

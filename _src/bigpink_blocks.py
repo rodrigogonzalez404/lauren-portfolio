@@ -66,14 +66,21 @@ def blocks(r, gsec, swatches, img_rows, viewer):
                   + img_rows('big-pink', [[(f, f'{name} logo idea over the skyline, in dimensional letters and on building signage')]], r) + '</div>')
     ideas += ('<div class="bp-idea"><div class="bp-ihead"><span class="mono-s muted">First round</span><h3 class="gr-ch">Prism</h3><p class="bm muted">An angular, faceted mark from the first round of logo concepts, shown the same way.</p></div>'
               + img_rows('big-pink', [[('concept_prism.jpg', 'Prism logo concept over the skyline, in dimensional letters and on building signage')]], r) + '</div>')
-    return ('<div class="grid-case bp-case">' + defs()
-            + gsec(mark, 'The mark', 'OnePink joins the address and the nickname in one word. Wide-set, rounded capitals run vertically like the tower, with ONE set apart from PINK in rose.')
-            + gsec(var, 'Versions', 'One mark, set for the palette’s light and dark grounds and in a single colour.')
-            + gsec(color, 'Color', 'Four colours, each chosen for what it says about the building.')
-            + gsec(typ, 'Typography', 'The wordmark is lettered, not typeset; Cabin, the presentation’s typeface, carries the titles and text around it.')
-            + gsec(place, 'In place', 'Over the skyline, in dimensional letters and on building signage — then carried through a sample brochure, flyer, tablet and phone, with a tagline built on “one”.')
-            + gsec(pres, 'The presentation', 'Thirty-eight screens in eight chapters, built in Ceros as a click-through pitch and framed by a vertical BIG PINK wordmark. The design screens are here — click through them on the laptop.')
-            + gsec(img_rows('big-pink', [[('moodboard.jpg', 'Big Pink moodboard and palette')]], r), 'Moodboard', 'The tower, the city and Mt. Hood, Old Town streets, a rose mural and stone — and the palette taken from them.')
-            + gsec(names, 'Naming', 'Sixteen sample names, on a scale from the standard to the unique.')
-            + gsec(f'<div class="bp-ideas">{ideas}</div>', 'Concept exploration', 'The presentation showed three logo ideas, each over the skyline, in dimensional letters and on building signage. OnePink, above, is the one carried into the sample marketing material; OneEleven and Big Pink, and Prism from the first round of logo concepts, remain concepts.')
+    secs = [  # (anchor, title, body, intro) — Rodrigo t76u order; the presentation is last
+        ('bp-mark', 'The mark', mark, 'OnePink joins the address and the nickname in one word. Wide-set, rounded capitals run vertically like the tower, with ONE set apart from PINK in rose.'),
+        ('bp-versions', 'Versions', var, 'One mark, set for the palette’s light and dark grounds and in a single colour.'),
+        ('bp-moodboard', 'Moodboard', img_rows('big-pink', [[('moodboard.jpg', 'Big Pink moodboard and palette')]], r), 'The tower, the city and Mt. Hood, Old Town streets, a rose mural and stone — and the palette taken from them.'),
+        ('bp-color', 'Color', color, 'Four colours, each chosen for what it says about the building.'),
+        ('bp-type', 'Typography', typ, 'The wordmark is lettered, not typeset; Cabin, the presentation’s typeface, carries the titles and text around it.'),
+        ('bp-concepts', 'Concept exploration', f'<div class="bp-ideas">{ideas}</div>', 'The presentation showed three logo ideas, each over the skyline, in dimensional letters and on building signage. OnePink, shown first, is the one carried into the sample marketing material; OneEleven and Big Pink, and Prism from the first round of logo concepts, remain concepts.'),
+        ('bp-naming', 'Naming', names, 'Sixteen sample names, on a scale from the standard to the unique.'),
+        ('bp-place', 'In place', place, 'Over the skyline, in dimensional letters and on building signage — then carried through a sample brochure, flyer, tablet and phone, with a tagline built on “one”.'),
+        ('bp-presentation', 'The presentation', pres, 'Thirty-eight screens in eight chapters, built in Ceros as a click-through pitch and framed by a vertical BIG PINK wordmark. The design screens are here — click through them on the laptop.'),
+    ]
+    toc = ('<nav class="toc" aria-label="On this page"><div class="toc-head"><span class="mono muted">[Contents]</span><span class="mono-s muted">'
+           f'{len(secs):02d} sections</span></div><ol class="toc-list">'
+           + ''.join(f'<li><a href="#{a}"><span class="mono muted">[{i:02d}]</span><span class="toc-t">{t}</span><span class="toc-ar" aria-hidden="true">↓</span></a></li>' for i, (a, t, _, _) in enumerate(secs, 1))
+           + '</ol></nav>')
+    return ('<div class="grid-case bp-case">' + defs() + gsec(toc)
+            + ''.join(gsec(body, t, intro, aid=a) for a, t, body, intro in secs)
             + '</div>')

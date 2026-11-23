@@ -78,9 +78,9 @@ CAT_LABEL = {'re': 'Real Estate', 'interactive': 'Real Estate · Interactive', '
 def short_type(p):
     if p['cat'] == 'brand': return ', '.join(p['service'].split(', ')[:2])
     return p['type']
-def card(p, r, ratio='', small=False):
+def card(p, r, ratio='', small=False, src=None):
     sub = f'{T(short_type(p))} · {T(p["place"])}' if p['cat'] != 'brand' else T(short_type(p))
-    return f'''<a class="card" href="{r}work/{p["slug"]}.html" data-name="Project Card / {E(p["title"])}"><div class="ph {ratio}">{img(card_img(p["slug"]), p["title"]+" — project image", r)}</div>
+    return f'''<a class="card" href="{r}work/{p["slug"]}.html" data-name="Project Card / {E(p["title"])}"><div class="ph {ratio}">{img(src or card_img(p["slug"]), p["title"]+" — project image", r)}</div>
 <div class="meta"><div class="col"><span class="s{' sm' if small else ''}">{E(p["title"])}</span><span class="mono{'-s' if small else ''} muted">{sub}</span></div><span class="mono{'-s' if small else ''}">{T(p["year"])}</span></div></a>'''
 def playlist(p, r, link=True):
     ss = imgs(p['slug'], 's')
@@ -111,11 +111,12 @@ def home():
 <div class="btns mt40">{btn("Real Estate Work", "#real-estate", "pri", "↓")}{btn("Brand &amp; Ecommerce", "#brand", "sec")}</div></div></div></section>
 
 <section class="wrap" style="padding-bottom:var(--sec)" id="real-estate" data-name="01 Real Estate">
-<div class="sec-head clean"><div class="col gap16"><span class="mono muted">[01] ({len(re_home):02d})</span><h2 class="xl">Real Estate</h2></div>
+<div class="sec-head clean"><div class="col gap16"><span class="mono muted">[01] ({len(re_home) + 1:02d})</span><h2 class="xl">Real Estate</h2></div>
 <p class="bm muted intro">{T(H["re_intro"])}</p></div>
 <div class="grid2">{card(R["pdx-west"], r)}{card(R["kress-building"], r)}</div>
-<div class="mt64">{card(R["nomad"], r, "r169")}</div>
+<div class="mt64">{card(BY["big-pink"], r, "r169", src="assets/img/big-pink/card-wide.jpg")}</div>
 <div class="grid2 mt64">{card(R["the-grid"], r)}{card(R["pacific-center"], r)}</div>
+<div class="mt64">{card(R["nomad"], r, "r169")}</div>
 <div class="grid2 mt64">{card(R["leftbank"], r)}{card(R["madison-plaza"], r)}</div>
 <div class="grid2 mt64">{card(R["springwood"], r)}{card(R["pointe-at-bridgeport"], r)}</div>
 <div class="row mt64" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px"><p class="mono-s muted">{T(H["re_note"])}</p>{btn("All Real Estate work", "works.html#real-estate", "sec")}</div>
@@ -124,7 +125,8 @@ def home():
 <section class="wrap" style="padding-bottom:var(--sec)" id="interactive" data-name="Interactive Presentations">
 <div class="sec-head clean"><div class="col gap16"><span class="mono muted">[Interactive] ({len(CEROS):02d})</span><h2 class="l">{E(H["interactive_title"])}</h2></div>
 <p class="bm muted intro">{T(H["interactive_intro"])}</p></div>
-<div class="grid2">{"".join(card(p, r) for p in CEROS)}</div>
+<div>{card(BY["marketplace"], r, "r169", src="assets/img/marketplace/hero.jpg")}</div>
+<p class="mono-s muted mt24">Big Pink, the other Ceros pitch, is featured above in Real Estate — <a href="work/big-pink.html" style="text-decoration:underline">see the case</a>.</p>
 </section>
 
 <section class="dark wrap sec" data-name="Approach">
@@ -269,10 +271,10 @@ def psr(p):
 <div class="blk"><div class="lab"><span class="mono muted">[01]</span><span class="s">Project</span></div><div class="txt"><p class="s">{T(p["project"])}</p></div></div>
 <div class="blk"><div class="lab"><span class="mono muted">[02]</span><span class="s">Solution</span></div><div class="txt">{sol}</div></div>
 {res}</section>'''
-def gsec(inner, head='', intro='', note=''):
+def gsec(inner, head='', intro='', note='', aid=''):
     h = f'<div class="g-head"><h2 class="ci-h">{head}</h2>{f"<p class={chr(34)}bm muted{chr(34)}>{T(intro)}</p>" if intro else ""}</div>' if head else ''
     n = f'<p class="mono-s muted g-note">{T(note)}</p>' if note else ''
-    return f'<div class="g-block">{h}{inner}{n}</div>'
+    return f'<div class="g-block"{f" id={chr(34)}{aid}{chr(34)}" if aid else ""}>{h}{inner}{n}</div>'
 def next_block(p, r):
     i = ALL.index(p); nx = ALL[(i + 1) % len(ALL)]
     return f'''<section class="case-next" data-name="Next Project"><div class="wrap cg8">
