@@ -174,3 +174,14 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
   pointer line deleted; works index Interactive now lists only Big Pink). Sources kept: `bp_assets.marketplace_assets()`
   (not called), `/workspace/bigpink/rendered/marketplace-*.jpg`, the confidentiality LOG entry.
 - Note: the page background (`--paper` #F2F2F2) was never changed; only mockup/viewer surfaces are #ECEAE6.
+
+## Madison takes the big slot, Nomad the square (Rodrigo t79u, Nov 23 PM)
+- Home Real Estate order: PDX + Kress → Big Pink (wide) → The Grid + Pacific → **Madison (wide, `card-wide.jpg`)** →
+  Leftbank + **Nomad** → Springwood + Pointe.
+- `_src/madison_card.py` rewritten (old multiply version: `/workspace/mk/madison_card.py.multiply-nov23`): only the
+  backdrop takes the textured stone; devices, screens and brochure pages are copied exactly (whites stay 255). Object mask =
+  edge-closed, border-connected region of the white-background hero source, halo trimmed by regrowing the backdrop
+  through white pixels; backdrop + its soft shadows are multiplied onto `flyer_mockups.surface()`. Writes card-wide.jpg
+  (2400×1350, group 94% wide) and card.jpg (4:3, works index). The phone's opex paragraph is blurred (financial, = p08).
+- Nomad card = Rodrigo's cover-on-stone image `_src/nomad_card_src.png`, white screenshot border trimmed, resized to
+  1440×1080 → `assets/img/nomad/card.jpg` (images.py; home + works). Source is only ~1120 px wide. Nomad hero unchanged.

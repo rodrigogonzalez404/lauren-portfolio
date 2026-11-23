@@ -116,8 +116,8 @@ def home():
 <div class="grid2">{card(R["pdx-west"], r)}{card(R["kress-building"], r)}</div>
 <div class="mt64">{card(BY["big-pink"], r, "r169", src="assets/img/big-pink/card-wide.jpg")}</div>
 <div class="grid2 mt64">{card(R["the-grid"], r)}{card(R["pacific-center"], r)}</div>
-<div class="mt64">{card(R["nomad"], r, "r169")}</div>
-<div class="grid2 mt64">{card(R["leftbank"], r)}{card(R["madison-plaza"], r)}</div>
+<div class="mt64">{card(R["madison-plaza"], r, "r169", src="assets/img/madison-plaza/card-wide.jpg")}</div>
+<div class="grid2 mt64">{card(R["leftbank"], r)}{card(R["nomad"], r)}</div>
 <div class="grid2 mt64">{card(R["springwood"], r)}{card(R["pointe-at-bridgeport"], r)}</div>
 <div class="row mt64" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px"><p class="mono-s muted">{T(H["re_note"])}</p>{btn("All Real Estate work", "works.html#real-estate", "sec")}</div>
 </section>

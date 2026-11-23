@@ -100,7 +100,12 @@ def main():
     import pacific_book; pacific_book.main()
     import flyer_sheets; flyer_sheets.main()
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'grid')); import grid_assets; grid_assets.main()   # The Grid identity case
-    import madison_card; madison_card.main()   # Madison home/works card on the shared cream (hero stays Rodrigo's white original)
+    import madison_card; madison_card.main()
+    # Nomad home/works card (Rodrigo t79u): his cover-on-stone image, used as is — the white screenshot border trimmed,
+    # the stone frame (~4:3) kept whole, resized to the card size
+    _n = Image.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'nomad_card_src.png')).convert('RGB')
+    _n = _n.crop((53, 44, 1172, 879)).resize((1440, 1080), Image.LANCZOS)
+    _n.save(os.path.join(OUT, 'nomad', 'card.jpg'), quality=90, optimize=True, progressive=True)   # Madison home/works card on the shared cream (hero stays Rodrigo's white original)
     os.makedirs(os.path.join(OUT, 'ui'), exist_ok=True); import flyer_mockups as FM; FM.surface(seed=7, light=(0.5, 0.15)).resize((1600, 1200), Image.LANCZOS).save(os.path.join(OUT, 'ui', 'stone-surface.jpg'), quality=84, optimize=True, progressive=True)   # iPad viewer stage: textured pale stone (t78u)
     import runpy; runpy.run_path(os.path.join(os.path.dirname(__file__),'desk_texture.py'))   # ui/desk-charcoal.jpg (OUT is wiped above)
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'bigpink')); import bp_assets; bp_assets.main()   # Big Pink (OnePink identity + Ceros laptop) and Marketplace

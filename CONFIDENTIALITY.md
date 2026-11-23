@@ -36,7 +36,7 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Madison Plaza
 
-- **Blurred:** p02 broker names, emails and phones; p07 offering bullets (price guidance, NOI, lender); p08 operating text (opex, in-place vs market rents, NOI upside); p10–11 ground-rent and MFTE savings text; p40 "Clears 3x in-place rent ($1,864/mo …)" line; back cover broker names, emails and phones
+- **Blurred:** p02 broker names, emails and phones; p07 offering bullets (price guidance, NOI, lender); p08 operating text (opex, in-place vs market rents, NOI upside); p10–11 ground-rent and MFTE savings text; p40 "Clears 3x in-place rent ($1,864/mo …)" line; back cover broker names, emails and phones; home/works card: the phone screen opex paragraph (same p08 text; the case hero is Rodrigo's untouched original)
 - **Omitted:** PDF pages 13–17 = printed pp. 24–33 (unit mix & market rents, tax bill, income & expenses, pro forma notes, 10-year cash flow, rent comparables); replaced in the flip-book by a black "Confidential — financial information omitted" spread right after the 03 The Financials divider (pp. 22–23, kept)
 
 ## Springwood of Beaverton
