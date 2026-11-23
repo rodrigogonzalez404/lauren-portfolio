@@ -43,18 +43,26 @@ def onepink(width, one='#FFFFFF', pink=ROSE, name='onepink-h.svg'):
     svg = svg.replace('class="w1" fill="currentColor"', f'class="w1" fill="{one}"').replace('class="w2" fill="currentColor"', f'class="w2" fill="{pink}"')
     return Image.open(io.BytesIO(cairosvg.svg2png(bytestring=svg.encode(), output_width=int(width)))).convert('RGBA')
 
-def hero():
-    # the lead identity: OnePink on the palette's Dark Blue, ONE white + PINK rose as in the sample marketing material
-    W, H = 3200, 1800
-    rng = np.random.default_rng(11)
+def navy_wordmark(W, H, logo_frac, seed=11):
+    """OnePink on the palette's Dark Blue with the hero's subtle grain + centre glow, wordmark rendered from the vector."""
+    rng = np.random.default_rng(seed)
     yy, xx = np.mgrid[0:H, 0:W]
-    img = np.array([40, 35, 52], np.float32)[None, None] + rng.standard_normal((H, W, 1)).astype(np.float32) * 1.4
+    img = np.array([40, 35, 52], np.float32)[None, None] + rng.standard_normal((H, W, 1)).astype(np.float32) * 1.4 * (W / 3200) ** 0.5
     d = np.hypot((xx - W * .5) / W, (yy - H * .5) / H)
     img *= (1.10 - 0.30 * d)[..., None]
     im = Image.fromarray(np.clip(img, 0, 255).astype(np.uint8))
-    L = onepink(1900)
+    L = onepink(round(W * logo_frac))
     im.paste(L, ((W - L.width) // 2, (H - L.height) // 2), L)
-    save(im, 'hero.jpg', q=88)
+    return im
+
+def hero():
+    # the lead identity: OnePink on the palette's Dark Blue, ONE white + PINK rose as in the sample marketing material
+    save(navy_wordmark(3200, 1800, 1900 / 3200), 'hero.jpg', q=88)
+
+def cards():
+    # Rodrigo t81u (Nov 23, 3:09 PM PT): the home/works card is the hero treatment, not the white marketing mockup
+    save(navy_wordmark(2400, 1350, 1900 / 3200), 'card-wide.jpg', q=90)   # home featured slot, same proportions as the hero
+    save(navy_wordmark(1600, 1200, 0.62), 'card.jpg', q=90)                # works index, Next Project
 
 def white_frame(im, ratio, margin=0.04):
     """Fit the whole mockup (no device cropped) into `ratio`, padding with white around the content."""
@@ -75,14 +83,12 @@ def main():
     # sample marketing material on its ORIGINAL white (Rodrigo t76u: no beige) — also the home/works card
     mk = Image.open(MED + 'bigpink-marketingmaterial-mockup-copy.jpg').convert('RGB')
     save(trim_white(mk, 160), 'material.jpg', 2400)
-    save(white_frame(mk, 16 / 9), 'card-wide.jpg', 2400)   # home featured slot (Nomad's old place)
-    save(white_frame(mk, 4 / 3), 'card.jpg', 1600)        # works index, Next Project
     with tempfile.TemporaryDirectory() as t:
         for n, name in ((2, 'moodboard'), (5, 'concept_prism')):
             subprocess.run(['pdftoppm', '-f', str(n), '-l', str(n), '-r', '240', '-png', '-singlefile', PDF, f'{t}/p'], check=True, stderr=subprocess.DEVNULL)
             im = Image.open(f'{t}/p.png')
             save(trim_white(im, 0) if name == 'moodboard' else im, name + '.jpg', 2400)
-    hero()
+    hero(); cards()
     # Marketplace I & II: REMOVED from the site Nov 23 PM (Rodrigo t78u). Sources kept; marketplace_assets() is not called.
     print('big-pink assets ->', OUT)
 def marketplace_assets():
