@@ -77,6 +77,7 @@ def main():
                 W,H=im.size; c=spec[2]; im=im.crop((int(c[0]*W),int(c[1]*H),int(c[2]*W),int(c[3]*H)))
             nm=f'p{k:02d}.jpg'; save(im,slug,nm); names.append(nm)
         man[slug]=names
+    import nomad_surface; nomad_surface.main()   # Nomad scene photos re-surfaced on palette.CREAM from the pre-cream originals
     for f in NOMAD_IMG: save(Image.open(RD+'nomad/'+f),'nomad',('hero.jpg' if f.startswith('n01') else f.split('_')[0]+'.jpg') if f.startswith('n') else f)
     for i,f in enumerate(NOMAD_FLIP): save(Image.open(RD+'nomad/flip/'+f),'nomad/flip',f'f{i:02d}.jpg',1600)
     for slug,fs in CEROS.items():
@@ -100,7 +101,7 @@ def main():
     import flyer_sheets; flyer_sheets.main()
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'grid')); import grid_assets; grid_assets.main()   # The Grid identity case
     import madison_card; madison_card.main()   # Madison home/works card on the shared cream (hero stays Rodrigo's white original)
-    os.makedirs(os.path.join(OUT, 'ui'), exist_ok=True); import flyer_mockups as FM; FM.surface(seed=7, light=(0.5, 0.15)).resize((1600, 1200), Image.LANCZOS).save(os.path.join(OUT, 'ui', 'cream-surface.jpg'), quality=82, optimize=True, progressive=True)   # iPad viewer stage (shared CREAM)
+    # (ui/cream-surface.jpg retired Nov 23 PM: the viewers are flat stone #ECEAE6 in CSS, no texture)
     import runpy; runpy.run_path(os.path.join(os.path.dirname(__file__),'desk_texture.py'))   # ui/desk-charcoal.jpg (OUT is wiped above)
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'bigpink')); import bp_assets; bp_assets.main()   # Big Pink (OnePink identity + Ceros laptop) and Marketplace
     json.dump(man,open(os.path.join(os.path.dirname(__file__),'image_manifest.json'),'w'),indent=1)

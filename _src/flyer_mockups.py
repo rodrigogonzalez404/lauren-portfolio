@@ -10,13 +10,15 @@ W, H = 2304, 1728
 def surface(base=CREAM, seed=3, light=(0.3, 0.2)):
     rng = np.random.default_rng(seed)
     def up(n, f): return np.array(Image.fromarray(rng.standard_normal((max(2, H // f), max(2, W // f))).astype(np.float32)).resize((W, H), Image.BICUBIC))
-    v = rng.standard_normal((H, W)) * 6 + up(0, 3) * 3.5 + up(0, 240) * 1.5
-    img = np.array(base, float)[None, None, :] + v[..., None] * np.array([1, .98, .95])
+    # Nov 23 PM (stone): the paper texture is gone — only a faint neutral grain (against JPEG banding) and a soft,
+    # colourless light falloff remain, so nothing reads tan.
+    v = rng.standard_normal((H, W)) * 1.1
+    img = np.array(base, float)[None, None, :] + v[..., None]
     yy, xx = np.mgrid[0:H, 0:W]
     d = np.hypot(xx / W - light[0], yy / H - light[1])
-    img = img * (1.05 - 0.13 * d)[..., None]
+    img = img * (1.03 - 0.07 * d)[..., None]
     img = img * (np.array(base, float) / np.median(img.reshape(-1, 3), 0))  # median lands exactly on base
-    return Image.fromarray(np.clip(img, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.8))
+    return Image.fromarray(np.clip(img, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.6))
 
 def coeffs(dst, src):
     A, B = [], []
@@ -36,7 +38,7 @@ def _poly_mask(pts, size, scale=2):
     ImageDraw.Draw(m).polygon([(x * scale, y * scale) for x, y in pts], fill=255)
     return np.asarray(m.resize(size, Image.BOX), np.float32) / 255
 
-def _multiply(cv, a, tint=(0.40, 0.37, 0.34)):
+def _multiply(cv, a, tint=(0.40, 0.40, 0.41)):   # neutral grey shadow (was warm 0.40/0.37/0.34)
     """darken the canvas where alpha a>0 (a multiply shadow keeps the surface texture visible)"""
     c = np.asarray(cv, np.float32)
     c = c * (1 - a[..., None]) + c * np.array(tint, np.float32) * a[..., None]

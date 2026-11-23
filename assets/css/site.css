@@ -221,12 +221,12 @@ button{font:inherit;color:inherit}
 .g-row.g-inset{padding:3.992% 0 5.988%}
 @media (max-width:640px){.g-row.g-inset{padding:0}}
 .fb-wrap.tall{max-width:1000px}
-/* iPad viewer (digital brochures) — CSS-drawn iPad Pro on the shared cream #D2CEC8; JS in site.js */
-.tab-stage{position:relative;background-color:#D2CEC8;background-image:radial-gradient(120% 95% at 45% 30%,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 55%,rgba(60,50,40,.10) 100%),url("../img/ui/cream-surface.jpg");background-size:100% 100%,cover;background-position:center;padding:clamp(32px,6.4vw,92px) clamp(12px,5.6vw,80px) 0;color:#0F0F0F}
+/* iPad viewer (digital brochures) — CSS-drawn iPad Pro on the shared stone #ECEAE6 (no paper texture; neutral vignette + shadows — Nov 23 PM); JS in site.js */
+.tab-stage{position:relative;background-color:#ECEAE6;background-image:radial-gradient(120% 95% at 45% 30%,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 55%,rgba(0,0,0,.045) 100%);background-size:100% 100%;background-position:center;padding:clamp(32px,6.4vw,92px) clamp(12px,5.6vw,80px) 0;color:#0F0F0F}
 .tab-wrap{position:relative;max-width:1040px;margin:0 auto;container-type:inline-size}
-.tab-wrap::after{content:"";position:absolute;left:7%;right:7%;bottom:-2.4cqw;height:4.2cqw;border-radius:50%;background:radial-gradient(closest-side,rgba(40,32,24,.42),rgba(40,32,24,0));filter:blur(1.2cqw);pointer-events:none;z-index:0}
+.tab-wrap::after{content:"";position:absolute;left:7%;right:7%;bottom:-2.4cqw;height:4.2cqw;border-radius:50%;background:radial-gradient(closest-side,rgba(18,18,20,.42),rgba(18,18,20,0));filter:blur(1.2cqw);pointer-events:none;z-index:0}
 .tab{position:relative;z-index:1;border-radius:5.4cqw;padding:.3cqw;background:linear-gradient(160deg,#B9B9BE 0%,#6E6E74 22%,#9C9CA2 50%,#5C5C61 78%,#A9A9AF 100%);
-  box-shadow:0 .25cqw .5cqw rgba(20,16,12,.28),0 1.6cqw 3.2cqw -1cqw rgba(20,16,12,.40),0 4.4cqw 7cqw -3.4cqw rgba(30,24,18,.45)}
+  box-shadow:0 .25cqw .5cqw rgba(16,16,18,.28),0 1.6cqw 3.2cqw -1cqw rgba(16,16,18,.40),0 4.4cqw 7cqw -3.4cqw rgba(20,20,22,.45)}
 .tab-glass{position:relative;border-radius:5.1cqw;background:#0A0A0B;padding:2.75cqw;box-shadow:inset 0 0 0 .08cqw rgba(255,255,255,.08),inset 0 .12cqw .2cqw rgba(255,255,255,.06)}
 .tab-cam{position:absolute;top:1.25cqw;left:50%;width:.62cqw;height:.62cqw;margin-left:-.31cqw;border-radius:50%;background:radial-gradient(circle at 38% 35%,#3A4250 0%,#15181D 45%,#050506 75%);box-shadow:0 0 0 .1cqw #161618}
 .tab-screen{position:relative;aspect-ratio:4/3;border-radius:2.4cqw;overflow:hidden;background:#000;touch-action:pan-y;cursor:grab;outline:none;-webkit-tap-highlight-color:transparent;isolation:isolate}
@@ -250,8 +250,8 @@ button{font:inherit;color:inherit}
 .tab-dots i{width:6px;height:6px;border-radius:50%;background:rgba(15,15,15,.22);transition:background .3s,transform .3s}
 .tab-dots i.on{background:#0F0F0F;transform:scale(1.15)}
 .tab-foot{display:flex;justify-content:center;text-align:center;margin-top:clamp(24px,3vw,40px);padding:18px 0 22px;border-top:1px solid rgba(15,15,15,.14)}
-.tab-hint{color:#55524E}.tab-hint .hm{display:none}
-.tab-note{text-align:center;color:#55524E;margin:0;padding:0 0 22px;max-width:none}
+.tab-hint{color:#5E5F62}.tab-hint .hm{display:none}
+.tab-note{text-align:center;color:#5E5F62;margin:0;padding:0 0 22px;max-width:none}
 @media (max-width:700px){.tab-hint .hd{display:none}.tab-hint .hm{display:inline}.tab-stage{margin:0 calc(-1 * var(--m));padding-left:14px;padding-right:14px}}
 .tab-conf{background:#0A0A0A;color:#F2F2F2}
 .tab-confin{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.2cqw;text-align:center;padding:0 8%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
@@ -322,13 +322,13 @@ button{font:inherit;color:inherit}
 .lap .tab-glass{border-radius:2.2cqw 2.2cqw .3cqw .3cqw;padding:2.2cqw 2cqw 2.7cqw;background:#060607}
 .lap .tab-cam{top:.85cqw;width:.5cqw;height:.5cqw;margin-left:-.25cqw}
 .lap .tab-screen{aspect-ratio:16/9;border-radius:.2cqw}
-.lap-base{position:relative;z-index:1;height:2.2cqw;margin:0 -8.5%;border-radius:.25cqw .25cqw 50% 50% / .25cqw .25cqw 100% 100%;background:linear-gradient(180deg,#f1f1f3 0%,#d9dadd 30%,#b8babe 72%,#8e9095 100%);box-shadow:0 .1cqw 0 rgba(255,255,255,.6) inset,0 1.4cqw 2.2cqw -1.2cqw rgba(30,24,18,.55)}
+.lap-base{position:relative;z-index:1;height:2.2cqw;margin:0 -8.5%;border-radius:.25cqw .25cqw 50% 50% / .25cqw .25cqw 100% 100%;background:linear-gradient(180deg,#f1f1f3 0%,#d9dadd 30%,#b8babe 72%,#8e9095 100%);box-shadow:0 .1cqw 0 rgba(255,255,255,.6) inset,0 1.4cqw 2.2cqw -1.2cqw rgba(20,20,22,.55)}
 .lap-base i{position:absolute;left:50%;top:0;width:15%;height:.85cqw;transform:translateX(-50%);border-radius:0 0 1.1cqw 1.1cqw;background:linear-gradient(180deg,#a9abaf,#cfd0d3)}
 .tab-wrap.lap::after{left:-4%;right:-4%;bottom:-1.8cqw}
 /* ---- Big Pink case (proposal) ---- */
 @font-face{font-family:'Cabin';font-weight:400 700;font-display:swap;src:url(../fonts/Cabin-Var.woff2) format('woff2')}
 .bp-wm{height:78%;width:auto;display:block}
-.bp-mean{font:400 13px/1.35 Geist,sans-serif;color:#55524E}
+.bp-mean{font:400 13px/1.35 Geist,sans-serif;color:#5E5F62}
 .bp-type{font-family:'Cabin',sans-serif;color:#282334}
 .bp-type .gr-aa{color:#C67484;font-weight:700}
 .bp-type .b{font-weight:700;letter-spacing:.14em;font-size:clamp(18px,2vw,30px)}
