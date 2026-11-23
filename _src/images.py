@@ -56,8 +56,7 @@ RE={
 }
 NOMAD_FLIP=['p00_cover.jpg','page-03_L.jpg','page-03_R.jpg','page-07_L.jpg','page-07_R.jpg','page-10_L.jpg','page-10_R.jpg','page-11_L.jpg','page-11_R.jpg','page-12_L.jpg','page-12_R.jpg','page-15_L.jpg','page-15_R.jpg','page-17_L.jpg','page-19_R.jpg','page-22_L.jpg','page-22_R.jpg']
 NOMAD_IMG=['n01_hero_spread-investment-summary.jpg','n02_cover-on-desk.jpg','n03_printed-stack.jpg','n06_tablet-neighborhood-map.jpg','n08_detail-supply-chart.jpg']  # Nov 23: design-system crops (ds_*) removed from the page (Rodrigo)
-CEROS={'big-pink':['bigpink-%02d'%i for i in (1,2,3,6,7,16,18,19,20,23)],
-       'marketplace':['marketplace-%02d'%i for i in (1,2,3,5,9,11,13,15,16)]}
+CEROS={}   # big-pink + marketplace: all assets from _src/bigpink/bp_assets.py (Nov 23 laptop/identity treatment)
 # brand galleries: ordered as on the live Webflow case pages (already public there)
 DROP={'RealEstate_Examples','8-FNL'}   # Fortis: readable listing prices, cap rates, broker names/phones/emails -> omitted
 
@@ -103,6 +102,7 @@ def main():
     import madison_card; madison_card.main()   # Madison home/works card on the shared cream (hero stays Rodrigo's white original)
     os.makedirs(os.path.join(OUT, 'ui'), exist_ok=True); import flyer_mockups as FM; FM.surface(seed=7, light=(0.5, 0.15)).resize((1600, 1200), Image.LANCZOS).save(os.path.join(OUT, 'ui', 'cream-surface.jpg'), quality=82, optimize=True, progressive=True)   # iPad viewer stage (shared CREAM)
     import runpy; runpy.run_path(os.path.join(os.path.dirname(__file__),'desk_texture.py'))   # ui/desk-charcoal.jpg (OUT is wiped above)
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'bigpink')); import bp_assets; bp_assets.main()   # Big Pink (OnePink identity + Ceros laptop) and Marketplace
     json.dump(man,open(os.path.join(os.path.dirname(__file__),'image_manifest.json'),'w'),indent=1)
     print('done')
 if __name__=='__main__': main()

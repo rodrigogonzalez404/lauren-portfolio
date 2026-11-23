@@ -110,9 +110,9 @@ UNPUBLISHED = {'redmond-gateway', 'portland-office-market-report'}
 PROJECTS = [p for p in PROJECTS if p['slug'] not in UNPUBLISHED]
 
 CEROS = [
- dict(slug='big-pink', title='Big Pink', cat='interactive', type='[[Interactive Pitch]]', place='Portland, OR', year='[[Year]]', tool='Ceros',
-      summary='[[Placeholder: A click-through Ceros pitch for the U.S. Bancorp Tower (“Big Pink”) — the building, amenity additions, activation concepts, a sample re-naming and a marketing approach.]]'),
- dict(slug='marketplace', title='Marketplace I & II', cat='interactive', type='[[Interactive Pitch]]', place='[[City]]', year='[[Year]]', tool='Ceros',
+ dict(slug='big-pink', title='Big Pink', cat='interactive', type='Pitch Presentation & Brand Concepts', place='Portland, OR', year='2025', tool='Ceros',
+      summary='A Ceros pitch for Big Pink, the U.S. Bancorp Tower, and the identity it proposed — OnePink, from the logo to sample marketing material.'),
+ dict(slug='marketplace', title='Marketplace I & II', cat='interactive', type='[[Interactive Pitch]]', place='Portland, OR', year='2026', tool='Ceros',
       summary='[[Placeholder: A click-through Ceros pitch presentation for Marketplace I & II — introductions, market overview, competition, case studies and approach.]]'),
 ]
 for c in CEROS:
@@ -120,7 +120,7 @@ for c in CEROS:
              project='[[Placeholder: What the pitch had to do and who it was for.]]',
              solution=['[[Placeholder: How the interactive deck is structured and designed.]]'],
              results='[[Placeholder: Outcome to be confirmed by Lauren / Colliers.]]',
-             note='Selected design screens only. Market data, fee details, team and client information are left out. [[The live presentation is not linked — confirm with Colliers before sharing it.]]')
+             note='Selected design screens only. Market data, fee details, team and client information are left out.')
 
 BRAND_ORDER = [('aafayaa','Aafayaa'),('abundant-earth','Abundant Earth'),('wild-naturals','Wild Naturals'),('toksuite','TokSuite'),('farm-bee','Farm & Bee'),('zulay','Zulay Kitchen'),('cgk','CGK Unlimited')]
 BRAND = []
@@ -131,3 +131,12 @@ for slug,title in BRAND_ORDER:
                       home=slug in ('aafayaa','abundant-earth','wild-naturals'),gallery_title='Selected work'))
 
 ALL = PROJECTS + CEROS + BRAND   # case-page order (also drives "Next project")
+
+# Big Pink copy (Nov 23; leads with OnePink — never say the client chose it; Colliers did not win, so no Results) — written from the Ceros presentation and Lauren's logo-concepts deck
+for c in CEROS:
+    if c['slug'] == 'big-pink':
+        c.update(project='Big Pink — the U.S. Bancorp Tower at 111 SW 5th Avenue, “the icon of downtown Portland” — had a new owner, who called owning it “deeply meaningful” and “also a responsibility.” Colliers pitched to lead the building’s leasing and marketing with an interactive presentation that had to show the tower “seen from a new angle”: its story, the market and the competition, and a marketing approach bold enough to reposition a landmark — down to a possible new name.',
+                 solution=['The proposed identity, OnePink, joins the address and the nickname in one word. Wide-set, rounded capitals run vertically like the tower — ONE in white, PINK in rose on deep navy — with a four-colour palette chosen for what each colour says about the building and a tagline, “One City. One Workplace. One Big Experience.” It is carried through sample marketing material: a brochure, a flyer, a tablet and a phone.',
+                           'It sits inside an interactive Ceros presentation in eight numbered chapters — Introductions, The Building, The Market, The Competition, Marketing Approach, Fee Proposal, Why Us? and Appendix. Each chapter opens on a deep navy panel with a rose-pink outlined numeral beside full-bleed photography of the tower and the city; a vertical BIG PINK wordmark frames the cover and the close. The marketing approach builds up to the identity through a moodboard, sixteen sample names from standard to unique, and three logo ideas — OneEleven, Big Pink and OnePink — each shown over the skyline, in dimensional letters and on building signage.'],
+                 results='',   # Rodrigo, Nov 23: leave Results empty (block hidden) — no outcome claimed
+                 role='Designer — the full Ceros presentation, naming and logo concepts', note='')

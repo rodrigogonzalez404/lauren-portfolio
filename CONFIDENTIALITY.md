@@ -57,12 +57,12 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 ## Big Pink
 
 - **Blurred:** nothing
-- **Omitted:** all Ceros pages outside the curated 10 (market data, fees, team, client lists); no live embed or link
+- **Omitted:** [03] The Market — submarket figures, absorption, rents and concessions (black screen in viewer); [04] The Competition — competitive set with rents (black screen in viewer); [06] Fee Proposal — fee terms (black screen in viewer); team, client-list, reference, lease-map and services screens; the empty SWOT screen and the repositioning screen (carries copy from another project); no live embed of, or link to, the Ceros presentation
 
 ## Marketplace I & II
 
 - **Blurred:** nothing
-- **Omitted:** all Ceros pages outside the curated 9; no live embed or link
+- **Omitted:** all Ceros pages outside the curated 9 (market data, fees, team, client lists); no live embed of, or link to, the Ceros presentation
 
 ## Brand & Ecommerce (Aafayaa, Abundant Earth, Wild Naturals, TokSuite, Farm & Bee, Zulay Kitchen, CGK Unlimited)
 

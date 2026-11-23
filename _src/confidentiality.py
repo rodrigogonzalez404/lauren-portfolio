@@ -34,6 +34,6 @@ LOG = {
     blurred=[], omitted=['pages 03–16 market data and sales']),
  'fortis-net-lease': dict(note='Listing flyers that show prices, cap rates and broker contact details are left out.',
     blurred=[], omitted=['RealEstate_Examples.jpg (readable sale prices, cap rates, listing prices)','8-FNL.jpg email flyers (listing prices, cap rates, broker names, phones, emails)']),
- 'big-pink': dict(note='', blurred=[], omitted=['all Ceros pages outside the curated 10 (market data, fees, team, client lists); no live embed or link']),
- 'marketplace': dict(note='', blurred=[], omitted=['all Ceros pages outside the curated 9; no live embed or link']),
+ 'big-pink': dict(note='Laptop viewer of 25 design screens + 3 black confidential screens; OnePink identity, moodboard, naming and logo concepts are front-of-house, not financial.', blurred=[], omitted=['[03] The Market — submarket figures, absorption, rents and concessions (black screen in viewer)', '[04] The Competition — competitive set with rents (black screen in viewer)', '[06] Fee Proposal — fee terms (black screen in viewer)', 'team, client-list, reference, lease-map and services screens', 'the empty SWOT screen and the repositioning screen (carries copy from another project)', 'no live embed of, or link to, the Ceros presentation']),
+ 'marketplace': dict(note='Laptop viewer of 9 curated design screens.', blurred=[], omitted=['all Ceros pages outside the curated 9 (market data, fees, team, client lists)', 'no live embed of, or link to, the Ceros presentation']),
 }

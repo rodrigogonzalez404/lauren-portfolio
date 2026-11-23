@@ -31,14 +31,14 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 - `_src/images.py` — regenerates `assets/img/` from the original PDFs/mockups on the build box (paths under `/workspace/...`,
   not in the repo). Contains the page selections and blur boxes (fractions of the page). You normally won't need it —
   just drop replacement images into `assets/img/<slug>/` with the same names.
-- Case template (Rodrigo, Nov 19): ABOVE the gallery = the redesign intro (cover label + big title + summary → 16:9 hero, or the auto-playing playlist on interactive pages → ruled meta row, equal 72 top/bottom → dark [01] Project / [02] Solution / [03] Results). FROM the gallery down = Figma page "01 Rebuild (current site)" frame 7:2: white gallery (cols 2–7, 128 top/bottom) → grey Next Project (80) → footer. No captions/labels on any picture.
+- Case template (Rodrigo, Nov 19): ABOVE the gallery = the redesign intro (cover label + big title + summary → 16:9 hero (interactive pages too since Nov 23 — the playlist is gone) → ruled meta row, equal 72 top/bottom → dark [01] Project / [02] Solution / [03] Results; an empty `results` string hides [03]). FROM the gallery down = Figma page "01 Rebuild (current site)" frame 7:2: white gallery (cols 2–7, 128 top/bottom) → grey Next Project (80) → footer. No captions/labels on any picture.
 - Spacing: 8-col grid (147/24 gutters/48 margins at 1440; 16 margins mobile). Tokens in `assets/css/site.css`: `--cs` 128 (info + gallery padding, equal top and bottom), `--cn` 80 (Next Project), hero clamp(360px,43.75vw,630px). Galleries are equal-height rows (full width / pairs / portrait triples, sized by aspect ratio) so nothing is cropped. Home/Works/About keep the `--sec`/`--s96…` rhythm. CSS/JS are cache-busted with `?v=<md5>` by build.py. Hero override: `python3 _src/set_hero.py SLUG file.jpg` stores a supplied mockup as `<MOCK>/SLUG_hero-override.jpg` (images.py prefers it); Madison Plaza shows an override uncropped on white (`.case-hero.fit`).
 - Responsive: one page serves desktop and mobile (breakpoints at 960 / 820 / 640px; fluid `clamp()` type).
 
 ## Open items (as of the initial commit)
 - All Real Estate case copy (Project / Solution / Results / summary / role / client team) is `[[placeholder]]` — needs Lauren.
 - Nomad copy is a draft written from the document — Lauren to review. Results unknown.
-- Ceros: type, city, year, and whether Colliers approves showing them.
+- Ceros: Big Pink settled Nov 23 (see below). Marketplace: Portland, OR / 2026 set; type, role and copy still `[[ ]]`.
 - Home "Approach" section is placeholder copy.
 - Contact page has no form (GitHub Pages is static) — email + LinkedIn only.
 - Portland Office Market Report: only cover + contents shown; the report may be public — confirm before adding data pages.
@@ -109,3 +109,23 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 - Logos are real vectors extracted from Lauren's deck PDF (`_src/grid/extract_logos.py` → `logo-*.svg`, `fill=currentColor`) and inlined as SVG, so they recolour per panel. Symbol/wordmark = same SVG with a cropped viewBox (`.gr-logo.crop`).
 - Raster assets from `_src/grid/grid_assets.py` (run by images.py): hero.jpg (logo on stone over a faint grid), card.jpg (the existing lobby-sign mockup — the thumbnail Rodrigo referred to), deck signage crops (page 3/5/7 right column at 300 dpi), cards.jpg (code-built business cards on the shared cream).
 - Results states the client chose The Grid (source: Colliers email "They have confirmed the Grid for the name/logo"); the client's feedback is paraphrased, no names. No building banner was made (no honest way to make it flawless); the deck's exterior blade sign + lobby wall + lobby panel + business cards cover the applications.
+
+## Big Pink + Marketplace — Ceros in a laptop, OnePink identity (Nov 23, Rodrigo t74u/t75u)
+- The Ceros previews can't be iframed (CSP frame-ancestors) and must NOT be linked anywhere. Both cases show screen captures
+  in a CSS laptop that reuses the iPad viewer (`ipad_viewer(..., device='laptop')` → `.tab-wrap.lap` + `.lap-base`). Home/Works
+  cards are laptop renders; the auto-playing playlist is gone from cards and heroes.
+- Big Pink leads with **OnePink**, Grid-style: The mark (vertical + horizontal) → Versions → Color → Typography (Cabin) →
+  In place (concept board, sample marketing material, tagline) → The presentation (laptop viewer, 25 screens + 3 black
+  confidential screens) → Moodboard → Naming → Concept exploration (OneEleven, Big Pink, Prism "First round").
+  Rules from Rodrigo: the client did NOT pick a name or logo — never say OnePink was chosen (it is "the one carried into the
+  sample marketing material"); Colliers did NOT win — Results is empty (block hidden), copy says "pitched"; Lauren designed
+  the whole presentation (role line).
+- Code: `_src/bigpink_blocks.py` (sections), `_src/bigpink/bp_assets.py` (called at the end of images.py; writes
+  `assets/img/big-pink/` + `assets/img/marketplace/`). OnePink wordmark = `_src/bigpink/onepink-h.svg` / `onepink-vertical.svg`,
+  traced with potrace (`trace_onepink.py`) from the white letters on the Ceros concept board; paths `.w1` ONE / `.w2` PINK,
+  inlined once as `<symbol>`s and coloured with `--one` / `--pink`. Hero = OnePink on Dark Blue (code-built).
+- Laptop renders (Big Pink card, Marketplace hero + card) are stored in `/workspace/bigpink/rendered/` and copied in by
+  bp_assets; re-render with `_src/bigpink/render_laptops.js` (needs the :8765 server) only if a cover screen changes.
+- Sources off-repo: `/workspace/bigpink/cap/` (Ceros captures), `/workspace/bigpink/media/` (Ceros media),
+  `/workspace/uploads/big-pink.pdf` (logo-concepts deck). Screen selection + exclusions are commented in bp_assets.py.
+- Viewer hints: arrows wrapped in `.kb` (Geist) — PT Mono has no ← → glyphs and showed dots.

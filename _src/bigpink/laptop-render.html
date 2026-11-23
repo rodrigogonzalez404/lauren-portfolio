@@ -1,0 +1,7 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../assets/css/site.css">
+<style>body{margin:0;background:#D2CEC8}
+.st{position:relative;display:flex;align-items:center;justify-content:center;background-color:#D2CEC8;background-image:radial-gradient(120% 95% at 45% 30%,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 55%,rgba(60,50,40,.10) 100%),url("../../assets/img/ui/cream-surface.jpg");background-size:100% 100%,cover;overflow:hidden}
+.st .tab-wrap.lap{width:var(--lw);max-width:none}
+.st .tab-page img{object-fit:cover}</style></head>
+<body><div class="st" id="st"><div class="tab-wrap lap"><div class="tab"><div class="tab-glass"><span class="tab-cam"></span><div class="tab-screen"><div class="tab-track"><figure class="tab-page cur"><img id="im" src=""></figure></div></div></div></div><div class="lap-base"><i></i></div></div></div>
+<script>const q=new URLSearchParams(location.search);const st=document.getElementById('st');st.style.width=q.get('w')+'px';st.style.height=q.get('h')+'px';st.style.setProperty('--lw',q.get('lw')+'px');document.getElementById('im').src=q.get('src');</script></body></html>

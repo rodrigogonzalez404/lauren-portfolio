@@ -124,8 +124,7 @@ def home():
 <section class="wrap" style="padding-bottom:var(--sec)" id="interactive" data-name="Interactive Presentations">
 <div class="sec-head clean"><div class="col gap16"><span class="mono muted">[Interactive] ({len(CEROS):02d})</span><h2 class="l">{E(H["interactive_title"])}</h2></div>
 <p class="bm muted intro">{T(H["interactive_intro"])}</p></div>
-<div class="grid2">{"".join(playlist(p, r) for p in CEROS)}</div>
-<p class="mono-s muted mt40">Pages auto-advance like a playlist; click to open the case study. Only design pages are shown — market data, fees, team and client lists are left out.</p>
+<div class="grid2">{"".join(card(p, r) for p in CEROS)}</div>
 </section>
 
 <section class="dark wrap sec" data-name="Approach">
@@ -153,7 +152,7 @@ def works():
 <div class="sec-head clean"><div class="col gap16"><span class="mono muted">[01] ({len(PROJECTS):02d})</span><h2 class="xl">Real Estate</h2></div><p class="bm muted intro">{T(HOME["re_intro"])}</p></div>
 <div class="grid2">{"".join(card(p, r) for p in PROJECTS)}</div>
 <div class="works-sub" id="interactive"><div class="sec-head clean"><div class="col gap16"><span class="mono muted">[Interactive] ({len(CEROS):02d})</span><h2 class="l">{E(HOME["interactive_title"])}</h2></div><p class="bm muted intro">{T(HOME["interactive_intro"])}</p></div>
-<div class="grid2">{"".join(playlist(p, r) for p in CEROS)}</div></div>
+<div class="grid2">{"".join(card(p, r) for p in CEROS)}</div></div>
 <p class="mono-s muted mt64">{T(HOME["re_note"])}</p></section>
 <section class="wrap sec" id="brand" data-name="Brand &amp; Ecommerce">
 <div class="sec-head clean"><div class="col gap16"><span class="mono muted">[02] ({len(BRAND):02d})</span><h2 class="xl">Brand &amp; Ecommerce</h2></div><p class="bm muted intro">{T(HOME["brand_intro"])}</p></div>
@@ -264,10 +263,12 @@ def meta_row(p):
 def psr(p):
     sol = ''.join(f'<p class="bl">{T(s)}</p>' for s in p['solution'])
     note = f'<p class="mono-s muted draft">{T(p["draft_note"])}</p>' if p.get('draft_note') else ''
+    # an empty results string hides the [03] block entirely (Big Pink: a pitch, no outcome to report)
+    res = f'''<div class="blk"><div class="lab"><span class="mono muted">[03]</span><span class="s">Results</span></div><div class="txt"><p class="{'m' if len(strip_ph(p['results'])) < 220 else 's'}">{T(p["results"])}</p></div></div>''' if p['results'].strip() else ''
     return f'''<section class="dark psr" data-name="Project / Solution / Results">{note}
 <div class="blk"><div class="lab"><span class="mono muted">[01]</span><span class="s">Project</span></div><div class="txt"><p class="s">{T(p["project"])}</p></div></div>
 <div class="blk"><div class="lab"><span class="mono muted">[02]</span><span class="s">Solution</span></div><div class="txt">{sol}</div></div>
-<div class="blk"><div class="lab"><span class="mono muted">[03]</span><span class="s">Results</span></div><div class="txt"><p class="{'m' if len(strip_ph(p['results'])) < 220 else 's'}">{T(p["results"])}</p></div></div></section>'''
+{res}</section>'''
 def gsec(inner, head='', intro='', note=''):
     h = f'<div class="g-head"><h2 class="ci-h">{head}</h2>{f"<p class={chr(34)}bm muted{chr(34)}>{T(intro)}</p>" if intro else ""}</div>' if head else ''
     n = f'<p class="mono-s muted g-note">{T(note)}</p>' if note else ''
@@ -289,7 +290,7 @@ def nomad_blocks(r):
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in NOMAD_PAL)
     pages = ''.join(f'<div class="fb-page"{" data-density=\"hard\"" if i == 0 else ""}><img alt="Nomad offering package — {a}" src="{r}{I}flip/f{i:02d}.jpg" draggable="false"></div>' for i, a in enumerate(FLIP_ALTS))
     pages += '<div class="fb-page fb-end" data-density="hard"><div class="fb-endin"><span class="mono">[End]</span><div><div class="fb-endt">Nomad</div><div class="mono" style="margin-top:14px">Investor Offering Package · 2026</div></div><span class="mono fb-endm">Colliers · Overlook, North Portland — selected pages; confidential pages omitted</span></div></div>'
-    hint = '<span class="hd">Drag a page corner, click a page, or use the ← → keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
+    hint = '<span class="hd">Drag a page corner, click a page, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
     ds = f'''<div class="gallery"><div class="swatches">{sw}</div>
 </div>'''
     book = f'''<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book">{pages}</div></div>
@@ -321,7 +322,7 @@ def madison_blocks(r):
             tag, f = e.split(':')
             alt = {'cover': 'Front cover', 'back': 'Back cover'}.get(tag, 'Page ' + tag[1:])
             pages += f'<div class="fb-page"{hard}><img alt="Madison Plaza offering memorandum — {alt}" src="{r}{I}flip/{f}" draggable="false"></div>'
-    hint = '<span class="hd">Drag a page corner, click a page, or use the ← → keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
+    hint = '<span class="hd">Drag a page corner, click a page, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in MADISON_PAL)
     ds = f'<div class="gallery"><div class="swatches">{sw}</div></div>'
     book = f"""<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book">{pages}</div></div>
@@ -346,7 +347,7 @@ def pacific_blocks(r):
         alt = {'cover': 'Front cover', 'back': 'Back cover'}.get(tag, 'Page ' + tag[1:])
         num = {'cover': '01', 'back': '12'}[tag] if tag in ('cover', 'back') else f'{int(tag[1:]):02d}'
         pages += f'<div class="fb-page" data-pg="{num}"{hard}><img alt="Pacific Center leasing brochure — {alt}" src="{r}{I}flip/{f}" draggable="false"></div>'
-    hint = '<span class="hd">Drag a page corner, click a page, or use the ← → keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
+    hint = '<span class="hd">Drag a page corner, click a page, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in PACIFIC_PAL)
     ds = f'<div class="gallery"><div class="swatches">{sw}</div></div>'
     book = f"""<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap tall"><div id="fb-book" class="fb-book" data-w="850" data-h="1100" data-total="12">{pages}</div></div>
@@ -361,13 +362,13 @@ SHEET_JITTER = [(-1.6, -10, 6), (1.2, 12, -8), (-0.6, -4, -12), (2.0, 8, 10), (-
 def sheet_stack(slug, title, n, r, note=''):
     I = f'assets/img/{slug}/sheets/'
     sh = ''.join(f'<figure class="ss-sheet" style="--r:{SHEET_JITTER[i % 8][0]}deg;--x:{SHEET_JITTER[i % 8][1]}px;--y:{SHEET_JITTER[i % 8][2]}px;z-index:{n - i}"><img src="{r}{I}s{i+1:02d}.jpg" alt="{E(title)} flyer — sheet {i+1}" width="2000" height="1545" draggable="false"></figure>' for i in range(n))
-    hint = '<span class="hd">Click or drag the top sheet, or use the ← → keys</span><span class="hm">Swipe the sheet or tap the arrows</span>'
+    hint = '<span class="hd">Click or drag the top sheet, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the sheet or tap the arrows</span>'
     return f"""<div class="fb-stage ss-stage" data-name="Sheet stack"><div class="ss-wrap"><div class="ss" tabindex="0" role="group" aria-roledescription="sheet stack" aria-label="{E(title)} flyer sheets">{sh}</div></div>
 <div class="fb-controls"><button class="fb-btn ss-prev" aria-label="Previous sheet">←</button><span class="mono fb-counter ss-counter" aria-live="polite">Sheet 01 / {n:02d}</span><button class="fb-btn ss-next" aria-label="Next sheet">→</button></div>
 <div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div>{f'<p class="mono-s ss-note">{T(note)}</p>' if note else ''}</div>"""
 # iPad viewer (digital brochures, Nov 23): a CSS-drawn iPad Pro (landscape) on the shared cream; pages slide like a tablet.
 # Reusable: ipad_viewer(slug, title, files, r, note). JS in site.js (".tab-stage"); CSS "iPad viewer" block in site.css.
-def ipad_viewer(slug, title, files, r, note='', label='digital brochure'):
+def ipad_viewer(slug, title, files, r, note='', label='digital brochure', device='ipad'):
     """files: image names under assets/img/<slug>/, or ('CONF', section) for a black 'Confidential — financial
     information omitted' screen (Madison pattern)."""
     n = len(files)
@@ -381,9 +382,12 @@ def ipad_viewer(slug, title, files, r, note='', label='digital brochure'):
                 f'<img {att}="{r}assets/img/{slug}/{f}" alt="{E(title)} {label} — page {i+1}" draggable="false"></figure>')
     pages = ''.join(page(i, f) for i, f in enumerate(files))
     dots = ''.join('<i class="on"></i>' if i == 0 else '<i></i>' for i in range(n))
-    hint = '<span class="hd">Swipe or drag the page, click its edge, or use the ← → keys</span><span class="hm">Swipe the screen or tap the arrows</span>'
-    return f"""<div class="tab-stage" data-name="iPad viewer"><div class="tab-wrap"><div class="tab"><div class="tab-glass"><span class="tab-cam" aria-hidden="true"></span>
-<div class="tab-screen" tabindex="0" role="region" aria-roledescription="carousel" aria-label="{E(title)} {label}, {n} pages"><div class="tab-track">{pages}</div></div></div></div></div>
+    hint = '<span class="hd">Swipe or drag the page, click its edge, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the screen or tap the arrows</span>'
+    lap = device == 'laptop'
+    if lap: hint = '<span class="hd">Click through it like the live presentation — drag, click the screen’s edge, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the screen or tap the arrows</span>'
+    base = '<div class="lap-base" aria-hidden="true"><i></i></div>' if lap else ''
+    return f"""<div class="tab-stage{' lap-stage' if lap else ''}" data-name="{'Laptop' if lap else 'iPad'} viewer"><div class="tab-wrap{' lap' if lap else ''}"><div class="tab"><div class="tab-glass"><span class="tab-cam" aria-hidden="true"></span>
+<div class="tab-screen" tabindex="0" role="region" aria-roledescription="carousel" aria-label="{E(title)} {label}, {n} pages"><div class="tab-track">{pages}</div></div></div></div>{base}</div>
 <div class="tab-controls"><button class="tab-btn tab-prev" aria-label="Previous page" disabled>←</button><span class="mono tab-counter" aria-live="polite">Page 01 / {n:02d}</span><button class="tab-btn tab-next" aria-label="Next page">→</button></div>
 <div class="tab-dots" aria-hidden="true">{dots}</div>
 <div class="tab-foot"><span class="mono-s tab-hint">{hint}</span></div>{f'<p class="mono-s tab-note">{T(note)}</p>' if note else ''}</div>"""
@@ -435,8 +439,8 @@ def pdx_blocks(r):
 def case(p):
     r = '../'; s = p['slug']
     body = case_head(p, r)
-    if p['cat'] == 'interactive':
-        body += f'<div class="case-stage" data-name="Hero Playlist">{playlist(p, r, link=False)}</div>'
+    if False:
+        pass
     else:
         body += f'<div class="case-hero{" fit" if s in HERO_FIT and os.path.exists(f"/workspace/lauren-case-studies/mockups/{s}_hero-override.jpg") else ""}" data-name="Hero Mockup">{img(f"assets/img/{s}/hero.jpg", p["title"]+" — hero mockup", r, eager=True)}</div>'
     body += meta_row(p) + psr(p)
@@ -454,6 +458,11 @@ def case(p):
         g = leftbank_blocks(r)
     elif s == 'pdx-west':
         g = pdx_blocks(r)
+    elif s == 'big-pink':
+        import bigpink_blocks; g = bigpink_blocks.blocks(r, gsec, swatches, img_rows, ipad_viewer)
+    elif s == 'marketplace':
+        g = gsec(ipad_viewer('marketplace', 'Marketplace I & II', [f'scr/s{i:02d}.jpg' for i in range(1, 10)], r, p['note'], 'Ceros presentation', 'laptop'), 'The presentation',
+                 'Selected design screens from the Ceros pitch — introductions, market overview, competition, case studies and approach. Click through them on the laptop.')
     elif s == 'the-grid':
         import grid_blocks; g = grid_blocks.grid_blocks(r, gsec, swatches, img_rows)
     elif p['cat'] == 're' and s != 'fortis-net-lease':
