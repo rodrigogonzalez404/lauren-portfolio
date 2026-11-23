@@ -331,6 +331,31 @@ def madison_blocks(r):
             + gsec(f'<div class="gallery">{row(("book_mockup.jpg", "The printed offering memorandum"))}{row(("book_cover.jpg", "Front cover"), ("book_back.jpg", "Back cover"))}</div>', 'The printed book')
             + gsec(book, 'Inside the book', 'The reading sequence as an investor meets it — executive summary, the property, amenities and floor plans, then the market. Turn the pages.'))
 
+PACIFIC_PAL = [('Navy', '#212B3B'), ('Slate Blue', '#435774'), ('Taupe', '#D7CBC4'), ('Umber', '#583117'), ('White', '#FFFFFF')]
+def pacific_blocks(r):
+    """Pacific Center (Nov 23): like Nomad/Madison — swatches, the printed brochure, flip-book on the charcoal desk.
+    Portrait letter pages: the book is sized from data-w/data-h (850x1100) instead of the landscape default."""
+    I = 'assets/img/pacific-center/'
+    def row(*fs):
+        return '<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in fs) + '</div>'
+    seq = json.load(open(os.path.join(ROOT, '_src', 'pacific_flip.json')))
+    pages = ''
+    for i, e in enumerate(seq):
+        tag, f = e.split(':')
+        hard = ' data-density="hard"' if i in (0, len(seq) - 1) else ''
+        alt = {'cover': 'Front cover', 'back': 'Back cover'}.get(tag, 'Page ' + tag[1:])
+        num = {'cover': '01', 'back': '12'}[tag] if tag in ('cover', 'back') else f'{int(tag[1:]):02d}'
+        pages += f'<div class="fb-page" data-pg="{num}"{hard}><img alt="Pacific Center leasing brochure — {alt}" src="{r}{I}flip/{f}" draggable="false"></div>'
+    hint = '<span class="hd">Drag a page corner, click a page, or use the ← → keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
+    sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in PACIFIC_PAL)
+    ds = f'<div class="gallery"><div class="swatches">{sw}</div></div>'
+    book = f"""<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap tall"><div id="fb-book" class="fb-book" data-w="850" data-h="1100" data-total="12">{pages}</div></div>
+<div class="fb-controls"><button class="fb-btn" id="fb-prev" aria-label="Previous page">←</button><span class="mono fb-counter" id="fb-counter" aria-live="polite">Cover</span><button class="fb-btn" id="fb-next" aria-label="Next page">→</button></div>
+<div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div></div>"""
+    return (gsec(ds, 'Design system')
+            + gsec(f'<div class="gallery">{row(("book_mockup.jpg", "The printed leasing brochure, open on a table"))}{row(("book_cover.jpg", "Front cover"), ("book_back.jpg", "Back cover"))}</div>', 'The printed brochure')
+            + gsec(book, 'Inside the brochure', 'The reading sequence as a prospective tenant meets it — the building and its downtown setting, amenities, highlights, the neighborhood, then availabilities. Turn the pages.'))
+
 # Sheet stack (flyers): loose sheets on the desk; reusable — sheet_stack(slug, title, n, r)
 SHEET_JITTER = [(-1.6, -10, 6), (1.2, 12, -8), (-0.6, -4, -12), (2.0, 8, 10), (-2.2, -14, 2), (0.8, 4, 12), (-1.0, 10, -4), (1.6, -8, 8)]
 def sheet_stack(slug, title, n, r, note=''):
@@ -372,6 +397,8 @@ def case(p):
         g = nomad_blocks(r)
     elif s == 'madison-plaza':
         g = madison_blocks(r)
+    elif s == 'pacific-center':
+        g = pacific_blocks(r)
     elif s == 'leftbank':
         g = leftbank_blocks(r)
     elif s == 'pdx-west':
@@ -384,7 +411,7 @@ def case(p):
         g = gsec(gallery(s, imgs(s, 'g'), r, p['title'], wide_at=1.2), '', '', LOG.get(s, {}).get('note', ''))
     body += f'<section class="case-gallery white" data-name="Gallery"><div class="wrap cg8"><div class="cg-col">{g}</div></div></section>'
     body += next_block(p, r)
-    extra_js = '<script src="../assets/js/page-flip.browser.js"></script>\n' if s in ('nomad', 'madison-plaza') else ''
+    extra_js = '<script src="../assets/js/page-flip.browser.js"></script>\n' if s in ('nomad', 'madison-plaza', 'pacific-center') else ''
     page = head(f'{strip_ph(p["title"])} — Case Study — Lauren Gonzalez', r, strip_ph(first_sentence(p['summary']))) + nav(r, 'brand' if p['cat'] == 'brand' else 're') + body + footer(r)
     page = page.replace(f'<script src="{r}assets/js/site.js', extra_js + f'<script src="{r}assets/js/site.js')
     write(f'work/{s}.html', page)

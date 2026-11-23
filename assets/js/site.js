@@ -23,15 +23,19 @@
   // flip-book (Nomad): needs assets/js/page-flip.browser.js loaded first
   var el=document.getElementById('fb-book');
   if(el&&window.St){
-    var pf=new St.PageFlip(el,{width:1100,height:850,size:'stretch',minWidth:260,maxWidth:1100,minHeight:200,maxHeight:850,
+    var PW=+el.getAttribute('data-w')||1100, PH=+el.getAttribute('data-h')||850;   // page size; Pacific Center = portrait 850x1100
+    var pf=new St.PageFlip(el,{width:PW,height:PH,size:'stretch',minWidth:260,maxWidth:PW,minHeight:200,maxHeight:PH,
       showCover:true,usePortrait:true,maxShadowOpacity:0.45,flippingTime:900,mobileScrollSupport:false,drawShadow:true,autoSize:true});
     pf.loadFromHTML(el.querySelectorAll('.fb-page'));
     window.pageFlip=pf;
+    var PG=el.getAttribute('data-total')?[].map.call(el.querySelectorAll('.fb-page'),function(x){return x.getAttribute('data-pg')}):null, PT=el.getAttribute('data-total');
     var total=pf.getPageCount(), c=document.getElementById('fb-counter'), pv=document.getElementById('fb-prev'), nx=document.getElementById('fb-next');
     function pad2(x){return (x<10?'0':'')+x}
     function upd(){
       var i=pf.getCurrentPageIndex(), o=pf.getOrientation(), t;
       if(i===0) t='Cover'; else if(i===total-1) t='End';
+      else if(PG){var a=(o==='landscape')?((i%2===0)?i-1:i):i;   // printed page numbers from data-pg (Pacific Center)
+        t=(o==='landscape'&&a+1<total-1)?'Pages '+PG[a]+'–'+PG[a+1]+' / '+PT:'Page '+PG[a]+' / '+PT;}
       else if(o==='landscape'){var a=(i%2===0)?i-1:i; t='Pages '+pad2(a)+'–'+pad2(Math.min(a+1,total-2))+' / '+pad2(total-2);}
       else t='Page '+pad2(i)+' / '+pad2(total-2);
       el.classList.toggle('portrait',o==='portrait');

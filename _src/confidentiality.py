@@ -14,7 +14,7 @@ LOG = {
     blurred=['none (Rodrigo: "remove the blur" on the flip-book pages)'],
     omitted=['offering/price pages, financials, rent comps, contacts, page-04 offering table (nomad_om-spread.jpg not published)']),
  'the-grid': dict(note='Name and logo concepts shown as presented.', blurred=[], omitted=[]),
- 'pacific-center': dict(note=STD, blurred=[], omitted=['page 6 availabilities (suites, SF, rates)','page 7 broker contacts']),
+ 'pacific-center': dict(note='', blurred=['none — Nov 23 flip-book: all 12 printed pages checked; no pricing, rents or operating figures (availabilities = suite numbers + SF only)'], omitted=['nothing — cover, spreads pp. 2–11 and back cover (broker contacts readable: not financial) all shown']),
  'leftbank': dict(note=STD, blurred=['none — sheets 1–6 checked (Nov 20): no rents, prices, contacts or deal figures; only the 500–6,500+ SF space range'], omitted=['page 7 broker contacts (names, phones) — not in the sheet stack']),
  'madison-plaza': dict(note='Section 03 Financials (pages 24–33) is left out; contacts and deal figures elsewhere are blurred.',
     blurred=['p02 broker names, emails and phones','p07 offering bullets (price guidance, NOI, lender)','p08 operating text (opex, in-place vs market rents, NOI upside)','p10–11 ground-rent and MFTE savings text','p40 "Clears 3x in-place rent ($1,864/mo …)" line','back cover broker names, emails and phones'],

@@ -88,3 +88,10 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 - **Nomad.** The design-system crops (ds_*) and the [Type] line were removed; only the swatches remain.
 - **Wild Naturals.** The gallery follows Figma frame 12:2 (`FIG_ROWS` in build.py): full · pair · full · pair (inset, `.g-inset`) · full · full · full, at 1002 / 489+489 px at 1440.
 - **Removed:** Redmond Gateway and Portland Office Market Report (`content.UNPUBLISHED`). Their entries are kept in content.py/images.py/confidentiality.py as source, with no page, card, Next link or images.
+
+## Pacific Center (Nov 23) — like Nomad / Madison, as a brochure
+- Hero (poster mockup) and intro block unchanged. Below: Design system (swatches only: Navy #212B3B, Slate Blue #435774, Taupe #D7CBC4, Umber #583117, White, sampled from the pages) → The printed brochure (open-spread mockup on the shared cream + flat front/back cover) → Inside the brochure (flip-book on the charcoal desk).
+- Source PDF `source/extracted/PacificCenter-Flyer.pdf`: 7 letter pages; PDF 2–6 are two-page spreads exported squashed to half width. `_src/pacific_book.py` renders them from the vectors at 2× width (`pdftoppm -scale-to-x 3400 -scale-to-y 2200`, into `pages/pacific-center-brochure/`), which restores the true proportions, then splits them into printed pp. 2–11. Flip sequence = cover, pp. 2–11, back cover (12 pages). The old squashed p01–p05 gallery is gone.
+- Flip-book page size is now per book: `#fb-book data-w/data-h` (Pacific 850×1100 portrait; default 1100×850). `data-total` + `data-pg` on pages make the counter show printed page numbers ("Pages 02–03 / 12"). Nomad/Madison are unchanged. `.fb-wrap.tall` caps the portrait book at 1000px.
+- Open-spread mockup: `/workspace/mk/run.py pacific-book` (scenes/spread.jpg, quad `SPREAD`) → `mockups/pacific-center_brochure-spread.jpg` → `book_mockup.jpg`.
+- Confidentiality: no pricing, rents or operating figures anywhere (Availabilities = suite numbers + SF). All 12 pages shown, nothing blurred; back-cover broker contacts are readable (not financial). No disclaimer added.

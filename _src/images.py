@@ -46,7 +46,7 @@ RE={
  'kress-building':('kress-building','kress-building_brochure.jpg',[(1,[]),(2,[(0.068,0.866,0.175,0.897)]),(3,[]),(4,[]),(6,[]),(9,[])]),
  'pdx-west':('pdx-west-flyer',None,[]),  # sheets: _src/flyer_sheets.py; hero, card, mock_spread: _src/flyer_mockups.py
  'the-grid':('kirkland-405-brand','the-grid_lobby-sign.jpg',[(i,[]) for i in range(1,9)]),
- 'pacific-center':('pacific-center-flyer','pacific-center_poster.jpg',[(i,[]) for i in range(1,6)]),
+ 'pacific-center':('pacific-center-flyer','pacific-center_poster.jpg',[]),  # hero = poster mockup; brochure + flip-book: see _src/pacific_book.py (Nov 23)
  'leftbank':('leftbank-flyer','leftbank_flyer.jpg',[]),  # sheets for the stack: see _src/flyer_sheets.py
  'madison-plaza':('madison-plaza-om','madison-plaza_om-cover.jpg',[]),  # page gallery replaced by the Nomad-style book: see _src/madison_book.py
  'redmond-gateway':('redmond-assemblage-om','redmond-gateway_om-stack.jpg',[(1,[]),(2,[]),(6,[(0.035,0.24,0.315,0.43)]),(7,[(0.035,0.24,0.315,0.43)]),(14,[]),(15,[])]),  # parcel text names owners + lease dates -> blurred),
@@ -97,6 +97,7 @@ def main():
     # about / misc
     for f in ('about_portrait.jpg','about_educator.jpg'): save(Image.open(RD+f),'about',f.replace('about_',''))
     import madison_book; madison_book.main()
+    import pacific_book; pacific_book.main()
     import flyer_sheets; flyer_sheets.main()
     import madison_card; madison_card.main()   # Madison home/works card on the shared cream (hero stays Rodrigo's white original)
     import runpy; runpy.run_path(os.path.join(os.path.dirname(__file__),'desk_texture.py'))   # ui/desk-charcoal.jpg (OUT is wiped above)

@@ -26,8 +26,8 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Pacific Center
 
-- **Blurred:** nothing
-- **Omitted:** page 6 availabilities (suites, SF, rates); page 7 broker contacts
+- **Blurred:** none — Nov 23 flip-book: all 12 printed pages checked; no pricing, rents or operating figures (availabilities = suite numbers + SF only)
+- **Omitted:** nothing — cover, spreads pp. 2–11 and back cover (broker contacts readable: not financial) all shown
 
 ## The Leftbank Project
 
