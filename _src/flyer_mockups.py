@@ -118,4 +118,27 @@ def pdx():
     out(cv, 'pdx-west', 'mock_spread.jpg')
     import pdx_rodrigo_mockup; pdx_rodrigo_mockup.main()   # Rodrigo's mockup (Nov 23) replaces hero.jpg + card.jpg
 
+def mauzey():
+    # Mauzey Court OM (Nov 23): self-made print mockups on the textured pale stone, PDX-style.
+    # S = s01..s15 = PDF pages 1-6, 8-16 (p7 lease abstract omitted): S[0] cover, S[2] executive summary (price line blurred),
+    # S[4] investment highlights, S[5] tenant, S[11] regional map (PDF p13), S[14] back cover
+    S = sheets('mauzey-court')
+    k = W / 1024
+    # hero + card: the cover with a lifted corner over the back cover, kept inside the middle of the frame (the case hero is cropped to 16:9)
+    cv = surface(seed=5, light=(0.4, 0.2))
+    place(cv, S[14], rect(470 * k, 380 * k, 520 * k, 4.0), shadow=.6)
+    place(cv, S[0], rect(540 * k, 392 * k, 560 * k, -5.0), lift_corner=2, lift=42)
+    out(cv, 'mauzey-court', 'hero.jpg'); out(cv, 'mauzey-court', 'card.jpg')
+    # cover on its own, a second page underneath (The memorandum section)
+    cv = surface(seed=9)
+    place(cv, S[2], rect(498 * k, 372 * k, 540 * k, 3.0), shadow=.6)
+    place(cv, S[0], rect(532 * k, 400 * k, 565 * k, -6.5), lift_corner=2, lift=42)
+    out(cv, 'mauzey-court', 'mock_cover.jpg')
+    # three inside pages fanned out
+    cv = surface(seed=23, light=(0.5, 0.2))
+    place(cv, S[5], rect(700, 930, 1040, -7), shadow=.8)
+    place(cv, S[11], rect(1610, 930, 1040, 7), shadow=.8)
+    place(cv, S[4], rect(1155, 870, 1180, 1.5), lift_corner=2, lift=30)
+    out(cv, 'mauzey-court', 'mock_spread.jpg')
+
 if __name__ == '__main__': pdx()

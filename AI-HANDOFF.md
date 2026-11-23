@@ -187,3 +187,22 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
   1440×1080 → `assets/img/nomad/card.jpg` (images.py; home + works). Source is only ~1120 px wide. Nomad hero unchanged.
 - **Nov 23, 2:52 PM PT (Rodrigo t80u): "please ensure nothing is blur on this image"** — the phone paragraph blur on the
   Madison card is removed (`madison_card.BLUR = []`); recorded as an approved exception in confidentiality.py/CONFIDENTIALITY.md.
+
+## Big Pink card = OnePink on Dark Blue (Rodrigo t81u, published a92f4e4)
+- `bp_assets.navy_wordmark(W, H, logo_frac)` draws the hero treatment; `cards()` writes card-wide.jpg (2400×1350) and card.jpg
+  (1600×1200, wordmark 62% wide). The white marketing mockup stays inside the case page (material.jpg).
+
+## Mauzey Court replaces The Pointe; copy pass; Contact for career opportunities (Rodrigo t82u, Nov 23)
+- **8210 Mauzey Court** (`mauzey-court`, Digital Offering Memorandum, Hillsboro, OR, 2026) — source
+  `/workspace/uploads/MauzeyCourt-Hillsboro-OM.pdf` (identical to lauren-case-studies/source/extracted/). PDX treatment:
+  `flyer_sheets.py` renders sheets s01–s15 = PDF 1–6, 8–16 (p3 price/NOI line and p4 Price row blurred); `flyer_mockups.mauzey()`
+  makes hero/card (cover over back cover on textured stone), mock_cover, mock_spread; `build.mauzey_blocks` = design system
+  (MAUZEY_PAL + Rift/Proxima Nova line) → the memorandum (mockups + front/back) → iPad viewer with a black CONF screen for p7.
+- The Pointe at Bridgeport: in `content.UNPUBLISHED` (source entry, RE images config and pages kept; no page/card/link).
+- **No [[ ]] anywhere** in the built site. `RE_PH` is now empty; every RE case has its own Project/Solution (Pacific Center and
+  Madison written from their source PDFs this pass). Results only where sourced: The Grid, plus the approved Webflow brand
+  copy and Fortis. Empty Results hide the [03] block. Client = "Colliers", Role = "Graphic Designer" on every RE case.
+- Home Approach: label "[Approach]", heading + three steps written (content.HOME). About: the Colliers placeholder line removed.
+- **Contact rule changed (t82u overrides "Contact stays as is")**: page title "Get in Touch", CONTACT_LINE = career/opportunity
+  wording, RESUME_LINE "Résumé available on request — just send me a note.", buttons "Get in Touch" (mailto) + "Request My
+  Résumé" (mailto with subject). Footer everywhere: resume line + "Request My Résumé"; nav button "Get in Touch".

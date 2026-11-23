@@ -45,10 +45,11 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 - **Blurred:** p01 cover: "$1,035 Avg. Rent" only (Nov 23 — "75 Sites | 100% Occupied" now readable, cover + hero mockup); p04: lot-rent range "$949 to $1,236"; p05: rent-upside paragraph ("Current rents are at minimum 20% below market … turnover … projected at 31%"); p07: property tax figure
 - **Omitted:** PDF 14–15 Financial Overview (financial summary, rent roll) — replaced by a black "Confidential — financial information omitted" screen after the kept 03 divider; PDF 17 Rent Comparables — black screen after the kept 04 divider
 
-## The Pointe at Bridgeport
+## 8210 Mauzey Court
 
-- **Blurred:** none — Nov 23: p01 cover broker strip + hero mockup unblurred (front page)
-- **Omitted:** pages 5–6 demographics; page 9 broker contacts
+- **Blurred:** p03 executive summary headline line: price and 2027 NOI ("$5.65MM | 2027 NOI: …"); p04 property overview: Price row
+- **Shown on purpose:** cover and back cover with broker names, phones and emails (front pages are not confidential); p05 "$4M+ of tenant-funded improvements" highlight and p12 demographics (income) — not deal pricing, rents or operating figures; p10 Portland market overview incl. the market-wide average asking lease rate (published Colliers market data, not this property's rent)
+- **Omitted:** p07 Lease Abstract (base-rent schedule, NOI, tenant investment, escalations) — replaced by a black "Confidential — financial information omitted" screen in the iPad viewer
 
 ## Fortis Net Lease
 

@@ -17,19 +17,21 @@ HOME = dict(
     hero='Senior graphic designer turning commercial real estate strategy into marketing that wins listings.',
     intro='Hello to you, I am Lauren Elyse Gonzalez. 16 years of experience crafting strategic brand campaigns, packaging, and marketing assets that drive business growth.',
     re_intro='Leasing brochures, offering memorandums, branding, and digital marketing for commercial real estate — strategy and execution, from first concept to launch.',
-    re_note='Mockups use the original page artwork. Confidential deal data (pricing, income, rent rolls, fees, tenants) is excluded or blurred.',
-    approach_label='[[Approach]]',
-    approach='[[Placeholder: Strategy first, then craft — every piece is built to help brokers win the listing and move the deal.]]',
-    approach_steps=[('01','Position the asset','[[Placeholder: Translate the broker’s story — location, building, audience — into one clear message.]]'),
-                    ('02','Design the package','[[Placeholder: Flyers, brochures and investor offering packages built on a consistent, sharp system.]]'),
-                    ('03','Launch everywhere','[[Placeholder: Carry the listing across email, web, signage and presentation decks.]]')],
+    re_note='Mockups use the original page artwork. Confidential deal data (pricing, income, rent rolls, fees) is excluded or blurred.',
+    approach_label='[Approach]',
+    approach='Strategy first, then craft — every piece is built to help brokers win the listing and move the deal.',
+    approach_steps=[('01','Position the asset','I start with the broker’s story — the building, the location, the audience — and turn it into one clear message before a single page is designed.'),
+                    ('02','Design the package','Brochures, flyers and offering memorandums built on one sharp, consistent system, so dense facts read at a glance and every page feels like the same building.'),
+                    ('03','Launch everywhere','The identity then travels with the listing — from print to iPad, email, web, signage and pitch presentations — so the message lands the same way everywhere.')],
     interactive_title='Interactive Presentations',
-    interactive_intro='[[Placeholder: Click-through Ceros pitch experiences built for Colliers listing presentations — branding, positioning and marketing concepts for the building.]]',
+    interactive_intro='Click-through Ceros pitch presentations built for Colliers — branding, positioning and marketing concepts for the building.',
     brand_intro='These featured projects showcase a selection of clients, where I had the opportunity to bring their brand personalities to life, helping them connect with their target audience.',
     testimonial=('Lauren stands at the top of my list for a reliable, responsive, high quality, thoughtful, efficient, and strategic designer. The quality of her work is absolutely impeccable.','Taylor W.','VP Marketing, ClimbOn'),
 )
 EXPERTISE = ['Brand Identity','Packaging','Brand Strategy','Digital Design','Illustration','Marketing']
-CONTACT_LINE = 'If you’re interested in learning more about my services, discussing a potential project, or just want to chat about design and creativity, I’m here to listen.'
+CONTACT_LINE = 'Open to new opportunities in brand and real estate marketing design. Whether it’s a role, a collaboration or a conversation about design, I’d love to hear from you.'
+RESUME_LINE = 'Résumé available on request — just send me a note.'
+RESUME_MAILTO = 'mailto:laurenelysegonzalez@gmail.com?subject=R%C3%A9sum%C3%A9%20request'
 
 TESTIMONIALS = [
  ('Aaron C.','CEO + Co-Founder, Zulay Kitchen','Lauren creates beauty and professionalism with simple touches that go a long way. I’ve never accepted a completed design from Lauren that I did not like because she would never allow it! I highly recommend to have Lauren work on packaging or branding for you as they always do a great job.'),
@@ -46,22 +48,17 @@ STUDENTS = [
 ABOUT = dict(
     lead='As a Senior Graphic Designer with 16 years of experience, I have had the opportunity to craft strategic brand campaigns, packaging, and marketing assets that drive business growth primarily in the e-commerce and retail industries.',
     body='I specialize in brand identity design, brand strategy, packaging, surface pattern design, and creative direction, collaborating with teams to develop compelling visuals.',
-    colliers='[[Placeholder: A line on Lauren’s current role at Colliers — confirm wording with Lauren.]]',
+    colliers='',
     educator='In the process of creating and growing my own design business, I witnessed how many new designers struggled—not just with the business side, but also with the fundamentals of graphic design and branding. This inspired me to create 4 The Creatives, a platform dedicated to teaching essential design skills, brand identity, and the tools needed to grow a successful career. Through courses, workshops, and mentorship, I have had the opportunity to help thousands of creatives build confidence in both their work and their future.',
 )
 
 # ---------- PROJECTS ----------
 # cat: 're' | 'interactive' | 'brand'.  Images live in assets/img/<slug>/ :
 #   hero.jpg (mockup / lead image), card.jpg (optional, falls back to hero.jpg), p01.. (document pages), g01.. (gallery), s01.. (screens)
-RE_PH = dict(
-    project='[[Placeholder: One or two sentences on the property, the client team and what the piece had to do.]]',
-    solution=['[[Placeholder: The design approach — layout system, typography, photography and how the story is structured.]]',
-              '[[Placeholder: The deliverables — print, digital, signage — and how the system carries across them.]]'],
-    results='[[Placeholder: Outcome to be confirmed by Lauren / Colliers — do not invent metrics.]]',
-)
+RE_PH = dict(project='', solution=[], results='')   # Nov 23 (t82u): no placeholders; every published RE case sets its own Project/Solution; Results only where sourced (The Grid)
 def re_proj(slug, title, typ, place, year, summary, home=True, pages_title='The pages', pages_intro='Selected pages from the piece.'):
-    return dict(slug=slug, title=title, cat='re', type=typ, place=place, year=year, client='Colliers <span class="muted">[[team — confirm]]</span>',
-                role='[[Lauren to confirm]]', summary=summary, home=home, pages_title=pages_title, pages_intro=pages_intro, **RE_PH)
+    return dict(slug=slug, title=title, cat='re', type=typ, place=place, year=year, client='Colliers',
+                role='Graphic Designer', summary=summary, home=home, pages_title=pages_title, pages_intro=pages_intro, **RE_PH)
 
 PROJECTS = [
  dict(re_proj('pdx-west','PDX West Logistics Center','Digital Leasing Brochure','Portland, OR','2026','A digital leasing brochure for a 938,000 SF Class A distribution building on Portland’s Airport Way.'),
@@ -73,24 +70,28 @@ PROJECTS = [
       solution=['A landscape brochure in deep Kress green and warm parchment, with a single rust-orange accent kept for the message brokers must not miss. Cinzel’s inscriptional capitals give the headlines the presence of a landmark, Proxima Nova keeps every fact clean and modern, and a line-drawn rosette medallion — repeated large and tonal behind the cover — carries the identity from the first page to the last.',
                 'The pages read the way a tenant tours: the cover leads with three reasons to call — one block from the future James Beard Market, a well-capitalized local ownership group, a 10,000 SF spec suite under construction — then “A Landmark Redefined” sets out the renovation and the availability, a full-bleed street view declares “Where Business Moves”, two numbered maps prove the neighborhood and the parking, and floor plans for both floors plus a designed spec-suite layout close the case.']),
  dict(slug='nomad', title='Nomad', cat='re', type='Investor Offering Package', place='Overlook, North Portland, OR', year='2026', home=True,
-      client='Colliers <span class="muted">[[team — confirm]]</span>', role='[[Lauren to confirm]]',
-      summary='[[An investor offering package that sells a North Portland apartment community through bold colour, editorial photography and clear market storytelling.]]',
+      client='Colliers', role='Graphic Designer',
+      summary='An investor offering package that sells a North Portland apartment community through bold colour, editorial photography and clear market storytelling.',
       project='Nomad is an apartment community in North Portland’s Overlook neighborhood, brought to market by Colliers as an investment sale. The offering package had to give institutional and private investors a fast, credible read on the property, the neighborhood and the Portland market — and make the opportunity stand out in a crowded deal pipeline.',
       solution=['A landscape document organized into five numbered chapters — Investment Summary, Property Description, Market Overview, The Comparables and The Financials. Each chapter opens on a full-bleed photograph washed in a red-to-yellow colour gradient, with a charcoal chapter tab and an oversized italic numeral.',
-                'A tight system carries every page: heavy italic display type and orange headlines in outlined title boxes, a four-colour palette of signal red, orange, sun yellow and charcoal, diagonal hatch accents, a consistent icon set, a custom site plan, neighborhood and access maps, and charts drawn in the same palette so market data reads at a glance.'],
-      results='[[Placeholder: outcome — launch, investor interest, tours or sale — to be confirmed by Lauren / Colliers. The document itself states no results.]]',
-      draft_note='[[Draft copy written from the document — Lauren to review]]'),
+                'A tight system carries every page: heavy italic display type and orange headlines in outlined title boxes, a four-colour palette of signal red, orange, sun yellow and charcoal, diagonal hatch accents, a consistent icon set, a custom site plan, neighborhood and access maps, and charts drawn in the same palette so market data reads at a glance.'],),
  dict(re_proj('the-grid','The Grid (Kirkland 405)','Naming & Brand Identity','Kirkland, WA','2025','A name and identity for a Kirkland office building, repositioned for the region’s innovation economy.'),
       project='Kirkland 405 is an office building in Kirkland, Washington, being repositioned to attract dynamic, innovation-focused tenants from the region’s growing ecosystem of AI, healthcare and creative technology companies. The Colliers team needed a name and an identity to lead that story — one that would feel modern, connected and tech-driven, and tie the building to the broader Kirkland and Seattle innovation story.',
       solution=['A naming study that developed three names — The Grid, Stage One and The Pulse — all the way to a logo, each with its own mark, five key messages, the reasoning behind the name, and the mark shown in place on an exterior blade sign and a lobby feature wall. Every route shares one restrained presentation system, a single cool grey on warm stone with light Open Sans, so the client compares ideas, not styling.',
                 'The Grid is a nod to both the tech infrastructure that powers innovation and the urban connectivity of Seattle. Its mark pairs two offset, open square frames — a plan of connected space — with a light geometric wordmark whose open letters echo the gaps in the frames. Drawn as simple line work, it translates directly into dimensional letters, reverses cleanly onto dark panels, and reduces to the two frames alone.'],
       results='The client chose The Grid as the building’s name and logo. In their feedback it stood out immediately as modern, connected and tech-driven — the right direction for repositioning the property for innovation-focused tenants — and they called the full set of concepts a strong creative foundation for telling the building’s story.'),
- re_proj('pacific-center','Pacific Center','Leasing Brochure','Portland, OR','2026','[[Placeholder: A leasing brochure for a downtown Portland office tower.]]'),
+ dict(re_proj('pacific-center','Pacific Center','Leasing Brochure','Portland, OR','2026','A leasing brochure for a Class A office tower half a block from Pioneer Courthouse Square.'),
+      project='Pacific Center at 851 SW Sixth Avenue is a Class A office tower in the heart of downtown Portland’s Central Business District — half a block from Pioneer Courthouse Square, directly on the MAX light rail and bus mall, and owned and managed by Schnitzer Properties. Colliers needed a leasing brochure to market suites from about 1,300 SF to nearly 16,000 SF to tenants and their brokers, and to show a building with the amenities of a modern workplace at one of the city’s most connected addresses.',
+      solution=['A tall-format brochure in deep navy with warm taupe panels: light, widely spaced Gotham capitals for the headlines, Adobe Caslon for the text, and a slim vertical folio running down each page edge. Photography leads every spread — the tower, the atrium lobby, the new employee lounge, the fitness center — framed by navy margins so the building always reads first.',
+                'The spreads move from the building to the street: the cover and the downtown story, the amenities, the highlights in a grid of line icons, then the neighborhood — walk, transit and bike scores of 99, 97 and 94 over a map of restaurants, shops and culture — before the availabilities, a sample floor plan with a spec furniture layout, and the leasing team on the back cover.']),
  dict(re_proj('leftbank','The Leftbank Project','Digital Leasing Brochure','Portland, OR','2026','A digital leasing brochure for a historic creative-office block in the heart of Albina.'),
       project='The Leftbank Building at 240 N Broadway is a 1923 A.E. Doyle design and one of only three remaining original buildings from Portland’s Albina neighborhood — a former warehouse whose nearly 100-year history runs through hospitality, manufacturing and music, including the Dude Ranch jazz club. Colliers needed a digital leasing brochure to market office and creative spaces from 500 to 6,500+ SF to tenants and their brokers: lead with the character of a seismically retrofitted landmark, and show a neighborhood on the rise.',
       solution=['A landscape brochure that lets the building’s own materials carry it: brick, timber, vaulted ceilings and oversized windows in full-bleed photography, framed by black panels and a burnt-orange accent drawn from the brick. Corsario’s warm serif headlines give it a sense of history, Open Sans keeps the details plain, and a row of simple line icons turns the six key amenities — seismic retrofit, the warehouse-to-office conversion, an on-site café, Energy Star certification, the ceilings and windows, and transit, bike and parking access — into a scannable strip.',
                 'The pages move from the building outward: the cover and its amenity strip, the history spread, the spaces, a local-amenities map with bike and transit scores of 95 and 81, then an aerial of Lower Albina that maps the revitalization around the block — Albina Vision Trust, the I-5 Rose Quarter project, the Moda Center renovation and Lloyd Center redevelopment — before closing on the street view and the leasing team.']),
- re_proj('madison-plaza','Madison Plaza','Investor Offering Package','Kent, WA','2026','An investor offering package for a 157-unit apartment community next to Kent Station.'),
+ dict(re_proj('madison-plaza','Madison Plaza','Investor Offering Package','Kent, WA','2026','An investor offering package for a 157-unit apartment community next to Kent Station.'),
+      project='Madison Plaza is a 157-unit apartment community built in 2022 at 102 Madison Avenue in downtown Kent, Washington, with ground-floor retail and the Kent Sounder Station next door. Colliers’ Capital Markets Group was bringing it to market as a core-plus investment and needed an offering memorandum that would make the case for its embedded revenue upside — transit access, a growing South King County economy and a renter base drawn to downtown Kent.',
+      solution=['A landscape memorandum in raspberry and plum charcoal on white, set entirely in Montserrat — thin, wide capitals for the headlines with the key words picked out in bold raspberry — and led by bright photography of the new building and its interiors. A numbered contents spread sets up four sections: Executive Summary, The Property, The Financials and The Market.',
+                'A consistent system keeps a data-heavy document readable: a clean offering-summary table, maps that place the property between Seattle, the airport and the Kent Valley industrial core, transit and connectivity tables, oversized figures for the region’s growth and its renters, and “The Kent Advantage”, which sets each fact beside what it means and why it matters.']),
  re_proj('redmond-gateway','Redmond Gateway','Investor Offering Package','Redmond, WA','2026','[[Placeholder: An offering memorandum for a two-parcel development site in downtown Redmond.]]'),
  dict(re_proj('springwood','Springwood of Beaverton','Digital Offering Memorandum','Beaverton, OR','2026','A digital offering memorandum for a 55+ manufactured-home community in Beaverton.'),
       project='Springwood of Beaverton is an age-restricted (55+) manufactured-home community on 14.57 acres in Washington County: 74 multi-section homes and one apartment attached to the clubhouse, 100% occupied and made up entirely of tenant-owned homes. Colliers was taking it to market through a call for offers, and needed an offering memorandum that would give investors the full picture — the asset, its value-add story and its location near some of Oregon’s largest employers — in a document as orderly as the community itself.',
@@ -100,13 +101,18 @@ PROJECTS = [
  re_proj('portland-office-market-report','Portland Office Market Report Q1 2026','Market Report','Portland, OR','2026','[[Placeholder: Design of Colliers’ quarterly Portland office market report.]]',
          pages_intro='Cover and contents. The data pages are left out of this portfolio [[— confirm whether the published report can be shown in full]].'),
 ]
+PROJECTS.append(dict(re_proj('mauzey-court','8210 Mauzey Court','Digital Offering Memorandum','Hillsboro, OR','2026','A digital offering memorandum for a fully leased flex/industrial building in Hillsboro’s tech corridor.'),
+      project='8210 Mauzey Court is a 20,000 SF flex/industrial building in Hillsboro, Oregon, 100% leased to True Terpenes — a flavor and terpene manufacturer whose 2021 buildout added high-end offices, production areas, clean rooms and a fully climate-controlled warehouse. Colliers was bringing it to market as an investment sale and needed an offering memorandum that would show investors a turnkey, mission-critical asset in one of the region’s strongest tech submarkets, home to Intel, Tokyo Electron and ASML.',
+      solution=['A landscape memorandum in deep teal and seafoam, with Rift’s tall, condensed capitals for the headlines and Proxima Nova for the text. Full-bleed aerials and interior photography sit beside solid colour panels, while small dot grids, thin rules and outlined circles give the pages a precise, technical rhythm that suits a clean-room manufacturer.',
+                'The document reads the way an investor works through a deal: the executive summary and property overview, six investment highlights with line icons, the tenant and the lease, a photo tour of the offices, production floor and warehouse, then the market — Portland and Washington County industrial data charted in the same palette — demographics, and three maps that prove regional, national and local access, before closing on the building and the brokers.']))
 fc=BRAND_COPY['fortis-net-lease']
-PROJECTS.append(dict(slug='fortis-net-lease', title='Fortis Net Lease', cat='re', type='Marketing Design', place='[[National]]', year=fc['year'], home=False,
+PROJECTS.append(dict(slug='fortis-net-lease', title='Fortis Net Lease', cat='re', type='Marketing Design', place='', year=fc['year'], home=False,
      client=fc['client'], industry=fc['industry'], service=fc['service'], role=None,
      summary=fc['project'], project=fc['project'], solution=fc['solution'], results=' '.join(fc['results']), gallery_title='Selected work'))
 
 # Nov 23 (Rodrigo): removed from the site. Entries kept above as source; not published (no page, card, nav or Next link).
-UNPUBLISHED = {'redmond-gateway', 'portland-office-market-report', 'marketplace'}   # marketplace: removed Nov 23 PM (Rodrigo t78u)
+UNPUBLISHED = {'redmond-gateway', 'portland-office-market-report', 'marketplace', 'pointe-at-bridgeport'}   # pointe: replaced by Mauzey Court Nov 23 (Rodrigo t82u)
+#   # marketplace: removed Nov 23 PM (Rodrigo t78u)
 PROJECTS = [p for p in PROJECTS if p['slug'] not in UNPUBLISHED]
 
 CEROS = [
@@ -134,6 +140,7 @@ CEROS = [c for c in CEROS if c['slug'] not in UNPUBLISHED]
 ALL = PROJECTS + CEROS + BRAND   # case-page order (also drives "Next project")
 
 # Big Pink copy (Nov 23; leads with OnePink — never say the client chose it; Colliers did not win, so no Results) — written from the Ceros presentation and Lauren's logo-concepts deck
+for _p in PROJECTS: _p.setdefault('results', '')   # Results only where sourced (t82u)
 for c in CEROS:
     if c['slug'] == 'big-pink':
         c.update(project='Big Pink — the U.S. Bancorp Tower at 111 SW 5th Avenue, “the icon of downtown Portland” — had a new owner, who called owning it “deeply meaningful” and “also a responsibility.” Colliers pitched to lead the building’s leasing and marketing with an interactive presentation that had to show the tower “seen from a new angle”: its story, the market and the competition, and a marketing approach bold enough to reposition a landmark — down to a possible new name.',

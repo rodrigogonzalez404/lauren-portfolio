@@ -52,7 +52,7 @@ def nav(r, cur=''):
         return f'<a class="nav-t" href="{r}{href}"{" aria-current=\"page\"" if key == cur else ""}>{name}</a>'
     return f'''<header class="nav" data-name="Nav"><a class="brand" href="{r}index.html"><b>{SITE_NAME}</b><span class="mono-s muted">{NAV_SUB}</span></a>
 <button class="menu-btn mono-s" aria-expanded="false" aria-controls="site-links"><span>Menu</span></button>
-<nav class="links" id="site-links">{l("works.html#real-estate","Real Estate","re")}{l("works.html#brand","Brand &amp; Ecommerce","brand")}{l("about.html","About","about")}{l("contact.html","Contact","contact")}<a class="btn sm pri" href="{r}contact.html">Let’s Get to Work <span aria-hidden="true">→</span></a></nav></header>
+<nav class="links" id="site-links">{l("works.html#real-estate","Real Estate","re")}{l("works.html#brand","Brand &amp; Ecommerce","brand")}{l("about.html","About","about")}{l("contact.html","Contact","contact")}<a class="btn sm pri" href="{r}contact.html">Get in Touch <span aria-hidden="true">→</span></a></nav></header>
 <main id="main">'''
 def btn(t, href, k='pri', arrow='→', extra=''):
     return f'<a class="btn {k}{extra}" href="{href}">{t} <span aria-hidden="true">{arrow}</span></a>'
@@ -62,7 +62,8 @@ def footer(r, line=None):
 <footer class="foot dark" data-name="Footer CTA">
 <div class="g12"><span class="mono muted c1-4">[Contact]</span>
 <p class="m c4-13">{T(line)}</p>
-<div class="c4-13 btns mt40">{btn("Let’s Get to Work", r+"contact.html", "ond")}{btn(EMAIL, "mailto:"+EMAIL, "sec", "↗", " long")}</div></div>
+<p class="bm muted c4-13 mt24">{T(RESUME_LINE)}</p>
+<div class="c4-13 btns mt40">{btn("Request My Résumé", RESUME_MAILTO, "ond", "↗")}{btn(EMAIL, "mailto:"+EMAIL, "sec", "↗", " long")}</div></div>
 <a class="big" href="{r}contact.html" aria-label="Contact"><span>Contact</span><span aria-hidden="true">↗</span></a>
 <div class="bottom"><a class="mono" href="mailto:{EMAIL}">[Contact] {EMAIL}</a><a class="mono" href="{LINKEDIN}" target="_blank" rel="noopener">[Social] LinkedIn ↗</a><span class="mono muted">©2026 All rights reserved.</span></div></footer>
 <script src="{r}assets/js/site.js?v={_v('assets/js/site.js')}"></script>
@@ -79,7 +80,7 @@ def short_type(p):
     if p['cat'] == 'brand': return ', '.join(p['service'].split(', ')[:2])
     return p['type']
 def card(p, r, ratio='', small=False, src=None):
-    sub = f'{T(short_type(p))} · {T(p["place"])}' if p['cat'] != 'brand' else T(short_type(p))
+    sub = (f'{T(short_type(p))} · {T(p["place"])}' if p.get('place') else T(short_type(p))) if p['cat'] != 'brand' else T(short_type(p))
     return f'''<a class="card" href="{r}work/{p["slug"]}.html" data-name="Project Card / {E(p["title"])}"><div class="ph {ratio}">{img(src or card_img(p["slug"]), p["title"]+" — project image", r)}</div>
 <div class="meta"><div class="col"><span class="s{' sm' if small else ''}">{E(p["title"])}</span><span class="mono{'-s' if small else ''} muted">{sub}</span></div><span class="mono{'-s' if small else ''}">{T(p["year"])}</span></div></a>'''
 def playlist(p, r, link=True):
@@ -118,7 +119,7 @@ def home():
 <div class="grid2 mt64">{card(R["the-grid"], r)}{card(R["pacific-center"], r)}</div>
 <div class="mt64">{card(R["madison-plaza"], r, "r169", src="assets/img/madison-plaza/card-wide.jpg")}</div>
 <div class="grid2 mt64">{card(R["leftbank"], r)}{card(R["nomad"], r)}</div>
-<div class="grid2 mt64">{card(R["springwood"], r)}{card(R["pointe-at-bridgeport"], r)}</div>
+<div class="grid2 mt64">{card(R["springwood"], r)}{card(R["mauzey-court"], r)}</div>
 <div class="row mt64" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px"><p class="mono-s muted">{T(H["re_note"])}</p>{btn("All Real Estate work", "works.html#real-estate", "sec")}</div>
 </section>
 
@@ -167,8 +168,8 @@ def about():
 <div class="g12 mt96"><div class="c1-6">{img("assets/img/about/portrait.jpg", "Lauren Elyse Gonzalez", r, eager=True)}</div>
 <div class="c7-13 col"><p class="s">{T(A["lead"])}</p>
 <p class="bl muted mt24">{T(A["body"])}</p>
-<p class="bl muted mt24">{T(A["colliers"])}</p>
-<div class="mt40">{btn("Let’s Get to Work", "contact.html")}</div></div></div></section>
+{f'<p class="bl muted mt24">{T(A["colliers"])}</p>' if A["colliers"] else ''}
+<div class="mt40">{btn("Get in Touch", "contact.html")}</div></div></div></section>
 <section class="dark wrap sec" data-name="Expertise"><div class="g12"><span class="mono muted c1-4">[Expertise]</span><p class="l c4-13">{" · ".join(EXPERTISE)}</p></div></section>
 <section class="wrap sec" data-name="From Clients"><div class="sec-head"><h2 class="xl">From Clients</h2><span class="mono muted">({len(TESTIMONIALS):02d})</span></div>
 <div class="quotes">{"".join(quote(*t) for t in TESTIMONIALS[:3])}</div>
@@ -186,13 +187,14 @@ def contact():
     r = ''
     b = head('Contact — Lauren Gonzalez', r) + nav(r, 'contact') + f'''
 <section class="wrap case-cover" style="padding-bottom:var(--sec)" data-name="Contact Hero"><span class="mono muted">[Contact]</span>
-<h1 class="xxl mt24">Let’s Get<br>to Work</h1>
+<h1 class="xxl mt24">Get in<br>Touch</h1>
 <div class="g12 mt96"><p class="l c1-8">{T(CONTACT_LINE)}</p>
 <div class="c9-13 col contact-list">
 <div><span class="mono-s muted">[Contact]</span><a class="s" href="mailto:{EMAIL}" style="word-break:break-all">{EMAIL}</a></div>
 <div><span class="mono-s muted">[Social]</span><a class="s" href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+<div><span class="mono-s muted">[Résumé]</span><span class="bm">{T(RESUME_LINE)}</span></div>
 <div><span class="mono-s muted">[Expertise]</span><span class="bm">{" · ".join(EXPERTISE)}</span></div></div></div>
-<p class="mono-s muted mt64">{ph("[[Placeholder: a contact form can be added later (GitHub Pages is static — it needs a form service such as Formspree). Until then, email is the contact method.]]")}</p></section>
+<div class="btns mt64">{btn("Get in Touch", "mailto:"+EMAIL, "pri", "↗")}{btn("Request My Résumé", RESUME_MAILTO, "sec", "↗")}</div></section>
 ''' + footer(r, EMAIL)
     write('contact.html', b)
 
@@ -260,7 +262,7 @@ def psr(p):
     sol = ''.join(f'<p class="bl">{T(s)}</p>' for s in p['solution'])
     note = f'<p class="mono-s muted draft">{T(p["draft_note"])}</p>' if p.get('draft_note') else ''
     # an empty results string hides the [03] block entirely (Big Pink: a pitch, no outcome to report)
-    res = f'''<div class="blk"><div class="lab"><span class="mono muted">[03]</span><span class="s">Results</span></div><div class="txt"><p class="{'m' if len(strip_ph(p['results'])) < 220 else 's'}">{T(p["results"])}</p></div></div>''' if p['results'].strip() else ''
+    res = f'''<div class="blk"><div class="lab"><span class="mono muted">[03]</span><span class="s">Results</span></div><div class="txt"><p class="{'m' if len(strip_ph(p.get('results', ''))) < 220 else 's'}">{T(p.get("results", ""))}</p></div></div>''' if p['results'].strip() else ''
     return f'''<section class="dark psr" data-name="Project / Solution / Results">{note}
 <div class="blk"><div class="lab"><span class="mono muted">[01]</span><span class="s">Project</span></div><div class="txt"><p class="s">{T(p["project"])}</p></div></div>
 <div class="blk"><div class="lab"><span class="mono muted">[02]</span><span class="s">Solution</span></div><div class="txt">{sol}</div></div>
@@ -432,6 +434,17 @@ def pdx_blocks(r):
             + gsec(f'<div class="gallery">{row(("mock_spread.jpg", "Three inside pages of the brochure fanned out on a table"), ("mock_cover.jpg", "The brochure cover, with a second page underneath"))}{row(("sheets/s01.jpg", "Front page"), ("sheets/s07.jpg", "Back page"))}</div>', 'The brochure')
             + gsec(ipad_viewer('pdx-west', 'PDX West Logistics Center', [f'sheets/s{i:02d}.jpg' for i in range(1, 8)], r, LOG['pdx-west']['note']), 'Inside the brochure', 'Seven pages, in the order a tenant or broker reads them — the building, its specifications and site plan, the submarket, then access, workforce and reach. Swipe through them on the iPad.'))
 
+MAUZEY_PAL = [('Deep Teal', '#004E61'), ('Teal', '#00666D'), ('Aqua', '#00A195'), ('Seafoam', '#9FDDC5'), ('White', '#FFFFFF')]
+def mauzey_blocks(r):
+    # sheets s01..s15 = PDF pages 1-6, 8-16 (flyer_sheets.py); PDF p7 lease abstract (rent schedule, NOI) -> black screen
+    f = [f'sheets/s{i:02d}.jpg' for i in range(1, 16)]
+    files = f[:6] + [('CONF', 'Lease Abstract · page 7')] + f[6:]
+    return (gsec(swatches(MAUZEY_PAL), 'Design system', 'Rift Bold, tall and condensed, for the headlines; Proxima Nova for the text.')
+            + gsec(img_rows('mauzey-court', [[('mock_spread.jpg', 'Three inside pages of the memorandum fanned out on a table'), ('mock_cover.jpg', 'The memorandum cover, with a second page underneath')],
+                                             [('sheets/s01.jpg', 'Front cover'), ('sheets/s15.jpg', 'Back cover')]], r), 'The offering memorandum')
+            + gsec(ipad_viewer('mauzey-court', '8210 Mauzey Court', files, r, LOG['mauzey-court']['note'], 'offering memorandum'), 'Inside the memorandum',
+                   'Sixteen pages, in the order an investor reads them — the asset and its highlights, the tenant, the building, the market, demographics and access. The lease abstract stays confidential. Swipe through it on the iPad.'))
+
 def case(p):
     r = '../'; s = p['slug']
     body = case_head(p, r)
@@ -454,6 +467,8 @@ def case(p):
         g = leftbank_blocks(r)
     elif s == 'pdx-west':
         g = pdx_blocks(r)
+    elif s == 'mauzey-court':
+        g = mauzey_blocks(r)
     elif s == 'big-pink':
         import bigpink_blocks; g = bigpink_blocks.blocks(r, gsec, swatches, img_rows, ipad_viewer)
     elif s == 'marketplace':
@@ -484,6 +499,7 @@ if __name__ == '__main__':
         if slug in UNPUBLISHED: continue
         md.append(f"## {BY[slug]['title'] if slug in BY else slug}\n")
         md.append('- **Blurred:** ' + ('; '.join(d.get('blurred') or []) or 'nothing') )
+        if d.get('shown'): md.append('- **Shown on purpose:** ' + '; '.join(d['shown']))
         if d.get('exception'): md.append('- **Approved exception:** ' + d['exception'])
         md.append('- **Omitted:** ' + ('; '.join(d.get('omitted') or []) or 'nothing') + '\n')
     md.append('## Brand & Ecommerce (Aafayaa, Abundant Earth, Wild Naturals, TokSuite, Farm & Bee, Zulay Kitchen, CGK Unlimited)\n')
