@@ -170,13 +170,22 @@ def put_device(cv, dev, cx, cy, shadow=1.0):
     return cv
 
 def kress():
-    """Kress Building hero + card (Nov 24, Lauren via Rodrigo t94u): PDX-style self-made print mockup on the textured stone,
+    """Kress Building hero + card (Nov 24, Lauren via Rodrigo t94u/t96u): PDX-style self-made print mockup on the textured stone,
     a different composition: the printed cover over the back cover on the left, the tablet with the availability page on the right.
-    Uses Lauren's own pages p01/p02/p10 (unblurred: public record, approved exception)."""
+    card.jpg = 4:3 (Home/Works). hero.jpg = the SAME composition on a wider 16:9 stone canvas, so the case hero (16:9, cover-cropped)
+    shows it whole (t96u: no crop of the back cover). Uses Lauren's own pages p01/p02/p10 (unblurred: public record, approved exception)."""
+    global W, H
     P = lambda n: Image.open(os.path.join(ROOT, 'assets', 'img', 'kress-building', f'p{n:02d}.jpg')).convert('RGB')
-    k = W / 1024
-    cv = surface(seed=13, light=(0.35, 0.2))
-    place(cv, P(10), rect(395 * k, 345 * k, 400 * k, 7.0), shadow=.6)                      # back cover, behind
-    place(cv, P(1), rect(345 * k, 410 * k, 450 * k, -4.0), lift_corner=2, lift=40)            # front cover, corner lifted
-    put_device(cv, tablet(P(2), 330 * k, 2.5), 768 * k, 430 * k)                               # tablet on the right, clear of the cover title
-    out(cv, 'kress-building', 'hero.jpg'); out(cv, 'kress-building', 'card.jpg')
+    k = 2304 / 1024
+    for name, (cw, ch) in (('card.jpg', (2304, 1728)), ('hero.jpg', (3072, 1728))):
+        W0, H0 = W, H; W, H = cw, ch
+        try:
+            cv = surface(seed=13, light=(0.35, 0.2))
+        finally:
+            W, H = W0, H0
+        dx = (cw - 2304) / 2
+        place(cv, P(10), rect(395 * k + dx, 345 * k, 400 * k, 7.0), shadow=.6)                      # back cover, behind
+        place(cv, P(1), rect(345 * k + dx, 410 * k, 450 * k, -4.0), lift_corner=2, lift=40)            # front cover, corner lifted
+        put_device(cv, tablet(P(2), 330 * k, 2.5), 768 * k + dx, 430 * k)                               # tablet on the right, clear of the cover title
+        if name == 'hero.jpg': cv = cv.resize((2400, 1350), Image.LANCZOS)
+        out(cv, 'kress-building', name)

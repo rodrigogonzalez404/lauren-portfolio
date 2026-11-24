@@ -215,3 +215,4 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 - Hero + card = `flyer_mockups.kress()` (also run by flyer_sheets.main()): PDX-style self-made print mockup on the textured stone.
   The cover sits over the back cover on the left, and a code-drawn tablet (`tablet()` + `put_device()`) shows p02 on the right. The old booklet
   scene mockup (`mockups/kress-building_brochure.jpg`) is retired.
+- t96u: the case hero is the same composition as the card, rendered on a 16:9 stone canvas (nothing cropped). `img()` now adds `?v=<md5>` to image URLs.

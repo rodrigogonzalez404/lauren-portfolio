@@ -30,7 +30,7 @@ def size(rel):
     with Image.open(os.path.join(ROOT, rel)) as im: return im.size
 def img(rel, alt, r, cls='', eager=False):
     w, h = size(rel)
-    return f'<img src="{r}{rel}" alt="{html.escape(alt)}" width="{w}" height="{h}" decoding="async"{f" class={chr(34)}{cls}{chr(34)}" if cls else ""}>'
+    return f'<img src="{r}{rel}?v={_v(rel)}" alt="{html.escape(alt)}" width="{w}" height="{h}" decoding="async"{f" class={chr(34)}{cls}{chr(34)}" if cls else ""}>'
 def card_img(slug):
     return f'assets/img/{slug}/card.jpg' if os.path.exists(os.path.join(IMG, slug, 'card.jpg')) else f'assets/img/{slug}/hero.jpg'
 
