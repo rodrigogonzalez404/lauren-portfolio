@@ -1,7 +1,7 @@
 """Sheet-stack assets for flyers (Leftbank, PDX West). Run: python3 _src/flyer_sheets.py
 Renders the flyer PDF fresh at 200 dpi (landscape letter -> 2200x1700) and saves sheets/s01..s06.jpg (2000px wide).
 Leftbank page 7 = broker contacts -> omitted. Sheets 1-6 checked: no rents, prices, contacts or deal figures -> no blurs.
-PDX West: pages 1-9 shown (p1 broker strip blurred), page 10 = back cover with broker contacts -> omitted. No pricing anywhere."""
+PDX West: sheets s01-s08 = PDF 1,2,3,5,6,8,9,10; the viewer shows s01,s02,s04-s08 (Nov 24). No pricing anywhere."""
 import os, subprocess, tempfile, glob
 from PIL import Image
 from images import save, blur

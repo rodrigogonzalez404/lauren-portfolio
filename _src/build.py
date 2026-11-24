@@ -432,7 +432,7 @@ def pdx_blocks(r):
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in PDX_PAL)
     return (gsec(f'<div class="gallery"><div class="swatches">{sw}</div></div>', 'Design system')
             + gsec(f'<div class="gallery">{row(("mock_spread.jpg", "Three inside pages of the brochure fanned out on a table"), ("mock_cover.jpg", "The brochure cover, with a second page underneath"))}{row(("sheets/s01.jpg", "Front page"), ("sheets/s07.jpg", "Back page"))}</div>', 'The brochure')
-            + gsec(ipad_viewer('pdx-west', 'PDX West Logistics Center', [f'sheets/s{i:02d}.jpg' for i in range(1, 8)], r, LOG['pdx-west']['note']), 'Inside the brochure', 'Seven pages, in the order a tenant or broker reads them — the building, its specifications and site plan, the submarket, then access, workforce and reach. Swipe through them on the iPad.'))
+            + gsec(ipad_viewer('pdx-west', 'PDX West Logistics Center', [f'sheets/s{i:02d}.jpg' for i in (1, 2, 4, 5, 6, 7, 8)], r, LOG['pdx-west']['note']), 'Inside the brochure', 'Seven pages, in the order a tenant or broker reads them — the building and its specifications, the submarket, access, workforce and reach, then the leasing team on the back cover. Swipe through them on the iPad.'))
 
 MAUZEY_PAL = [('Deep Teal', '#004E61'), ('Teal', '#00666D'), ('Aqua', '#00A195'), ('Seafoam', '#9FDDC5'), ('White', '#FFFFFF')]
 def mauzey_blocks(r):

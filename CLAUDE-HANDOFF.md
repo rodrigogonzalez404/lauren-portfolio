@@ -175,7 +175,7 @@ ruled meta row → dark [01] Project / [02] Solution / [03] Results → body →
 
 | Slug | Title / type | Source | Palette | Treatment | Confidentiality (details in CONFIDENTIALITY.md) |
 |---|---|---|---|---|---|
-| `pdx-west` | PDX West Logistics Center, Digital Leasing Brochure, 2026 | `PDXWestFlyer_For Lease.pdf` + Rodrigo's mockup | Sage #76A48E, Slate #505F69, Deep Slate #374B4E, Mist #ECF3F0, White | Rodrigo's mockup as hero/card on stone; paper mockups (mock_spread, mock_cover); iPad viewer, sheets = PDF 1,2,3,5,6,8,9 | No financials in the flyer; p4/p7 removed editorially; back cover (p10) omitted |
+| `pdx-west` | PDX West Logistics Center, Digital Leasing Brochure, 2026 | `PDXWestFlyer_For Lease.pdf` + Rodrigo's mockup | Sage #76A48E, Slate #505F69, Deep Slate #374B4E, Mist #ECF3F0, White | Rodrigo's mockup as hero/card on stone; paper mockups (mock_spread, mock_cover); sheets s01–s08 = PDF 1,2,3,5,6,8,9,10; **iPad viewer shows s01,s02,s04–s08 = PDF 1,2,5,6,8,9,10** (Nov 24, Lauren: p3 site plan out, back cover in); s03 is still used by the fanned mockup | No financials in the flyer; p4/p7 removed editorially; back cover (p10, contacts) shown unblurred |
 | `kress-building` | Kress Building, Digital Leasing Brochure, 2026 | `Kress Building Brochure.pdf` | Kress Green #002B29, Rust #B45832, Sand #C6AC8A, Parchment #FBF5EC, White | Booklet scene mockup; iPad, all 10 pages | Only the per-SF asking rate blurred (p2, p7, p8). Cover commission callout shown (pending, §9) |
 | `big-pink` | Big Pink, Pitch Presentation & Brand Concepts, 2025 (Interactive) | Ceros captures + `uploads/big-pink.pdf` + Ceros media | Big Pink deck palette, in `bigpink_blocks.py` (Dark Blue hero) | Leads with **OnePink**: TOC → mark, versions, moodboard, color, typography (Cabin), concept exploration (OneEleven, Big Pink, Prism "First round"), naming, in place (white `material.jpg`), **presentation last** (laptop viewer, 25 screens + 3 black screens). Hero + cards = OnePink on Dark Blue | Market, competition, fee proposal = black screens; team/client-list/reference/lease-map screens dropped; no Ceros link or embed |
 | `the-grid` | The Grid (Kirkland 405), Naming & Brand Identity, 2025 | `Kirkland Brand Design/` deck | Grid Grey #777C80, Stone #EAE7E3, Silver #BABABA, Graphite #1D1D1F, White | Card + hero = Lauren's entrance-wall mockup (the logo at a building entrance); vector logos; Open Sans | Nothing blurred; client feedback paraphrased, no names. Results = the client confirmed The Grid (sourced) |
@@ -260,7 +260,8 @@ Blue, Madison wide, Nomad square); Marketplace sections; "Results stay `[[ ]]`".
 
 | Commit | Summary |
 |---|---|
-| (this) | CLAUDE-HANDOFF.md; financial figures scrubbed from `_src` comments + logs; Mauzey moved off the "excluded" list in CONFIDENTIALITY.md |
+| (Nov 24) | PDX West viewer: PDF p3 removed, back cover added (Lauren's feedback) |
+| `7722562` | CLAUDE-HANDOFF.md; financial figures scrubbed from `_src` comments + logs; Mauzey moved off the "excluded" list in CONFIDENTIALITY.md |
 | `74cf209` | Mauzey Court replaces The Pointe (PDX treatment, OM financials blurred/omitted); copy pass: Project/Solution on every RE case, Results only where sourced, no `[[ ]]`; Contact for career opportunities |
 | `a92f4e4` | Big Pink home/works card: OnePink wordmark on Dark Blue |
 | `f4411a9` | Madison card fully sharp (approved exception) |

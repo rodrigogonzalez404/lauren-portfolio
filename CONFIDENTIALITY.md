@@ -7,7 +7,7 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 ## PDX West Logistics Center
 
 - **Blurred:** none — Nov 23: cover broker strip unblurred (sheet stack, printed piece); Rodrigo's hero/card mockup shown with contacts readable (front pages are not confidential)
-- **Omitted:** pages 4 (corporate neighbors) and 7 (regional logistics hubs): removed from the sheet stack Nov 23 at Rodrigo's request (editorial, not confidentiality); page 10 back cover: broker names, phones and emails + disclaimer (no pricing, financials or rent comps anywhere in the flyer)
+- **Omitted:** pages 4 (corporate neighbors) and 7 (regional logistics hubs): removed from the sheet stack Nov 23 at Rodrigo's request (editorial, not confidentiality); page 3 (site plan) removed from the iPad viewer Nov 24 at Lauren's request (editorial; still in the fanned mockup). Page 10 back cover (broker names, phones, emails + disclaimer) added to the viewer Nov 24, unblurred: no pricing, financials or rent comps anywhere in the flyer
 
 ## Kress Building
 
