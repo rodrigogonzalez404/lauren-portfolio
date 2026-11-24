@@ -83,9 +83,9 @@ CAT_LABEL = {'re': 'Real Estate', 'interactive': 'Real Estate · Interactive', '
 def short_type(p):
     if p['cat'] == 'brand': return ', '.join(p['service'].split(', ')[:2])
     return p['type']
-def card(p, r, ratio='', small=False, src=None):
+def card(p, r, ratio='', small=False, src=None, eager=False):
     sub = (f'{T(short_type(p))} · {T(p["place"])}' if p.get('place') else T(short_type(p))) if p['cat'] != 'brand' else T(short_type(p))
-    return f'''<a class="card" href="{r}work/{p["slug"]}.html" data-name="Project Card / {E(p["title"])}"><div class="ph {ratio}">{img(src or card_img(p["slug"]), p["title"]+" — project image", r)}</div>
+    return f'''<a class="card" href="{r}work/{p["slug"]}.html" data-name="Project Card / {E(p["title"])}"><div class="ph {ratio}">{img(src or card_img(p["slug"]), p["title"]+" — project image", r, eager=eager)}</div>
 <div class="meta"><div class="col"><span class="s{' sm' if small else ''}">{E(p["title"])}</span><span class="mono{'-s' if small else ''} muted">{sub}</span></div><span class="mono{'-s' if small else ''}">{T(p["year"])}</span></div></a>'''
 def playlist(p, r, link=True):
     ss = imgs(p['slug'], 's')
@@ -118,7 +118,7 @@ def home():
 <section class="wrap" style="padding-bottom:var(--sec)" id="real-estate" data-name="01 Real Estate">
 <div class="sec-head clean"><div class="col gap16"><span class="mono muted">[01] ({len(re_home) + 1:02d})</span><h2 class="xl">Real Estate</h2></div>
 <p class="bm muted intro">{T(H["re_intro"])}</p></div>
-<div class="grid2">{card(R["pdx-west"], r)}{card(R["kress-building"], r)}</div>
+<div class="grid2">{card(R["pdx-west"], r, eager=True)}{card(R["kress-building"], r, eager=True)}</div>
 <div class="mt64">{card(BY["big-pink"], r, "r169", src="assets/img/big-pink/card-wide.jpg")}</div>
 <div class="grid2 mt64">{card(R["the-grid"], r)}{card(R["pacific-center"], r)}</div>
 <div class="mt64">{card(R["madison-plaza"], r, "r169", src="assets/img/madison-plaza/card-wide.jpg")}</div>
@@ -148,7 +148,7 @@ def works():
 <section class="wrap case-cover" data-name="Works Hero"><span class="mono muted">[Works]</span><h1 class="xxl mt24">Works</h1></section>
 <section class="wrap" id="real-estate" style="padding-top:var(--s48)" data-name="Real Estate">
 <div class="sec-head clean"><div class="col gap16"><span class="mono muted">[01] ({len(PROJECTS) + len(CEROS):02d})</span><h2 class="xl">Real Estate</h2></div><p class="bm muted intro">{T(HOME["re_intro"])}</p></div>
-<div class="grid2">{"".join(card(p, r) for p in PROJECTS[:2])}</div>
+<div class="grid2">{"".join(card(p, r, eager=True) for p in PROJECTS[:2])}</div>
 <div class="mt64">{card(BY["big-pink"], r, "r169", src="assets/img/big-pink/card-wide.jpg")}</div>
 <div class="grid2 mt64">{"".join(card(p, r) for p in PROJECTS[2:])}</div>
 <p class="mono-s muted mt64">{T(HOME["re_note"])}</p></section>
