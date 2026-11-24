@@ -23,7 +23,8 @@ assets/img/<slug>/    Web-optimized images (≤2400px, JPEG q80)
 assets/wordmark.svg   Hero wordmark
 _src/                 Generator + content (optional; only needed to regenerate pages)
 CONFIDENTIALITY.md    What was blurred or left out, per project
-AI-HANDOFF.md         Notes for Claude / ChatGPT / any assistant continuing the work
+CLAUDE-HANDOFF.md     START HERE: full handoff for an assistant picking the project up cold
+AI-HANDOFF.md         Detailed change log for any assistant continuing the work
 ```
 
 ## Editing

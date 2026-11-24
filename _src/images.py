@@ -43,14 +43,14 @@ def page(folder, n):
 # Rule (Rodrigo, Nov 23): front-page/cover content (contacts, headlines, addresses, broker strips) is NOT confidential;
 # only financial data (pricing, rents, rent comps, operating figures, taxes, deal financials) is blurred or omitted.
 RE={
- 'kress-building':('kress-building','kress-building_brochure.jpg',[(1,[]),(2,[(0.066,0.866,0.175,0.899)]),(3,[]),(4,[]),(5,[]),(6,[]),(7,[(0.066,0.462,0.168,0.499)]),(8,[(0.066,0.462,0.168,0.499)]),(9,[]),(10,[])]),  # Nov 23 iPad viewer: all 10 pages; only the '$28/SF FSG' asking rate is blurred (p2, p7, p8)
+ 'kress-building':('kress-building','kress-building_brochure.jpg',[(1,[]),(2,[(0.066,0.866,0.175,0.899)]),(3,[]),(4,[]),(5,[]),(6,[]),(7,[(0.066,0.462,0.168,0.499)]),(8,[(0.066,0.462,0.168,0.499)]),(9,[]),(10,[])]),  # Nov 23 iPad viewer: all 10 pages; only the per-SF asking rate is blurred (p2, p7, p8)
  'pdx-west':('pdx-west-flyer',None,[]),  # sheets: _src/flyer_sheets.py; hero, card, mock_spread: _src/flyer_mockups.py
  'the-grid':('kirkland-405-brand',None,[]),  # Nov 23 identity case: all assets from _src/grid/grid_assets.py (hero = vector logo; card = lobby-sign mockup)
  'pacific-center':('pacific-center-flyer','pacific-center_poster.jpg',[]),  # hero = poster mockup; brochure + flip-book: see _src/pacific_book.py (Nov 23)
  'leftbank':('leftbank-flyer','leftbank_flyer.jpg',[]),  # sheets for the stack: see _src/flyer_sheets.py
  'madison-plaza':('madison-plaza-om','madison-plaza_om-cover.jpg',[]),  # page gallery replaced by the Nomad-style book: see _src/madison_book.py
  'redmond-gateway':('redmond-assemblage-om','redmond-gateway_om-stack.jpg',[(1,[]),(2,[]),(6,[(0.035,0.24,0.315,0.43)]),(7,[(0.035,0.24,0.315,0.43)]),(14,[]),(15,[])]),  # parcel text names owners + lease dates -> blurred),
- 'springwood':('springwood-om','springwood_om-cover.jpg',[(1,[(0.7854,0.8905,0.9356,0.9265)]),(2,[]),(3,[]),(4,[(0.2172,0.4183,0.3093,0.4461)]),(5,[(0.7576,0.6471,0.9508,0.7565)]),(6,[]),(7,[(0.2462,0.6846,0.3043,0.7141)]),(8,[]),(9,[]),(10,[]),(11,[]),(12,[]),(13,[]),(16,[]),(18,[]),(19,[]),(20,[]),(21,[]),(22,[])]),  # Nov 23 iPad viewer: p01..p19 = PDF 1-13,16,18-22; blurred only: p1 '$1,035 Avg. Rent', p4 lot-rent range, p5 rent-upside paragraph, p7 property tax; PDF 14-15 (financials) + 17 (rent comps) omitted
+ 'springwood':('springwood-om','springwood_om-cover.jpg',[(1,[(0.7854,0.8905,0.9356,0.9265)]),(2,[]),(3,[]),(4,[(0.2172,0.4183,0.3093,0.4461)]),(5,[(0.7576,0.6471,0.9508,0.7565)]),(6,[]),(7,[(0.2462,0.6846,0.3043,0.7141)]),(8,[]),(9,[]),(10,[]),(11,[]),(12,[]),(13,[]),(16,[]),(18,[]),(19,[]),(20,[]),(21,[]),(22,[])]),  # Nov 23 iPad viewer: p01..p19 = PDF 1-13,16,18-22; blurred only: p1 average-rent figure, p4 lot-rent range, p5 rent-upside paragraph, p7 property tax; PDF 14-15 (financials) + 17 (rent comps) omitted
  'pointe-at-bridgeport':('the-pointe-bridgeport','the-pointe_flyer-stack.jpg',[(1,[]),(2,[]),(3,[]),(4,[]),(7,[]),(8,[])]),
  'portland-office-market-report':('portland-office-report-q1-2026','portland-office-report_laptop.jpg',[(1,[]),(2,[])]),
 }

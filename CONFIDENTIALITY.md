@@ -11,7 +11,7 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Kress Building
 
-- **Blurred:** "$28/SF FSG" asking rate — p02 availability bullets, p07 2nd-floor plan bullets, p08 3rd-floor plan bullets (Nov 23 iPad viewer; nothing else blurred — the cover commission callout and broker contacts are front-page content)
+- **Blurred:** Asking-rate figure (per-SF, full service) — p02 availability bullets, p07 2nd-floor plan bullets, p08 3rd-floor plan bullets (Nov 23 iPad viewer; nothing else blurred — the cover commission callout and broker contacts are front-page content)
 - **Omitted:** nothing — all 10 pages are in the iPad viewer (Nov 23)
 
 ## Nomad
@@ -36,19 +36,19 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Madison Plaza
 
-- **Blurred:** p02 broker names, emails and phones; p07 offering bullets (price guidance, NOI, lender); p08 operating text (opex, in-place vs market rents, NOI upside); p10–11 ground-rent and MFTE savings text; p40 "Clears 3x in-place rent ($1,864/mo …)" line; back cover broker names, emails and phones
+- **Blurred:** p02 broker names, emails and phones; p07 offering bullets (price guidance, NOI, lender); p08 operating text (opex, in-place vs market rents, NOI upside); p10–11 ground-rent and MFTE savings text; p40 in-place rent / income-qualification line; back cover broker names, emails and phones
 - **Approved exception:** Home/works card and case hero: the phone screen in the device mockup shows the p08 operating-expense paragraph unblurred — Rodrigo approved showing it on the card (Nov 23, 2:52 PM PT: "please ensure nothing is blur on this image").
 - **Omitted:** PDF pages 13–17 = printed pp. 24–33 (unit mix & market rents, tax bill, income & expenses, pro forma notes, 10-year cash flow, rent comparables); replaced in the flip-book by a black "Confidential — financial information omitted" spread right after the 03 The Financials divider (pp. 22–23, kept)
 
 ## Springwood of Beaverton
 
-- **Blurred:** p01 cover: "$1,035 Avg. Rent" only (Nov 23 — "75 Sites | 100% Occupied" now readable, cover + hero mockup); p04: lot-rent range "$949 to $1,236"; p05: rent-upside paragraph ("Current rents are at minimum 20% below market … turnover … projected at 31%"); p07: property tax figure
+- **Blurred:** p01 cover: the average-rent figure only (Nov 23 — "75 Sites | 100% Occupied" now readable, cover + hero mockup); p04: lot-rent range; p05: rent-upside paragraph (rents vs market, turnover projection); p07: property tax figure
 - **Omitted:** PDF 14–15 Financial Overview (financial summary, rent roll) — replaced by a black "Confidential — financial information omitted" screen after the kept 03 divider; PDF 17 Rent Comparables — black screen after the kept 04 divider
 
 ## 8210 Mauzey Court
 
-- **Blurred:** p03 executive summary headline line: price and 2027 NOI ("$5.65MM | 2027 NOI: …"); p04 property overview: Price row
-- **Shown on purpose:** cover and back cover with broker names, phones and emails (front pages are not confidential); p05 "$4M+ of tenant-funded improvements" highlight and p12 demographics (income) — not deal pricing, rents or operating figures; p10 Portland market overview incl. the market-wide average asking lease rate (published Colliers market data, not this property's rent)
+- **Blurred:** p03 executive summary headline line: asking price and projected NOI; p04 property overview: Price row
+- **Shown on purpose:** cover and back cover with broker names, phones and emails (front pages are not confidential); p05 tenant-funded-improvements highlight and p12 demographics (income) — not deal pricing, rents or operating figures; p10 Portland market overview incl. the market-wide average asking lease rate (published Colliers market data, not this property's rent)
 - **Omitted:** p07 Lease Abstract (base-rent schedule, NOI, tenant investment, escalations) — replaced by a black "Confidential — financial information omitted" screen in the iPad viewer
 
 ## Fortis Net Lease
@@ -67,8 +67,8 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Removed from the site (Nov 23, Rodrigo)
 
-- Redmond Gateway, Portland Office Market Report and Marketplace I & II (removed Nov 23 PM): no page, card or link; source entries kept in _src (content.UNPUBLISHED), images not generated.
+- Redmond Gateway, Portland Office Market Report, Marketplace I & II and The Pointe at Bridgeport (replaced by 8210 Mauzey Court) (removed Nov 23): no page, card or link; source entries kept in _src (content.UNPUBLISHED), images not generated.
 
 ## Projects not on the site (confidential / excluded)
 
-- The Galt (BOV), 8210 Mauzey Court, Fruit Valley, Pomeroy, Overland AI, W+K timeline, American Brush / REMS, Houghton RFQ; Apex skipped.
+- The Galt (BOV), Fruit Valley, Pomeroy, Overland AI, W+K timeline, American Brush / REMS, Houghton RFQ; Apex skipped.

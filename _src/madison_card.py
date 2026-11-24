@@ -64,7 +64,7 @@ def compose(a, w, obj, W, H, fill, seed, light):
     return Image.fromarray(np.clip(cv, 0, 255).astype(np.uint8)[..., ::-1])
 
 # Financials (CONFIDENTIALITY: Madison p08 operating text is blurred in the flip-book) — the phone screen shows the same
-# opex paragraph ("T12 operating expenses of $9,875 per unit ...") and is now large enough to read, so it is blurred
+# opex paragraph (T12 operating expenses per unit) and is now large enough to read, so it is blurred
 # here too; only neutral (text-on-white) pixels inside the rectangles, so the brochure's sky/photo is untouched.
 # Rodrigo t80u (Nov 23, 2:52 PM PT): "please ensure nothing is blur on this image" — he approved showing the phone
 # paragraph on the card, so no rectangles are blurred any more (kept for reference: (2766,1452,3214,1618), (3050,1612,3214,1700)).
