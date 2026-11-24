@@ -148,3 +148,5 @@ for c in CEROS:
                            'It sits inside an interactive Ceros presentation in eight numbered chapters — Introductions, The Building, The Market, The Competition, Marketing Approach, Fee Proposal, Why Us? and Appendix. Each chapter opens on a deep navy panel with a rose-pink outlined numeral beside full-bleed photography of the tower and the city; a vertical BIG PINK wordmark frames the cover and the close. The marketing approach builds up to the identity through a moodboard, sixteen sample names from standard to unique, and three logo ideas — OneEleven, Big Pink and OnePink — each shown over the skyline, in dimensional letters and on building signage.'],
                  results='',   # Rodrigo, Nov 23: leave Results empty (block hidden) — no outcome claimed
                  role='Designer — the full Ceros presentation, naming and logo concepts', client='Colliers', note='')   # Rodrigo t76u: "Colliers was the team"
+
+import copy_round; copy_round.apply(ALL)   # Nov 24 (t109u): short Project/Solution, no Results, Colliers real estate only

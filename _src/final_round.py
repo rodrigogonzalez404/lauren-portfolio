@@ -10,6 +10,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG = os.path.join(ROOT, 'assets', 'img')
 MADISON = '/workspace/uploads/madison-mockup-new.png'
 NOMAD = '/workspace/uploads/nomad-desk-mockup-new.png'
+MAUZEY = '/workspace/uploads/mauzey-mockup-new.png'   # t109u: cover + Regionally Connected map + interior photo sheet on stone (Rodrigo's mockup)
 SPRINGWOOD = '/workspace/uploads/springwood-mockup-v2.png'   # t108u: cover + Site Plan + Table of Contents on stone (Rodrigo's mockup; replaces springwood-mockup-new.png)
 
 def madison_wide(scale=0.75, W=2400, H=1350):
@@ -39,6 +40,11 @@ def springwood():
     im.save(os.path.join(IMG, 'springwood', 'hero.jpg'), quality=90, optimize=True, progressive=True)
     im.resize((1440, 1080), Image.LANCZOS).save(os.path.join(IMG, 'springwood', 'card.jpg'), quality=88, optimize=True, progressive=True)
 
+def mauzey():
+    im = Image.open(MAUZEY).convert('RGB')
+    im.save(os.path.join(IMG, 'mauzey-court', 'hero.jpg'), quality=90, optimize=True, progressive=True)
+    im.resize((1440, 1080), Image.LANCZOS).save(os.path.join(IMG, 'mauzey-court', 'card.jpg'), quality=88, optimize=True, progressive=True)
+
 def main():
-    madison_wide(); nomad(); springwood(); print('final round: madison card-wide, nomad hero/card')
+    madison_wide(); nomad(); springwood(); mauzey(); print('final round: madison card-wide, nomad hero/card')
 if __name__ == '__main__': main()

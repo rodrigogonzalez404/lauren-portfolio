@@ -7,9 +7,8 @@ from PIL import Image
 from images import save, blur
 FLYERS = {'leftbank': ('/workspace/lauren-case-studies/source/extracted/Leftbank_Flyer.pdf', range(1, 8), {}),
           # Mauzey Court OM (Nov 23, replaces The Pointe): PDF p7 lease abstract (rent schedule, NOI) omitted -> black screen in the viewer;
-          # p3 headline price + NOI line and p4 Price row blurred; covers + broker contacts shown
-          'mauzey-court': ('/workspace/uploads/MauzeyCourt-Hillsboro-OM.pdf', [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-                           {3: [(0.214, 0.424, 0.490, 0.465)], 4: [(0.137, 0.226, 0.196, 0.257)]}),
+          # Nov 24 (t109u): Rodrigo had all Mauzey blurs removed (p3 headline line, p4 Price row were blurred before); covers + broker contacts shown
+          'mauzey-court': ('/workspace/uploads/MauzeyCourt-Hillsboro-OM.pdf', [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16], {}),
           'pdx-west': ('/workspace/lauren-case-studies/source/extracted/PDXWestFlyer_For Lease.pdf', [1, 2, 3, 5, 6, 8, 9], {})}  # Nov 23: PDF p4 (corporate neighbors) + p7 (logistics hubs) removed from the stack (Rodrigo); PDX p10 = broker contacts -> omitted; p1 broker strip unblurred Nov 23 (front pages not confidential)  # slug: (pdf, pages, {page: blur boxes})
 def main():
     for slug, (pdf, pages, boxes) in FLYERS.items():

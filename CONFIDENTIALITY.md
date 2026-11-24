@@ -48,7 +48,7 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## 8210 Mauzey Court
 
-- **Blurred:** p03 executive summary headline line: asking price and projected NOI; p04 property overview: Price row
+- **Blurred:** none — Nov 24 (t109u): Rodrigo approved unblurring everything on Mauzey (p03 executive-summary headline line and p04 Price row were blurred before)
 - **Shown on purpose:** cover and back cover with broker names, phones and emails (front pages are not confidential); p05 tenant-funded-improvements highlight and p12 demographics (income) — not deal pricing, rents or operating figures; p10 Portland market overview incl. the market-wide average asking lease rate (published Colliers market data, not this property's rent)
 - **Omitted:** p07 Lease Abstract (base-rent schedule, NOI, tenant investment, escalations) — replaced by a black "Confidential — financial information omitted" screen in the iPad viewer
 

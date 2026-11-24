@@ -247,7 +247,7 @@ def meta_items(p):
     if p['cat'] == 'interactive':
         return [('Client', p['client']), ('Type', p['type']), ('Format', p['tool'] + ' interactive presentation'), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
     return [('Client', p['client']), ('Type', p['type']), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
-HERO_RATIO = {"pacific-center": "1448/910", "leftbank": "1448/920", "madison-plaza": "1448/1086", "nomad": "1448/1086", "springwood": "1448/1086"}   # hero image shown whole in its own frame ratio (Rodrigo's 4:3 desk mockup, t101u)
+HERO_RATIO = {"pacific-center": "1448/910", "leftbank": "1448/920", "madison-plaza": "1448/1086", "nomad": "1448/1086", "springwood": "1448/1086", "mauzey-court": "1448/1086"}   # hero image shown whole in its own frame ratio (Rodrigo's 4:3 desk mockup, t101u)
 HERO_FIT = set()   # (was madison-plaza; since t105u its hero is Rodrigo's mockup in its own 4:3 frame, see HERO_RATIO)
 def case_head(p, r):
     lab = CAT_LABEL[p['cat']]
@@ -265,7 +265,7 @@ def psr(p):
     # an empty results string hides the [03] block entirely (Big Pink: a pitch, no outcome to report)
     res = f'''<div class="blk"><div class="lab"><span class="mono muted">[03]</span><span class="s">Results</span></div><div class="txt"><p class="{'m' if len(strip_ph(p.get('results', ''))) < 220 else 's'}">{T(p.get("results", ""))}</p></div></div>''' if p['results'].strip() else ''
     return f'''<section class="dark psr" data-name="Project / Solution / Results">{note}
-<div class="blk"><div class="lab"><span class="mono muted">[01]</span><span class="s">Project</span></div><div class="txt"><p class="s">{T(p["project"])}</p></div></div>
+<div class="blk"><div class="lab"><span class="mono muted">[01]</span><span class="s">Project</span></div><div class="txt"><p class="{"bl" if p.get("summary_eq") else "s"}">{T(p["project"])}</p></div></div>
 <div class="blk"><div class="lab"><span class="mono muted">[02]</span><span class="s">Solution</span></div><div class="txt">{sol}</div></div>
 {res}</section>'''
 def gsec(inner, head='', intro='', note='', aid=''):
@@ -390,7 +390,7 @@ def ipad_viewer(slug, title, files, r, note='', label='digital brochure', device
                     f'<div class="tab-confin"><span class="tab-conft">Confidential —<br>financial information omitted</span><span class="mono-s tab-confm">{E(f[1])}</span></div></figure>')
         att = 'src' if i < 2 else 'data-src'
         return (f'<figure class="tab-page{" cur" if i == 0 else ""}" role="group" aria-roledescription="page" aria-label="Page {i+1} of {n}"{hid}>'
-                f'<img {att}="{r}assets/img/{slug}/{f}" alt="{E(title)} {label} — page {i+1}" draggable="false"></figure>')
+                f'<img {att}="{r}assets/img/{slug}/{f}?v={_v(f"assets/img/{slug}/{f}")}" alt="{E(title)} {label} — page {i+1}" draggable="false"></figure>')
     pages = ''.join(page(i, f) for i, f in enumerate(files))
     dots = ''.join('<i class="on"></i>' if i == 0 else '<i></i>' for i in range(n))
     hint = '<span class="hd">Swipe or drag the page, click its edge, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the screen or tap the arrows</span>'
