@@ -44,7 +44,10 @@ def head(title, r, desc='Portfolio of Lauren Elyse Gonzalez, graphic designer at
 <link rel="preload" href="{r}assets/fonts/Geist-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="{r}assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{r}assets/css/site.css?v={_v('assets/css/site.css')}">
+<link rel="stylesheet" href="{r}assets/css/fx.css?v={_v('assets/css/fx.css')}">
+<script>try{{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){{var d=document.documentElement;d.classList.add('fx');if(!sessionStorage.getItem('leg-pre')){{d.classList.add('fx-pre');sessionStorage.setItem('leg-pre','1')}}}}}}catch(e){{}}</script>
 </head><body>
+<div class="fx-pre-o" aria-hidden="true"><div class="fx-mark"><svg viewBox="0 0 148 148"><circle cx="74" cy="74" r="70"/></svg><b>LEG</b></div></div>
 <a class="skip" href="#main">Skip to content</a>
 '''
 def nav(r, cur=''):
@@ -67,6 +70,7 @@ def footer(r, line=None):
 <a class="big" href="{r}contact.html" aria-label="Contact"><span>Contact</span><span aria-hidden="true">↗</span></a>
 <div class="bottom"><a class="mono" href="mailto:{EMAIL}">[Contact] {EMAIL}</a><a class="mono" href="{LINKEDIN}" target="_blank" rel="noopener">[Social] LinkedIn ↗</a><span class="mono muted">©2026 All rights reserved.</span></div></footer>
 <script src="{r}assets/js/site.js?v={_v('assets/js/site.js')}"></script>
+<script src="{r}assets/js/fx.js?v={_v('assets/js/fx.js')}"></script>
 </body></html>
 '''
 def write(rel, body):

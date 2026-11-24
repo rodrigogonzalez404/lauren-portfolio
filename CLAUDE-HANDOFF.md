@@ -358,3 +358,12 @@ Contact page hero says only "Get in Touch": headline left with the Get in Touch 
 
 ## Nov 24 (t112u) — Works page
 Works: "Interactive Presentations" sub-section removed; OnePink (big-pink, `card-wide.jpg`, r169) is a wide card right after PDX West + Kress, as on Home; Brand & Ecommerce on Works is back on the page colour (Home keeps it black).
+
+## Nov 24 (t113u/t114u) — Premium effects (all pages)
+- Files: `assets/css/fx.css` + `assets/js/fx.js` (vanilla, no libraries/CDN), linked from `head()` / `footer()` in `_src/build.py`.
+- An inline `<head>` script adds `html.fx` unless the visitor prefers reduced motion; first page of a browser session also gets `html.fx-pre` (sessionStorage key `leg-pre`). Everything in fx.css is scoped under `html.fx`, so with no JS or reduced motion the site is exactly as before.
+- Preloader: `.fx-pre-o` overlay right after `<body>` — "LEG" in Geist with an SVG circle drawn by stroke-dashoffset (~1s), then the overlay slides up; pure CSS (ends by ~1.6s even if JS fails), fx.js removes it at 1.7s.
+- Smooth scrolling: wheel-only lerp (fine pointers); keyboard, anchors, touch and the iPad/flip-book viewers stay native.
+- Headline reveals: `main h1, main h2.xl, main h2.l, .cn-title` split into words, delayed per line. Image reveals: `.card .ph, .case-hero, figure.pic` unmask from the bottom with a slow zoom (CSS `scale`; IntersectionObserver watches the parent because a fully clipped element never intersects). Viewer pages are not animated.
+- Cards: hover scale 1.045 + a "View project" cursor label (`.fx-cur`, fine pointers only). Page transitions: internal .html links fade out 230 ms, pages fade in.
+- To turn everything off: delete the `<script>try{…html.fx…}</script>` line in `head()` (or remove the fx.css/fx.js links) and rebuild. To drop just the preloader: remove the `.fx-pre-o` div and the `fx-pre` part of that script.
