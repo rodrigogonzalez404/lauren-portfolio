@@ -373,3 +373,6 @@ Rodrigo: site "majorly slowed down"; cursor label hard to follow. Causes: (1) th
 
 ## Nov 24 (t116u) — Project/Solution/Results text
 `psr()` now renders Project, Solution and Results body text all as `<p class="bl">` on every case (branding incl. Zulay/CGK, Fortis, real estate). Copy unchanged; `summary_eq` from copy_round.py no longer affects styling.
+
+## Nov 24 (t120u) — Google Analytics 4
+GA4 Measurement ID **G-YEM6NJH1SL** (property set up by Rodrigo for laurengonzalezdesign.com; also counts the GitHub Pages address). Standard gtag.js snippet lives in `head()` in `_src/build.py`, right after `<meta charset>`, so every generated page (all 22) has exactly one Google tag. The Tag Manager container GTM-K9HF4JTH Google also showed is intentionally NOT used. noindex unchanged. Page views fire on each normal page load (the fx page fade is a 160 ms delay before a normal navigation). To remove: delete the three gtag lines in `head()` and rebuild.

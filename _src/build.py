@@ -37,6 +37,9 @@ def card_img(slug):
 def head(title, r, desc='Portfolio of Lauren Elyse Gonzalez, graphic designer at Colliers, Portland.'):
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
+<!-- Google tag (gtag.js) GA4 G-YEM6NJH1SL — Rodrigo t120u -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YEM6NJH1SL"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-YEM6NJH1SL');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>{E(title)}</title>
