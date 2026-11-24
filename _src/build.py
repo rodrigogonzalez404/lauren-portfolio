@@ -262,9 +262,9 @@ def psr(p):
     sol = ''.join(f'<p class="bl">{T(s)}</p>' for s in p['solution'])
     note = f'<p class="mono-s muted draft">{T(p["draft_note"])}</p>' if p.get('draft_note') else ''
     # an empty results string hides the [03] block entirely (Big Pink: a pitch, no outcome to report)
-    res = f'''<div class="blk"><div class="lab"><span class="mono muted">[03]</span><span class="s">Results</span></div><div class="txt"><p class="{'m' if len(strip_ph(p.get('results', ''))) < 220 else 's'}">{T(p.get("results", ""))}</p></div></div>''' if p['results'].strip() else ''
+    res = f'''<div class="blk"><div class="lab"><span class="mono muted">[03]</span><span class="s">Results</span></div><div class="txt"><p class="bl">{T(p.get("results", ""))}</p></div></div>''' if p['results'].strip() else ''
     return f'''<section class="dark psr" data-name="Project / Solution / Results">{note}
-<div class="blk"><div class="lab"><span class="mono muted">[01]</span><span class="s">Project</span></div><div class="txt"><p class="{"bl" if p.get("summary_eq") else "s"}">{T(p["project"])}</p></div></div>
+<div class="blk"><div class="lab"><span class="mono muted">[01]</span><span class="s">Project</span></div><div class="txt"><p class="bl">{T(p["project"])}</p></div></div>
 <div class="blk"><div class="lab"><span class="mono muted">[02]</span><span class="s">Solution</span></div><div class="txt">{sol}</div></div>
 {res}</section>'''
 def gsec(inner, head='', intro='', note='', aid=''):
