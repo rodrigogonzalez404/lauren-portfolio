@@ -30,7 +30,7 @@ def size(rel):
     with Image.open(os.path.join(ROOT, rel)) as im: return im.size
 def img(rel, alt, r, cls='', eager=False):
     w, h = size(rel)
-    return f'<img src="{r}{rel}?v={_v(rel)}" alt="{html.escape(alt)}" width="{w}" height="{h}" decoding="async"{f" class={chr(34)}{cls}{chr(34)}" if cls else ""}>'
+    return f'<img src="{r}{rel}?v={_v(rel)}" alt="{html.escape(alt)}" width="{w}" height="{h}"{"" if eager else ' loading="lazy"'} decoding="async"{f" class={chr(34)}{cls}{chr(34)}" if cls else ""}>'
 def card_img(slug):
     return f'assets/img/{slug}/card.jpg' if os.path.exists(os.path.join(IMG, slug, 'card.jpg')) else f'assets/img/{slug}/hero.jpg'
 
@@ -301,7 +301,7 @@ def nomad_blocks(r):
             tag, f = e.split(':')
             num = {'cover': '01', 'back': '56'}.get(tag, tag[1:].zfill(2))
             alt = {'cover': 'Front cover', 'back': 'Back cover'}.get(tag, 'Page ' + tag[1:])
-            pages += f'<div class="fb-page" data-pg="{num}"{hard}><img alt="Nomad offering memorandum — {alt}" src="{r}{I}flip/{f}" draggable="false"></div>'
+            pages += f'<div class="fb-page" data-pg="{num}"{hard}><img alt="Nomad offering memorandum — {alt}" src="{r}{I}flip/{f}?v={_v(I+"flip/"+f)}" loading="lazy" decoding="async" draggable="false"></div>'
     hint = '<span class="hd">Drag a page corner, click a page, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
     ds = f'<div class="gallery"><div class="swatches">{sw}</div></div>'
     book = f"""<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book" data-total="56">{pages}</div></div>
@@ -331,7 +331,7 @@ def madison_blocks(r):
         else:
             tag, f = e.split(':')
             alt = {'cover': 'Front cover', 'back': 'Back cover'}.get(tag, 'Page ' + tag[1:])
-            pages += f'<div class="fb-page"{hard}><img alt="Madison Plaza offering memorandum — {alt}" src="{r}{I}flip/{f}" draggable="false"></div>'
+            pages += f'<div class="fb-page"{hard}><img alt="Madison Plaza offering memorandum — {alt}" src="{r}{I}flip/{f}?v={_v(I+"flip/"+f)}" loading="lazy" decoding="async" draggable="false"></div>'
     hint = '<span class="hd">Drag a page corner, click a page, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in MADISON_PAL)
     ds = f'<div class="gallery"><div class="swatches">{sw}</div></div>'
@@ -356,7 +356,7 @@ def pacific_blocks(r):
         hard = ' data-density="hard"' if i in (0, len(seq) - 1) else ''
         alt = {'cover': 'Front cover', 'back': 'Back cover'}.get(tag, 'Page ' + tag[1:])
         num = {'cover': '01', 'back': '12'}[tag] if tag in ('cover', 'back') else f'{int(tag[1:]):02d}'
-        pages += f'<div class="fb-page" data-pg="{num}"{hard}><img alt="Pacific Center leasing brochure — {alt}" src="{r}{I}flip/{f}" draggable="false"></div>'
+        pages += f'<div class="fb-page" data-pg="{num}"{hard}><img alt="Pacific Center leasing brochure — {alt}" src="{r}{I}flip/{f}?v={_v(I+"flip/"+f)}" loading="lazy" decoding="async" draggable="false"></div>'
     hint = '<span class="hd">Drag a page corner, click a page, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in PACIFIC_PAL)
     ds = f'<div class="gallery"><div class="swatches">{sw}</div></div>'
