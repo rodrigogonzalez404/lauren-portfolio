@@ -17,16 +17,18 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 F = PAGES + 'nomad-om/'
 PDF = '/workspace/lauren-case-studies/source/extracted/Final OM PDFs/Nomad OM-digital.pdf'
 SLUG = 'nomad'
-BLUR_DOLLARS = {5: ('$1,425',), 6: None, 23: None, 24: None}   # None = every word with a '$' on the page
+BLUR_DOLLARS = {5: 'MOAT', 6: None, 23: None, 24: None}   # None = every word with a '$' on the page; a word = only the first '$' word after it
 KEEP = list(range(2, 26))     # PDF spreads 2-25 -> printed pp. 2-49 (25 = 05 The Financials divider)
 DROPPED = [26, 27, 28]        # printed pp. 50-55
 
 def boxes(n, only=None, pad=2.5):
     xml = subprocess.run(['pdftotext', '-f', str(n), '-l', str(n), '-bbox', PDF, '-'], capture_output=True, text=True).stdout
     pw, ph = map(float, re.search(r'<page width="([\d.]+)" height="([\d.]+)"', xml).groups())
-    out = []
+    out, seen = [], only is None
     for a, b, c, d, t in re.findall(r'xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">([^<]*)<', xml):
-        if '$' in t and (only is None or t in only):
+        if t == only: seen = True; continue
+        if '$' in t and seen:
+            if only is not None: seen = False
             a, b, c, d = map(float, (a, b, c, d))
             out.append(((a - pad) / pw, (b - pad) / ph, (c + pad) / pw, (d + pad) / ph))
     return out
