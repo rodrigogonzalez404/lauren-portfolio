@@ -11,8 +11,9 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Kress Building
 
-- **Blurred:** Asking-rate figure (per-SF, full service) — p02 availability bullets, p07 2nd-floor plan bullets, p08 3rd-floor plan bullets (Nov 23 iPad viewer; nothing else blurred — the cover commission callout and broker contacts are front-page content)
-- **Omitted:** nothing — all 10 pages are in the iPad viewer (Nov 23)
+- **Blurred:** nothing — Nov 24: the per-SF asking rate on p02, p07 and p08 is unblurred (iPad viewer, hero and card)
+- **Approved exception:** Nov 24, Rodrigo (Lauren's feedback): everything in the Kress brochure is public record and not confidential, so no page is blurred — including the leasing terms that the financials rule would normally blur.
+- **Omitted:** nothing — all 10 pages are in the iPad viewer
 
 ## Nomad
 

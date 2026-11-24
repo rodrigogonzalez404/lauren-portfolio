@@ -43,7 +43,7 @@ def page(folder, n):
 # Rule (Rodrigo, Nov 23): front-page/cover content (contacts, headlines, addresses, broker strips) is NOT confidential;
 # only financial data (pricing, rents, rent comps, operating figures, taxes, deal financials) is blurred or omitted.
 RE={
- 'kress-building':('kress-building','kress-building_brochure.jpg',[(1,[]),(2,[(0.066,0.866,0.175,0.899)]),(3,[]),(4,[]),(5,[]),(6,[]),(7,[(0.066,0.462,0.168,0.499)]),(8,[(0.066,0.462,0.168,0.499)]),(9,[]),(10,[])]),  # Nov 23 iPad viewer: all 10 pages; only the per-SF asking rate is blurred (p2, p7, p8)
+ 'kress-building':('kress-building',None,[(i,[]) for i in range(1,11)]),  # Nov 24 (Rodrigo t94u): public record -> nothing blurred (approved exception); hero + card = flyer_mockups.kress(). Before:  # Nov 23 iPad viewer: all 10 pages; only the per-SF asking rate is blurred (p2, p7, p8)
  'pdx-west':('pdx-west-flyer',None,[]),  # sheets: _src/flyer_sheets.py; hero, card, mock_spread: _src/flyer_mockups.py
  'the-grid':('kirkland-405-brand',None,[]),  # Nov 23 identity case: all assets from _src/grid/grid_assets.py (hero = vector logo; card = lobby-sign mockup)
  'pacific-center':('pacific-center-flyer','pacific-center_poster.jpg',[]),  # hero = poster mockup; brochure + flip-book: see _src/pacific_book.py (Nov 23)

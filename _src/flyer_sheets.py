@@ -21,5 +21,5 @@ def main():
                 if n in boxes: im = blur(im, boxes[n])
                 save(im, slug + '/sheets', f's{k:02d}.jpg', 2000)
         print(slug, 'sheets', len(pages))
-    import flyer_mockups; flyer_mockups.pdx(); flyer_mockups.mauzey()   # hero, card + fanned-sheets mockups, all self-made
+    import flyer_mockups; flyer_mockups.pdx(); flyer_mockups.mauzey(); flyer_mockups.kress()   # hero, card + fanned-sheets mockups, all self-made
 if __name__ == '__main__': main()

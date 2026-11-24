@@ -208,3 +208,10 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
 - **Contact rule changed (t82u overrides "Contact stays as is")**: page title "Get in Touch", CONTACT_LINE = career/opportunity
   wording, RESUME_LINE "Résumé available on request — just send me a note.", buttons "Get in Touch" (mailto) + "Request My
   Résumé" (mailto with subject). Footer everywhere: resume line + "Request My Résumé"; nav button "Get in Touch".
+
+## Kress unblurred + new mockup (Rodrigo t94u, Nov 24)
+- Lauren's feedback: everything in the Kress brochure is public record, so **nothing is blurred** (approved exception, logged in confidentiality.py).
+  `images.RE['kress-building']` has no blur boxes; p02/p07/p08 re-rendered sharp from the 200-dpi pages.
+- Hero + card = `flyer_mockups.kress()` (also run by flyer_sheets.main()): PDX-style self-made print mockup on the textured stone.
+  The cover sits over the back cover on the left, and a code-drawn tablet (`tablet()` + `put_device()`) shows p02 on the right. The old booklet
+  scene mockup (`mockups/kress-building_brochure.jpg`) is retired.

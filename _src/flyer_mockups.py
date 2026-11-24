@@ -142,3 +142,41 @@ def mauzey():
     out(cv, 'mauzey-court', 'mock_spread.jpg')
 
 if __name__ == '__main__': pdx()
+
+def tablet(page, w, ang, rim=(200, 201, 204)):
+    """Landscape tablet (aluminium rim, black glass, camera dot) showing `page` edge to edge; returns an RGBA image rotated by ang."""
+    s = SS; pw, ph = page.size
+    sw = int(w * s); sh = int(sw * ph / pw)                 # screen keeps the page proportions (nothing cropped)
+    b = int(0.045 * sw); r_ = int(0.035 * sw); g = int(0.006 * sw)
+    Wt, Ht = sw + 2 * b, sh + 2 * b
+    im = Image.new('RGBA', (Wt, Ht), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle((0, 0, Wt - 1, Ht - 1), r_ + b, fill=rim + (255,))
+    d.rounded_rectangle((g, g, Wt - 1 - g, Ht - 1 - g), r_ + b - g, fill=(14, 14, 16, 255))
+    d.ellipse((Wt // 2 - g, b // 2 - g, Wt // 2 + g, b // 2 + g), fill=(40, 42, 46, 255))
+    im.paste(page.convert('RGB').resize((sw, sh), Image.LANCZOS), (b, b))
+    im = im.rotate(ang, Image.BICUBIC, expand=True)
+    return im.resize((im.width // s, im.height // s), Image.LANCZOS)
+
+def put_device(cv, dev, cx, cy, shadow=1.0):
+    """Composite an RGBA device centred at (cx, cy) with the same layered neutral multiply shadows as place()."""
+    W_, H_ = cv.size; x0, y0 = int(cx - dev.width / 2), int(cy - dev.height / 2)
+    al = Image.new('L', (W_, H_), 0); al.paste(dev.getchannel('A'), (x0, y0))
+    base = np.asarray(al, np.float32) / 255; a = np.zeros_like(base)
+    for off, blur, k in [((0, 0), 2.5, 0.25), ((2, 4), 3, 0.5), ((8, 16), 14, 0.28), ((24, 40), 50, 0.24)]:
+        m = al.transform((W_, H_), Image.AFFINE, (1, 0, -off[0], 0, 1, -off[1]), Image.BILINEAR).filter(ImageFilter.GaussianBlur(blur))
+        a = np.maximum(a, np.asarray(m, np.float32) / 255 * k * shadow)
+    _multiply(cv, a * (1 - base))
+    cv.paste(dev, (x0, y0), dev)
+    return cv
+
+def kress():
+    """Kress Building hero + card (Nov 24, Lauren via Rodrigo t94u): PDX-style self-made print mockup on the textured stone,
+    a different composition: the printed cover over the back cover on the left, the tablet with the availability page on the right.
+    Uses Lauren's own pages p01/p02/p10 (unblurred: public record, approved exception)."""
+    P = lambda n: Image.open(os.path.join(ROOT, 'assets', 'img', 'kress-building', f'p{n:02d}.jpg')).convert('RGB')
+    k = W / 1024
+    cv = surface(seed=13, light=(0.35, 0.2))
+    place(cv, P(10), rect(395 * k, 345 * k, 400 * k, 7.0), shadow=.6)                      # back cover, behind
+    place(cv, P(1), rect(345 * k, 410 * k, 450 * k, -4.0), lift_corner=2, lift=40)            # front cover, corner lifted
+    put_device(cv, tablet(P(2), 330 * k, 2.5), 768 * k, 430 * k)                               # tablet on the right, clear of the cover title
+    out(cv, 'kress-building', 'hero.jpg'); out(cv, 'kress-building', 'card.jpg')

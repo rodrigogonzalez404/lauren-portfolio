@@ -176,7 +176,7 @@ ruled meta row → dark [01] Project / [02] Solution / [03] Results → body →
 | Slug | Title / type | Source | Palette | Treatment | Confidentiality (details in CONFIDENTIALITY.md) |
 |---|---|---|---|---|---|
 | `pdx-west` | PDX West Logistics Center, Digital Leasing Brochure, 2026 | `PDXWestFlyer_For Lease.pdf` + Rodrigo's mockup | Sage #76A48E, Slate #505F69, Deep Slate #374B4E, Mist #ECF3F0, White | Rodrigo's mockup as hero/card on stone; paper mockups (mock_spread, mock_cover); sheets s01–s08 = PDF 1,2,3,5,6,8,9,10; **iPad viewer shows s01,s02,s04–s08 = PDF 1,2,5,6,8,9,10** (Nov 24, Lauren: p3 site plan out, back cover in); s03 is still used by the fanned mockup | No financials in the flyer; p4/p7 removed editorially; back cover (p10, contacts) shown unblurred |
-| `kress-building` | Kress Building, Digital Leasing Brochure, 2026 | `Kress Building Brochure.pdf` | Kress Green #002B29, Rust #B45832, Sand #C6AC8A, Parchment #FBF5EC, White | Booklet scene mockup; iPad, all 10 pages | Only the per-SF asking rate blurred (p2, p7, p8). Cover commission callout shown (pending, §9) |
+| `kress-building` | Kress Building, Digital Leasing Brochure, 2026 | `Kress Building Brochure.pdf` | Kress Green #002B29, Rust #B45832, Sand #C6AC8A, Parchment #FBF5EC, White | Hero + card = `flyer_mockups.kress()` (Nov 24): PDX-style self-made mockup on textured stone, cover over back cover on the left + tablet with p02 on the right; iPad viewer, all 10 pages | **Nothing blurred** (Nov 24 approved exception: Rodrigo says the brochure is public record), incl. the asking rate on p2/p7/p8 and the cover commission callout |
 | `big-pink` | Big Pink, Pitch Presentation & Brand Concepts, 2025 (Interactive) | Ceros captures + `uploads/big-pink.pdf` + Ceros media | Big Pink deck palette, in `bigpink_blocks.py` (Dark Blue hero) | Leads with **OnePink**: TOC → mark, versions, moodboard, color, typography (Cabin), concept exploration (OneEleven, Big Pink, Prism "First round"), naming, in place (white `material.jpg`), **presentation last** (laptop viewer, 25 screens + 3 black screens). Hero + cards = OnePink on Dark Blue | Market, competition, fee proposal = black screens; team/client-list/reference/lease-map screens dropped; no Ceros link or embed |
 | `the-grid` | The Grid (Kirkland 405), Naming & Brand Identity, 2025 | `Kirkland Brand Design/` deck | Grid Grey #777C80, Stone #EAE7E3, Silver #BABABA, Graphite #1D1D1F, White | Card + hero = Lauren's entrance-wall mockup (the logo at a building entrance); vector logos; Open Sans | Nothing blurred; client feedback paraphrased, no names. Results = the client confirmed The Grid (sourced) |
 | `pacific-center` | Pacific Center, Leasing Brochure, 2026 | `PacificCenter-Flyer.pdf` | Navy #212B3B, Slate Blue #435774, Taupe #D7CBC4, Umber #583117, White | Poster hero; open-spread mockup; 12-page portrait flip-book | No financials; all pages shown |
@@ -201,6 +201,8 @@ Unpublished (kept in `_src`, no page/card/link, images not generated): `pointe-a
    financial lines on otherwise-useful pages (pixelate + heavy Gaussian, baked into the JPEG so it can't be recovered).
 3. **Approved exception:** the Madison home/works card (`madison-plaza/card*.jpg`) shows **nothing blurred** ("please ensure
    nothing is blur on this image"). The same phone paragraph stays blurred inside the flip-book (whether to unblur it is pending).
+   **Second approved exception (Nov 24, Rodrigo):** the Kress Building brochure is public record, so nothing in it is blurred
+   (viewer pages, hero, card). Don't re-add blur boxes to Kress.
 4. Log every blur/omission in `_src/confidentiality.py`. **Describe** figures and never quote them (the repo is public). Visually check
    every new image before publishing.
 5. Source PDFs and the zip never go into the repo.
@@ -260,7 +262,8 @@ Blue, Madison wide, Nomad square); Marketplace sections; "Results stay `[[ ]]`".
 
 | Commit | Summary |
 |---|---|
-| (Nov 24) | PDX West viewer: PDF p3 removed, back cover added (Lauren's feedback) |
+| (Nov 24) | Kress: all blur removed (public record), new PDX-style hero/card mockup (`flyer_mockups.kress()`) |
+| `edc19c8` | PDX West viewer: PDF p3 removed, back cover added (Lauren's feedback) |
 | `7722562` | CLAUDE-HANDOFF.md; financial figures scrubbed from `_src` comments + logs; Mauzey moved off the "excluded" list in CONFIDENTIALITY.md |
 | `74cf209` | Mauzey Court replaces The Pointe (PDX treatment, OM financials blurred/omitted); copy pass: Project/Solution on every RE case, Results only where sourced, no `[[ ]]`; Contact for career opportunities |
 | `a92f4e4` | Big Pink home/works card: OnePink wordmark on Dark Blue |
@@ -308,7 +311,7 @@ Blue, Madison wide, Nomad square); Marketplace sections; "Results stay `[[ ]]`".
 7. Does he have a **higher-res Nomad** image? (The card source is about 1120 px wide.)
 8. Keep or drop the **Node113** line in The Grid's Concept exploration intro (`_src/grid_blocks.py`)?
 9. Should the **PDX paper mockups** (mock_spread / mock_cover in "The brochure") be swapped?
-10. Is the **Kress cover commission percentage** OK to show? It is visible now as front-page content.
+10. ~~Kress cover commission~~: answered Nov 24. The whole Kress brochure is public record, so nothing is blurred.
 11. The stack disclaimer under PDX/Leftbank says contact details are blurred, which is no longer accurate. It is Rodrigo's own wording; change it only if he says so.
 12. **Git history** still contains the financial figures that this commit scrubbed from comments/logs (earlier commits of `_src/*.py` and
     `CONFIDENTIALITY.md`). Removing them needs a history rewrite + force-push, which is destructive. Only do it with Rodrigo's explicit OK.

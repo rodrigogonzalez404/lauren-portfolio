@@ -4,14 +4,15 @@ Rule (Rodrigo): leave anything confidential out; if leaving it out would look ba
 """
 STD = 'Confidential pages — pricing, financials, rent comps and broker contacts — are left out; contact details are blurred.'
 NOTE_NONE = 'Confidential information — pricing, financials and rent comps — is not shown.'   # Nov 23: accurate wording for pieces with no financial content (PDX West, Leftbank)
-NOTE_KRESS = 'The asking rate is blurred; the brochure carries no other financial information.'
+NOTE_KRESS = 'All ten pages are shown as published — the leasing details in this brochure are public record.'   # Nov 24 (Rodrigo t94u)
 LOG = {
  'pdx-west': dict(note=NOTE_NONE,
     blurred=['none — Nov 23: cover broker strip unblurred (sheet stack, printed piece); Rodrigo\'s hero/card mockup shown with contacts readable (front pages are not confidential)'],
     omitted=['pages 4 (corporate neighbors) and 7 (regional logistics hubs): removed from the sheet stack Nov 23 at Rodrigo\'s request (editorial, not confidentiality)', 'page 3 (site plan) removed from the iPad viewer Nov 24 at Lauren\'s request (editorial; still in the fanned mockup). Page 10 back cover (broker names, phones, emails + disclaimer) added to the viewer Nov 24, unblurred: no pricing, financials or rent comps anywhere in the flyer'], mockup='hero + card = Rodrigo\'s mockup on the cream surface (unblurred); printed piece = self-made mockups from the sheets'),
  'kress-building': dict(note=NOTE_KRESS,
-    blurred=['Asking-rate figure (per-SF, full service) — p02 availability bullets, p07 2nd-floor plan bullets, p08 3rd-floor plan bullets (Nov 23 iPad viewer; nothing else blurred — the cover commission callout and broker contacts are front-page content)'],
-    omitted=['nothing — all 10 pages are in the iPad viewer (Nov 23)']),
+    blurred=['nothing — Nov 24: the per-SF asking rate on p02, p07 and p08 is unblurred (iPad viewer, hero and card)'],
+    exception='Nov 24, Rodrigo (Lauren\'s feedback): everything in the Kress brochure is public record and not confidential, so no page is blurred — including the leasing terms that the financials rule would normally blur.',
+    omitted=['nothing — all 10 pages are in the iPad viewer']),
  'nomad': dict(note='Confidential chapters — pricing, financials, rent comps and broker contacts — are left out.',
     blurred=['none (Rodrigo: "remove the blur" on the flip-book pages)'],
     omitted=['offering/price pages, financials, rent comps, contacts, page-04 offering table (nomad_om-spread.jpg not published)']),
