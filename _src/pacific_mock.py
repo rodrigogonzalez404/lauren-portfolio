@@ -30,45 +30,13 @@ def lay(cv, obj, cx, cy, ang, k=0.0, shadow=0.8):
 
 def save(im, name): im.save(os.path.join(ROOT, 'assets', 'img', SLUG, name), 'JPEG', quality=86, optimize=True, progressive=True); print(name)
 
+UPLOAD = '/workspace/uploads/pacific-desk-mockup-new.png'   # Rodrigo's own mockup (t101u): cover + Highlights spread on a concrete desk
+HERO_BOX = (0, 70, 1448, 980)    # the book spans y 104-956 of 1086, so the hero frame is 1448:910 (build.py HERO_RATIO), nothing cut
+
 def main():
-    # master on white 3200x1800; hero = 16:9 (scaled), card = the central 4:3
-    cv = white(3200, 1800)
-    lay(cv, N.open_spread(2, 1560), 1330, 700, 5, k=0.06)
-    lay(cv, N.closed_book(1, 660), 2130, 1090, -7, k=0.03, shadow=0.95)
-    save(cv.resize((2400, 1350), Image.LANCZOS), 'hero.jpg')
-    save(cv.crop((400, 0, 2800, 1800)).resize((1440, 1080), Image.LANCZOS), 'card.jpg')
-    # printed brochure: amenities, highlights, neighbourhood spreads fanned on stone
-    cv = N.stone(2400, 1350, 43)
-    lay(cv, N.open_spread(3, 1080), 680, 470, -5, shadow=0.9)
-    lay(cv, N.open_spread(5, 1080), 1720, 500, 4, shadow=0.9)
-    lay(cv, N.open_spread(4, 1180), 1200, 870, -1, shadow=0.9)
-    save(cv, 'book_fan.jpg')
-    desk_card()   # t100u: the home/works card = the brochure on a cool concrete desk (pairs with The Grid card)
-
-def desk(w, h, seed=7):
-    """cool matte concrete desk top seen from above, its rounded front edge and the darker floor beyond it,
-    soft daylight from a window at top-left (a broad light fall-off + faint mullion shade)"""
-    rng = np.random.default_rng(seed)
-    def up(f): return np.array(Image.fromarray(rng.standard_normal((max(2, h // f), max(2, w // f))).astype(np.float32)).resize((w, h), Image.BICUBIC))
-    tex = 3.2 * up(1) + 2.2 * up(3) + 1.6 * up(16) + 1.8 * up(90)
-    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
-    light = 1.06 - 0.16 * np.hypot((xx - 0.15 * w) / w, (yy - 0.05 * h) / h)
-    band = 0.5 + 0.5 * np.cos(2 * np.pi * ((xx * 0.55 + yy) / (0.42 * w)))     # broad, very soft window-bar shading
-    light *= 1 - 0.035 * band
-    base = np.array([196, 199, 202], np.float32)                                # cool neutral grey (no warm cast)
-    a = (base[None, None] + tex[..., None]) * light[..., None]
-    e0 = int(h * 0.885); e1 = e0 + int(h * 0.012)                              # rounded front edge catches the light, then the room beyond
-    a[e0 - 6:e0] *= np.linspace(1.0, 1.06, 6)[:, None, None]
-    a[e0:e1] *= np.linspace(1.04, 0.74, e1 - e0)[:, None, None]
-    room = np.array([150, 154, 159], np.float32) * np.linspace(0.92, 0.80, h - e1)[:, None, None] * light[e1:, :, None] + 1.5 * tex[e1:, :, None]
-    a[e1:] = room
-    a[e1:e1 + 30] *= np.linspace(0.82, 1, 30)[:, None, None]
-    return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
-
-def desk_card():
-    cv = desk(2400, 1800)
-    lay(cv, N.open_spread(2, 1340), 1010, 680, 6, k=0.05, shadow=1.0)
-    lay(cv, N.closed_book(1, 580), 1700, 1000, -8, k=0.03, shadow=1.1)
-    save(cv.resize((1440, 1080), Image.LANCZOS), 'card.jpg')
-
+    """Nov 24 (t101u): Rodrigo's desk mockup is the Pacific hero and card, used as provided.
+    The earlier generated white hero, desk card and fanned book_fan.jpg (desk(), desk_card(), white()) are no longer used."""
+    im = Image.open(UPLOAD).convert('RGB')
+    save(im.crop(HERO_BOX), 'hero.jpg')
+    save(im.resize((1440, 1080), Image.LANCZOS), 'card.jpg')     # source is 1448x1086 = 4:3 already
 if __name__ == '__main__': main()

@@ -247,6 +247,7 @@ def meta_items(p):
     if p['cat'] == 'interactive':
         return [('Client', p['client']), ('Type', p['type']), ('Format', p['tool'] + ' interactive presentation'), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
     return [('Client', p['client']), ('Type', p['type']), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
+HERO_RATIO = {"pacific-center": "1448/910"}   # hero image shown whole in its own frame ratio (Rodrigo's 4:3 desk mockup, t101u)
 HERO_FIT = {"madison-plaza"}   # mockups on white: show whole image, no crop
 def case_head(p, r):
     lab = CAT_LABEL[p['cat']]
@@ -364,7 +365,7 @@ def pacific_blocks(r):
 <div class="fb-controls"><button class="fb-btn" id="fb-prev" aria-label="Previous page">←</button><span class="mono fb-counter" id="fb-counter" aria-live="polite">Cover</span><button class="fb-btn" id="fb-next" aria-label="Next page">→</button></div>
 <div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div></div>"""
     return (gsec(ds, 'Design system')
-            + gsec(f'<div class="gallery">{row(("book_fan.jpg", "The printed leasing brochure — amenities, highlights and neighborhood spreads"))}{row(("book_cover.jpg", "Front cover"), ("book_back.jpg", "Back cover"))}</div>', 'The printed brochure')
+            + gsec(f'<div class="gallery">{row(("book_cover.jpg", "Front cover"), ("book_back.jpg", "Back cover"))}</div>', 'The printed brochure')
             + gsec(book, 'Inside the brochure', 'The reading sequence as a prospective tenant meets it — the building and its downtown setting, amenities, highlights, the neighborhood, then availabilities. Turn the pages.'))
 
 # Sheet stack (flyers): loose sheets on the desk; reusable — sheet_stack(slug, title, n, r)
@@ -463,7 +464,7 @@ def case(p):
     if False:
         pass
     else:
-        body += f'<div class="case-hero{" fit" if s in HERO_FIT and os.path.exists(f"/workspace/lauren-case-studies/mockups/{s}_hero-override.jpg") else ""}" data-name="Hero Mockup">{img(f"assets/img/{s}/hero.jpg", p["title"]+" — hero mockup", r, eager=True)}</div>'
+        body += f'<div class="case-hero{" fit" if s in HERO_FIT and os.path.exists(f"/workspace/lauren-case-studies/mockups/{s}_hero-override.jpg") else ""}"{f' style="aspect-ratio:{HERO_RATIO[s]}"' if s in HERO_RATIO else ""} data-name="Hero Mockup">{img(f"assets/img/{s}/hero.jpg", p["title"]+" — hero mockup", r, eager=True)}</div>'
     body += meta_row(p) + psr(p)
     if s == 'nomad':
         g = nomad_blocks(r)
