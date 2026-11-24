@@ -10,7 +10,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG = os.path.join(ROOT, 'assets', 'img')
 MADISON = '/workspace/uploads/madison-mockup-new.png'
 NOMAD = '/workspace/uploads/nomad-desk-mockup-new.png'
-SPRINGWOOD = '/workspace/uploads/springwood-mockup-new.png'   # t107u: cover + Site Plan + Property Highlights on stone (Rodrigo's mockup)
+SPRINGWOOD = '/workspace/uploads/springwood-mockup-v2.png'   # t108u: cover + Site Plan + Table of Contents on stone (Rodrigo's mockup; replaces springwood-mockup-new.png)
 
 def madison_wide(scale=0.75, W=2400, H=1350):
     im = Image.open(MADISON).convert('RGB')

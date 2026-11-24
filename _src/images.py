@@ -50,7 +50,7 @@ RE={
  'leftbank':('leftbank-flyer','leftbank_flyer.jpg',[]),  # sheets for the stack: see _src/flyer_sheets.py
  'madison-plaza':('madison-plaza-om','madison-plaza_om-cover.jpg',[]),  # page gallery replaced by the Nomad-style book: see _src/madison_book.py
  'redmond-gateway':('redmond-assemblage-om','redmond-gateway_om-stack.jpg',[(1,[]),(2,[]),(6,[(0.035,0.24,0.315,0.43)]),(7,[(0.035,0.24,0.315,0.43)]),(14,[]),(15,[])]),  # parcel text names owners + lease dates -> blurred),
- 'springwood':('springwood-om','springwood_om-cover.jpg',[(1,[(0.7854,0.8905,0.9356,0.9265)]),(2,[]),(3,[]),(4,[(0.2172,0.4183,0.3093,0.4461)]),(5,[(0.7576,0.6471,0.9508,0.7565)]),(6,[]),(7,[(0.2462,0.6846,0.3043,0.7141)]),(8,[]),(9,[]),(10,[]),(11,[]),(12,[]),(13,[]),(16,[]),(18,[]),(19,[]),(20,[]),(21,[]),(22,[])]),  # Nov 23 iPad viewer: p01..p19 = PDF 1-13,16,18-22; blurred only: p1 average-rent figure, p4 lot-rent range, p5 rent-upside paragraph, p7 property tax; PDF 14-15 (financials) + 17 (rent comps) omitted
+ 'springwood':('springwood-om','springwood_om-cover.jpg',[(1,[]),(2,[]),(3,[]),(4,[]),(5,[]),(6,[]),(7,[]),(8,[]),(9,[]),(10,[]),(11,[]),(12,[]),(13,[]),(16,[]),(18,[]),(19,[]),(20,[]),(21,[]),(22,[])]),  # Nov 24 (t108u): Rodrigo — all blurs removed ('what is confidential is already removed'); p01..p19 = PDF 1-13,16,18-22; PDF 14-15 (financials) + 17 (rent comps) still omitted
  'pointe-at-bridgeport':('the-pointe-bridgeport','the-pointe_flyer-stack.jpg',[(1,[]),(2,[]),(3,[]),(4,[]),(7,[]),(8,[])]),
  'portland-office-market-report':('portland-office-report-q1-2026','portland-office-report_laptop.jpg',[(1,[]),(2,[])]),
 }

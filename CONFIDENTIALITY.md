@@ -43,7 +43,7 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Springwood of Beaverton
 
-- **Blurred:** p01 cover: the average-rent figure only (Nov 23 — "75 Sites | 100% Occupied" now readable, cover + hero mockup); p04: lot-rent range; p05: rent-upside paragraph (rents vs market, turnover projection); p07: property tax figure
+- **Blurred:** none — Nov 24 (t108u): Rodrigo approved unblurring everything (p01 cover, p04, p05, p07 were blurred before): "It doesn't need to be blur. What is confidential is already removed."
 - **Omitted:** PDF 14–15 Financial Overview (financial summary, rent roll) — replaced by a black "Confidential — financial information omitted" screen after the kept 03 divider; PDF 17 Rent Comparables — black screen after the kept 04 divider
 
 ## 8210 Mauzey Court
