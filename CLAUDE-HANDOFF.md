@@ -355,3 +355,6 @@ Rodrigo: for every real-estate case done with Colliers (PDX West, Kress, Nomad, 
 
 ## Nov 24 (t111u) — Contact layout
 Contact page hero says only "Get in Touch": headline left with the Get in Touch + Request My Résumé buttons under it; contact list (email, LinkedIn, Expertise) on the right, bottom-aligned with the buttons (`.contact-grid`, end of `site.css`); stacks on mobile. The large résumé sentence and the [Résumé] row are gone from the hero (offer = button). Sitewide footer contact block unchanged.
+
+## Nov 24 (t112u) — Works page
+Works: "Interactive Presentations" sub-section removed; OnePink (big-pink, `card-wide.jpg`, r169) is a wide card right after PDX West + Kress, as on Home; Brand & Ecommerce on Works is back on the page colour (Home keeps it black).

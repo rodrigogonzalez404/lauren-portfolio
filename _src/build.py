@@ -143,12 +143,12 @@ def works():
     b = head('Works — Lauren Gonzalez', r) + nav(r) + f'''
 <section class="wrap case-cover" data-name="Works Hero"><span class="mono muted">[Works]</span><h1 class="xxl mt24">Works</h1></section>
 <section class="wrap" id="real-estate" style="padding-top:var(--s48)" data-name="Real Estate">
-<div class="sec-head clean"><div class="col gap16"><span class="mono muted">[01] ({len(PROJECTS):02d})</span><h2 class="xl">Real Estate</h2></div><p class="bm muted intro">{T(HOME["re_intro"])}</p></div>
-<div class="grid2">{"".join(card(p, r) for p in PROJECTS)}</div>
-<div class="works-sub" id="interactive"><div class="sec-head clean"><div class="col gap16"><span class="mono muted">[Interactive] ({len(CEROS):02d})</span><h2 class="l">{E(HOME["interactive_title"])}</h2></div><p class="bm muted intro">{T(HOME["interactive_intro"])}</p></div>
-<div class="grid2">{"".join(card(p, r) for p in CEROS)}</div></div>
+<div class="sec-head clean"><div class="col gap16"><span class="mono muted">[01] ({len(PROJECTS) + len(CEROS):02d})</span><h2 class="xl">Real Estate</h2></div><p class="bm muted intro">{T(HOME["re_intro"])}</p></div>
+<div class="grid2">{"".join(card(p, r) for p in PROJECTS[:2])}</div>
+<div class="mt64">{card(BY["big-pink"], r, "r169", src="assets/img/big-pink/card-wide.jpg")}</div>
+<div class="grid2 mt64">{"".join(card(p, r) for p in PROJECTS[2:])}</div>
 <p class="mono-s muted mt64">{T(HOME["re_note"])}</p></section>
-<section class="dark wrap sec brand-dark" id="brand" data-name="Brand &amp; Ecommerce">
+<section class="wrap sec" id="brand" data-name="Brand &amp; Ecommerce">
 <div class="sec-head clean"><div class="col gap16"><span class="mono muted">[02] ({len(BRAND):02d})</span><h2 class="xl">Brand &amp; Ecommerce</h2></div><p class="bm muted intro">{T(HOME["brand_intro"])}</p></div>
 <div class="grid3">{"".join(card(p, r, "r11", small=True) for p in BRAND)}</div></section>
 ''' + footer(r)
