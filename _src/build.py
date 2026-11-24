@@ -282,22 +282,34 @@ def next_block(p, r):
 NOMAD_PAL = [('Signal Red', '#FF343B'), ('Orange', '#FF7B21'), ('Sun Yellow', '#FFC55E'), ('Charcoal', '#3C3839'), ('White', '#FFFFFF')]
 FLIP_ALTS = ['Cover', '01 Investment Summary', '01 Investment Summary', '02 Property Description', '02 Property Description', 'Site plan', 'Community amenities', 'Apartment amenities', 'Apartment amenities', 'Floor plans', 'Floor plans', '03 Market Overview', '03 Market Overview', 'Access map', 'Market supply chart', '04 The Comparables', '04 The Comparables']
 def nomad_blocks(r):
+    """Nov 24 (Lauren via Rodrigo t97u): printed book = three self-made mockups (_src/nomad_book.py); the flip-book holds every page
+    except printed pp. 50-55 (black confidential spread in their place); the Maps & data section is removed."""
     I = 'assets/img/nomad/'
-    def row(*fs): 
+    def row(*fs):
         return '<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in fs) + '</div>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in NOMAD_PAL)
-    pages = ''.join(f'<div class="fb-page"{" data-density=\"hard\"" if i == 0 else ""}><img alt="Nomad offering package — {a}" src="{r}{I}flip/f{i:02d}.jpg" draggable="false"></div>' for i, a in enumerate(FLIP_ALTS))
-    pages += '<div class="fb-page fb-end" data-density="hard"><div class="fb-endin"><span class="mono">[End]</span><div><div class="fb-endt">Nomad</div><div class="mono" style="margin-top:14px">Investor Offering Package · 2026</div></div><span class="mono fb-endm">Colliers · Overlook, North Portland — selected pages; confidential pages omitted</span></div></div>'
+    seq = json.load(open(os.path.join(ROOT, '_src', 'nomad_flip.json')))
+    pages, k = '', 0
+    for i, e in enumerate(seq):
+        hard = ' data-density="hard"' if i in (0, len(seq) - 1) else ''
+        if e == 'BLACK':
+            side = 'l' if k == 0 else 'r'; k += 1
+            txt = ('<span class="fb-conft">Confidential —<span class="po"> financial information omitted</span></span>' if side == 'l'
+                   else '<span class="fb-conft la">financial information omitted</span><span class="mono-s fb-confm po">[05] The Financials · pages 50–55</span>')
+            pages += f'<div class="fb-page fb-conf fb-conf-{side}" data-pg="{"50" if side == "l" else "55"}"><div class="fb-confin">{txt}</div></div>'
+        else:
+            tag, f = e.split(':')
+            num = {'cover': '01', 'back': '56'}.get(tag, tag[1:].zfill(2))
+            alt = {'cover': 'Front cover', 'back': 'Back cover'}.get(tag, 'Page ' + tag[1:])
+            pages += f'<div class="fb-page" data-pg="{num}"{hard}><img alt="Nomad offering memorandum — {alt}" src="{r}{I}flip/{f}" draggable="false"></div>'
     hint = '<span class="hd">Drag a page corner, click a page, or use the <span class="kb">←</span> <span class="kb">→</span> keys</span><span class="hm">Swipe the page, drag a corner past the edge, or tap the arrows</span>'
-    ds = f'''<div class="gallery"><div class="swatches">{sw}</div>
-</div>'''
-    book = f'''<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book">{pages}</div></div>
+    ds = f'<div class="gallery"><div class="swatches">{sw}</div></div>'
+    book = f"""<div class="fb-stage" data-name="Flip-book"><div class="fb-wrap"><div id="fb-book" class="fb-book" data-total="56">{pages}</div></div>
 <div class="fb-controls"><button class="fb-btn" id="fb-prev" aria-label="Previous page">←</button><span class="mono fb-counter" id="fb-counter" aria-live="polite">Cover</span><button class="fb-btn" id="fb-next" aria-label="Next page">→</button></div>
-<div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div></div>'''
+<div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div></div>"""
     return (gsec(ds, 'Design system', 'Palette sampled from the printed pages.')
-            + gsec(f'<div class="gallery">{row(("n02.jpg", "Cover: property photography, NOMAD wordmark, hatch border"), ("n03.jpg", "Printed offering packages, ready for investor tours"))}</div>', 'The printed book')
-            + gsec(book, 'Inside the book', 'The reading sequence as an investor meets it — chapter openers, amenities, floor plans, maps and market data. Turn the pages.', LOG["nomad"]["note"])
-            + gsec(f'<div class="gallery">{row(("n06.jpg", "Neighborhood amenities map, shown on screen"), ("n08.jpg", "Detail: market supply chart in the document palette"))}</div>', 'Maps &amp; data', 'Beyond the page: the neighborhood map on screen, and a close look at a chart drawn in the document palette.'))
+            + gsec(f'<div class="gallery">{row(("book_a.jpg", "The 03 Market Overview spread beside the closed cover"))}{row(("book_b.jpg", "The back cover with the contacts beside the Overlook Neighborhood spread"))}{row(("book_c.jpg", "Inside spreads: property, floor plans and apartment amenities"))}</div>', 'The printed book')
+            + gsec(book, 'Inside the book', 'The whole book as an investor meets it — investment summary, the property, amenities and floor plans, the market and the comparables, through to the back cover. Turn the pages.', LOG["nomad"]["note"]))
 
 MADISON_PAL = [('Raspberry', '#B0144A'), ('Crimson', '#A41D41'), ('Plum Charcoal', '#37272C'), ('Warm Grey', '#ACA5A8'), ('White', '#FFFFFF')]
 def madison_blocks(r):

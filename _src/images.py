@@ -78,8 +78,9 @@ def main():
             nm=f'p{k:02d}.jpg'; save(im,slug,nm); names.append(nm)
         man[slug]=names
     import nomad_surface; nomad_surface.main()   # Nomad scene photos re-surfaced on palette.CREAM from the pre-cream originals
-    for f in NOMAD_IMG: save(Image.open(RD+'nomad/'+f),'nomad',('hero.jpg' if f.startswith('n01') else f.split('_')[0]+'.jpg') if f.startswith('n') else f)
-    for i,f in enumerate(NOMAD_FLIP): save(Image.open(RD+'nomad/flip/'+f),'nomad/flip',f'f{i:02d}.jpg',1600)
+    import nomad_book; nomad_book.main()   # Nov 24 (t97u): hero, printed-book mockups, full flip-book
+    for f in []: save(Image.open(RD+'nomad/'+f),'nomad',('hero.jpg' if f.startswith('n01') else f.split('_')[0]+'.jpg') if f.startswith('n') else f)
+    for i,f in enumerate([]): save(Image.open(RD+'nomad/flip/'+f),'nomad/flip',f'f{i:02d}.jpg',1600)
     for slug,fs in CEROS.items():
         for i,f in enumerate(fs,1): save(Image.open(RD+'ceros/sel/'+f+'.jpg'),slug,f's{i:02d}.jpg')
         save(Image.open(RD+'ceros/sel/'+fs[0]+'.jpg'),slug,'card.jpg',1600)

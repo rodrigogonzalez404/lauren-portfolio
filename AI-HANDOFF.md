@@ -216,3 +216,10 @@ Read this first if you are an AI assistant (Claude, ChatGPT, Cursor, etc.) conti
   The cover sits over the back cover on the left, and a code-drawn tablet (`tablet()` + `put_device()`) shows p02 on the right. The old booklet
   scene mockup (`mockups/kress-building_brochure.jpg`) is retired.
 - t96u: the case hero is the same composition as the card, rendered on a 16:9 stone canvas (nothing cropped). `img()` now adds `?v=<md5>` to image URLs.
+
+## Nomad round (Rodrigo t97u, Nov 24)
+- `_src/nomad_book.py` (called from images.py) replaces the redesign/img/nomad copies: hero = `uploads/nomad-main-mockup-new.jpg` cropped to 16:9 (white margin only);
+  printed book = book_a/b/c.jpg (top-down self-made mockups on stone, `open_spread()` gutter shading + `_edges()` page stack); flip-book = every page
+  except printed pp. 50–55 (PDF 26–28) → black spread; `nomad_flip.json`; folio counter via data-pg/data-total=56.
+- Blur boxes are taken from `pdftotext -bbox` (words with '$'): PDF 5 subject avg rent, PDF 6 development-cost table, PDF 23–24 rent comps. Market stats + contacts shown.
+- Removed: n02/n03 printed-book images, the Maps & data section (n06/n08).

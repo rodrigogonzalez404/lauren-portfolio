@@ -17,8 +17,8 @@ Rule: leave anything confidential out; if leaving it out would look bad, blur it
 
 ## Nomad
 
-- **Blurred:** none (Rodrigo: "remove the blur" on the flip-book pages)
-- **Omitted:** offering/price pages, financials, rent comps, contacts, page-04 offering table (nomad_om-spread.jpg not published)
+- **Blurred:** Nov 24 (all pages restored): p09 the subject property's average-rent figure; pp. 10–11 the development-cost table (cost per unit, per SF, totals); pp. 44–47 every rent figure in the rent-comparable tables and charts. Neighborhood and city market statistics and the broker contacts are shown
+- **Omitted:** printed pp. 50–55 (PDF 26–28: pro forma, monthly financials, underwriting notes) — replaced by a black "Confidential — financial information omitted" spread after the kept 05 The Financials divider (Rodrigo t97u, Nov 24)
 
 ## The Grid (Kirkland 405)
 
