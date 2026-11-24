@@ -101,6 +101,7 @@ def main():
     import pacific_book; pacific_book.main()
     import pacific_mock; pacific_mock.main()   # Nov 24 (t101u): hero + card = Rodrigo's desk mockup (overrides the poster hero)
     import flyer_sheets; flyer_sheets.main()
+    import leftbank_round; leftbank_round.main()   # Nov 24 (t102u): shadowed brochure pages + Rodrigo's desk mockup as hero/card (needs the sheets)
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'grid')); import grid_assets; grid_assets.main()   # The Grid identity case
     import madison_card; madison_card.main()
     # Nomad home/works card (Rodrigo t79u): his cover-on-stone image, used as is — the white screenshot border trimmed,
