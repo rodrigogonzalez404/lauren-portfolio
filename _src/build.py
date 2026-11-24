@@ -247,7 +247,7 @@ def meta_items(p):
     if p['cat'] == 'interactive':
         return [('Client', p['client']), ('Type', p['type']), ('Format', p['tool'] + ' interactive presentation'), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
     return [('Client', p['client']), ('Type', p['type']), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
-HERO_RATIO = {"pacific-center": "1448/910", "leftbank": "1448/920", "madison-plaza": "1448/1086"}   # hero image shown whole in its own frame ratio (Rodrigo's 4:3 desk mockup, t101u)
+HERO_RATIO = {"pacific-center": "1448/910", "leftbank": "1448/920", "madison-plaza": "1448/1086", "nomad": "1448/1086"}   # hero image shown whole in its own frame ratio (Rodrigo's 4:3 desk mockup, t101u)
 HERO_FIT = set()   # (was madison-plaza; since t105u its hero is Rodrigo's mockup in its own 4:3 frame, see HERO_RATIO)
 def case_head(p, r):
     lab = CAT_LABEL[p['cat']]
