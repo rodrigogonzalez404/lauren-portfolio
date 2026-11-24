@@ -366,3 +366,6 @@ button{font:inherit;color:inherit}
 @media (max-width:820px){.toc-list{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.toc-list{grid-template-columns:1fr}.toc-list a{padding:14px 0 12px}}
 @media (prefers-reduced-motion:reduce){.toc-ar{transition:none}}
+/* t110u: Branding group in black (the contrast of the removed Approach block) */
+.brand-dark .card .ph{background:#222}
+.brand-dark + .foot.dark,.brand-dark + section.dark{border-top:1px solid var(--line-d)}

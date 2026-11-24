@@ -275,7 +275,8 @@ Blue, Madison wide, Nomad square); Marketplace sections; "Results stay `[[ ]]`".
 
 | Commit | Summary |
 |---|---|
-| (Nov 24) | t109u: flip-book images now version-tagged (fixes stale cached blurred Springwood p05); Mauzey mockup + all Mauzey blurs removed; Colliers real-estate copy pass (`_src/copy_round.py`: short Project/Solution, Results removed, Project text = Solution style via `summary_eq`) — branding cases + Fortis untouched |
+| (Nov 24) | t110u: Contact copy = only the résumé line (the 'Open to new opportunities…' line removed from the Contact page and the footer CTA on every page); Home Approach block removed; Brand & Ecommerce group on Home + Works now black (`.dark .brand-dark`) |
+| `577069a` | t109u: flip-book images now version-tagged (fixes stale cached blurred Springwood p05); Mauzey mockup + all Mauzey blurs removed; Colliers real-estate copy pass (`_src/copy_round.py`: short Project/Solution, Results removed, Project text = Solution style via `summary_eq`) — branding cases + Fortis untouched |
 | `331eadb` | Springwood v2: mockup v2 = hero + card; all Springwood blurs removed (t108u) |
 | `78a53af` | Springwood: Rodrigo's mockup = hero + card; Teal swatch removed; memorandum pages shadowed |
 | `c0a5122` | Final round: Madison home card scaled down for breathing room; Nomad hero + card = Rodrigo's desk mockup |
@@ -346,3 +347,8 @@ Blue, Madison wide, Nomad square); Marketplace sections; "Results stay `[[ ]]`".
 
 ## Nov 24 (t109u) — Colliers real-estate copy rule
 Rodrigo: for every real-estate case done with Colliers (PDX West, Kress, Nomad, The Grid, Pacific Center, Leftbank, Madison Plaza, Springwood, Mauzey Court, Big Pink) — **no Results block**, Project and Solution in the same size and weight, and both short and to the point. The short copy lives in `_src/copy_round.py` (applied at the end of `content.py`; the long originals stay above it in `content.py` for reference). Leave all branding cases and Fortis Net Lease alone.
+
+## Nov 24 (t110u) — Contact + Branding in black
+- Contact page and the footer CTA show only "Résumé available on request — just send me a note." (`RESUME_LINE`); `CONTACT_LINE` is no longer used. Email, LinkedIn and résumé buttons stay.
+- The Home "[Approach] Strategy first, then craft…" block (steps + Expertise line) is removed (`approach*` keys still in `content.py`, unused).
+- Rodrigo loved its contrast, so the Brand & Ecommerce group on Home and on Works is now near-black (`section.dark.brand-dark`, CSS at the end of `site.css`). Branding case pages themselves unchanged (only the shared footer text).

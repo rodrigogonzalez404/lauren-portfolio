@@ -57,12 +57,12 @@ def nav(r, cur=''):
 def btn(t, href, k='pri', arrow='→', extra=''):
     return f'<a class="btn {k}{extra}" href="{href}">{t} <span aria-hidden="true">{arrow}</span></a>'
 def footer(r, line=None):
-    line = line or CONTACT_LINE
+    line = line or RESUME_LINE   # t110u: the 'Open to new opportunities…' line removed
     return f'''</main>
 <footer class="foot dark" data-name="Footer CTA">
 <div class="g12"><span class="mono muted c1-4">[Contact]</span>
 <p class="m c4-13">{T(line)}</p>
-<p class="bm muted c4-13 mt24">{T(RESUME_LINE)}</p>
+{'' if line == RESUME_LINE else f'<p class="bm muted c4-13 mt24">{T(RESUME_LINE)}</p>'}
 <div class="c4-13 btns mt40">{btn("Request My Résumé", RESUME_MAILTO, "ond", "↗")}{btn(EMAIL, "mailto:"+EMAIL, "sec", "↗", " long")}</div></div>
 <a class="big" href="{r}contact.html" aria-label="Contact"><span>Contact</span><span aria-hidden="true">↗</span></a>
 <div class="bottom"><a class="mono" href="mailto:{EMAIL}">[Contact] {EMAIL}</a><a class="mono" href="{LINKEDIN}" target="_blank" rel="noopener">[Social] LinkedIn ↗</a><span class="mono muted">©2026 All rights reserved.</span></div></footer>
@@ -124,12 +124,9 @@ def home():
 </section>
 
 
-<section class="dark wrap sec" data-name="Approach">
-<div class="g12"><span class="mono muted c1-4">{T(H["approach_label"])}</span><h2 class="l c4-13">{T(H["approach"])}</h2></div>
-<div class="g12 mt64"><div class="c4-13 steps">{"".join(f'<div><span class="mono muted">[{n}]</span><span class="s">{E(t)}</span><span class="bm muted">{T(d)}</span></div>' for n, t, d in H["approach_steps"])}</div></div>
-<div class="g12 mt64"><span class="mono muted c1-4">[Expertise]</span><p class="s c4-13">{" · ".join(EXPERTISE)}</p></div></section>
 
-<section class="wrap sec" id="brand" data-name="02 Brand &amp; Ecommerce">
+
+<section class="dark wrap sec brand-dark" id="brand" data-name="02 Brand &amp; Ecommerce">
 <div class="sec-head clean"><div class="col gap16"><span class="mono muted">[02] ({len(BRAND):02d})</span><h2 class="l">Brand &amp; Ecommerce</h2></div>
 <div class="col right" style="gap:20px;align-items:flex-end"><p class="bm muted intro" style="text-align:right">{T(H["brand_intro"])}</p>{btn("See all", "works.html#brand", "sec")}</div></div>
 <div class="grid3">{"".join(card(p, r, "r11", small=True) for p in brand_home)}</div></section>
@@ -151,7 +148,7 @@ def works():
 <div class="works-sub" id="interactive"><div class="sec-head clean"><div class="col gap16"><span class="mono muted">[Interactive] ({len(CEROS):02d})</span><h2 class="l">{E(HOME["interactive_title"])}</h2></div><p class="bm muted intro">{T(HOME["interactive_intro"])}</p></div>
 <div class="grid2">{"".join(card(p, r) for p in CEROS)}</div></div>
 <p class="mono-s muted mt64">{T(HOME["re_note"])}</p></section>
-<section class="wrap sec" id="brand" data-name="Brand &amp; Ecommerce">
+<section class="dark wrap sec brand-dark" id="brand" data-name="Brand &amp; Ecommerce">
 <div class="sec-head clean"><div class="col gap16"><span class="mono muted">[02] ({len(BRAND):02d})</span><h2 class="xl">Brand &amp; Ecommerce</h2></div><p class="bm muted intro">{T(HOME["brand_intro"])}</p></div>
 <div class="grid3">{"".join(card(p, r, "r11", small=True) for p in BRAND)}</div></section>
 ''' + footer(r)
@@ -188,11 +185,10 @@ def contact():
     b = head('Contact — Lauren Gonzalez', r) + nav(r, 'contact') + f'''
 <section class="wrap case-cover" style="padding-bottom:var(--sec)" data-name="Contact Hero"><span class="mono muted">[Contact]</span>
 <h1 class="xxl mt24">Get in<br>Touch</h1>
-<div class="g12 mt96"><p class="l c1-8">{T(CONTACT_LINE)}</p>
+<div class="g12 mt96"><p class="l c1-8">{T(RESUME_LINE)}</p>
 <div class="c9-13 col contact-list">
 <div><span class="mono-s muted">[Contact]</span><a class="s" href="mailto:{EMAIL}" style="word-break:break-all">{EMAIL}</a></div>
 <div><span class="mono-s muted">[Social]</span><a class="s" href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn ↗</a></div>
-<div><span class="mono-s muted">[Résumé]</span><span class="bm">{T(RESUME_LINE)}</span></div>
 <div><span class="mono-s muted">[Expertise]</span><span class="bm">{" · ".join(EXPERTISE)}</span></div></div></div>
 <div class="btns mt64">{btn("Get in Touch", "mailto:"+EMAIL, "pri", "↗")}{btn("Request My Résumé", RESUME_MAILTO, "sec", "↗")}</div></section>
 ''' + footer(r, EMAIL)
