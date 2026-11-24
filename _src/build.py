@@ -247,7 +247,7 @@ def meta_items(p):
     if p['cat'] == 'interactive':
         return [('Client', p['client']), ('Type', p['type']), ('Format', p['tool'] + ' interactive presentation'), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
     return [('Client', p['client']), ('Type', p['type']), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
-HERO_RATIO = {"pacific-center": "1448/910", "leftbank": "1448/920", "madison-plaza": "1448/1086", "nomad": "1448/1086"}   # hero image shown whole in its own frame ratio (Rodrigo's 4:3 desk mockup, t101u)
+HERO_RATIO = {"pacific-center": "1448/910", "leftbank": "1448/920", "madison-plaza": "1448/1086", "nomad": "1448/1086", "springwood": "1448/1086"}   # hero image shown whole in its own frame ratio (Rodrigo's 4:3 desk mockup, t101u)
 HERO_FIT = set()   # (was madison-plaza; since t105u its hero is Rodrigo's mockup in its own 4:3 frame, see HERO_RATIO)
 def case_head(p, r):
     lab = CAT_LABEL[p['cat']]
@@ -411,7 +411,7 @@ def img_rows(slug, rows, r):
     return '<div class="gallery">' + ''.join('<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in row) + '</div>' for row in rows) + '</div>'
 
 KRESS_PAL = [('Kress Green', '#002B29'), ('Rust', '#B45832'), ('Sand', '#C6AC8A'), ('Parchment', '#FBF5EC'), ('White', '#FFFFFF')]
-SPRINGWOOD_PAL = [('Charcoal', '#2C3132'), ('Deep Teal', '#285D64'), ('Teal', '#347179'), ('Mist', '#F8F5F8'), ('White', '#FFFFFF')]
+SPRINGWOOD_PAL = [('Charcoal', '#2C3132'), ('Deep Teal', '#285D64'), ('Mist', '#F8F5F8'), ('White', '#FFFFFF')]
 def kress_blocks(r):
     files = [f'p{i:02d}.jpg' for i in range(1, 11)]
     return (gsec(swatches(KRESS_PAL), 'Design system')
@@ -423,7 +423,7 @@ def springwood_blocks(r):
     f = [f'p{i:02d}.jpg' for i in range(1, 20)]
     files = f[:13] + [('CONF', '[03] Financial Overview · pages 14–15')] + f[13:14] + [('CONF', '[04] Market Comparables · page 17')] + f[14:]
     return (gsec(swatches(SPRINGWOOD_PAL), 'Design system')
-            + gsec(img_rows('springwood', [[('p01.jpg', 'Front cover'), ('p19.jpg', 'Back cover')]], r), 'The offering memorandum')
+            + gsec(img_rows('springwood', [[('p01.jpg', 'Front cover'), ('p19.jpg', 'Back cover')]], r).replace('<figure class="pic"', '<figure class="pic lift"'), 'The offering memorandum')   # t107u: page shadow like Leftbank
             + gsec(ipad_viewer('springwood', 'Springwood of Beaverton', files, r, LOG['springwood']['note'], 'offering memorandum'), 'Inside the memorandum',
                    'The memorandum as an investor reads it — executive summary, property overview, then the location. The financial overview and the rent comparables stay confidential. Swipe through it on the iPad.'))
 

@@ -10,6 +10,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG = os.path.join(ROOT, 'assets', 'img')
 MADISON = '/workspace/uploads/madison-mockup-new.png'
 NOMAD = '/workspace/uploads/nomad-desk-mockup-new.png'
+SPRINGWOOD = '/workspace/uploads/springwood-mockup-new.png'   # t107u: cover + Site Plan + Property Highlights on stone (Rodrigo's mockup)
 
 def madison_wide(scale=0.75, W=2400, H=1350):
     im = Image.open(MADISON).convert('RGB')
@@ -33,6 +34,11 @@ def nomad():
     im.save(os.path.join(IMG, 'nomad', 'hero.jpg'), quality=90, optimize=True, progressive=True)
     im.resize((1440, 1080), Image.LANCZOS).save(os.path.join(IMG, 'nomad', 'card.jpg'), quality=88, optimize=True, progressive=True)
 
+def springwood():
+    im = Image.open(SPRINGWOOD).convert('RGB')                     # 1448x1086 = 4:3, used as provided
+    im.save(os.path.join(IMG, 'springwood', 'hero.jpg'), quality=90, optimize=True, progressive=True)
+    im.resize((1440, 1080), Image.LANCZOS).save(os.path.join(IMG, 'springwood', 'card.jpg'), quality=88, optimize=True, progressive=True)
+
 def main():
-    madison_wide(); nomad(); print('final round: madison card-wide, nomad hero/card')
+    madison_wide(); nomad(); springwood(); print('final round: madison card-wide, nomad hero/card')
 if __name__ == '__main__': main()
