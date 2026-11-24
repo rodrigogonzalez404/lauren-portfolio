@@ -99,6 +99,7 @@ def main():
     for f in ('about_portrait.jpg','about_educator.jpg'): save(Image.open(RD+f),'about',f.replace('about_',''))
     import madison_book; madison_book.main()
     import pacific_book; pacific_book.main()
+    import pacific_mock; pacific_mock.main()   # Nov 24: hero/card on white + fanned spreads (overrides the poster hero)
     import flyer_sheets; flyer_sheets.main()
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'grid')); import grid_assets; grid_assets.main()   # The Grid identity case
     import madison_card; madison_card.main()

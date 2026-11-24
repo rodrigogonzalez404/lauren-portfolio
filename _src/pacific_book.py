@@ -33,7 +33,7 @@ def main():
     names = []
     for i, (tag, im) in enumerate(seq):
         nm = f'f{i:02d}.jpg'; save(im, SLUG + '/flip', nm, 1200); names.append(tag + ':' + nm)
-    save(Image.open(MOCK + 'pacific-center_brochure-spread.jpg'), SLUG, 'book_mockup.jpg')   # /workspace/mk/run.py pacific-book
+    # (Nov 24) the open-spread mockup was dropped; book_fan.jpg + hero/card come from pacific_mock.py
     save(pg('pg-1'), SLUG, 'book_cover.jpg', 1600)
     save(pg('pg-7'), SLUG, 'book_back.jpg', 1600)
     json.dump(names, open(os.path.join(os.path.dirname(__file__), 'pacific_flip.json'), 'w'), indent=1)

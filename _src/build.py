@@ -364,7 +364,7 @@ def pacific_blocks(r):
 <div class="fb-controls"><button class="fb-btn" id="fb-prev" aria-label="Previous page">←</button><span class="mono fb-counter" id="fb-counter" aria-live="polite">Cover</span><button class="fb-btn" id="fb-next" aria-label="Next page">→</button></div>
 <div class="fb-foot"><span class="mono-s muted fb-hint">{hint}</span></div></div>"""
     return (gsec(ds, 'Design system')
-            + gsec(f'<div class="gallery">{row(("book_mockup.jpg", "The printed leasing brochure, open on a table"))}{row(("book_cover.jpg", "Front cover"), ("book_back.jpg", "Back cover"))}</div>', 'The printed brochure')
+            + gsec(f'<div class="gallery">{row(("book_fan.jpg", "The printed leasing brochure — amenities, highlights and neighborhood spreads"))}{row(("book_cover.jpg", "Front cover"), ("book_back.jpg", "Back cover"))}</div>', 'The printed brochure')
             + gsec(book, 'Inside the brochure', 'The reading sequence as a prospective tenant meets it — the building and its downtown setting, amenities, highlights, the neighborhood, then availabilities. Turn the pages.'))
 
 # Sheet stack (flyers): loose sheets on the desk; reusable — sheet_stack(slug, title, n, r)
