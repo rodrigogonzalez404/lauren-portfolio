@@ -11,7 +11,7 @@ UPLOAD = '/workspace/uploads/leftbank-desk-mockup-new.jpg'
 HERO_BOX = (0, 50, 1448, 970)   # tablet top ~y85, map sheet bottom ~y955 of 1086: nothing cut
 ORANGE = np.array([202, 86, 37])
 
-def shadowed(src, out, off=(8, 11), blur=18, k=0.38):
+def shadowed(src, out, off=(16, 20), blur=24, k=0.62):
     a = np.asarray(Image.open(src).convert('RGB')).astype(np.float32); H, W = a.shape[:2]
     o = np.abs(a - ORANGE).sum(2) < 30
     rows, cols = o.sum(1), o.sum(0)
