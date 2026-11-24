@@ -352,3 +352,6 @@ Rodrigo: for every real-estate case done with Colliers (PDX West, Kress, Nomad, 
 - Contact page and the footer CTA show only "Résumé available on request — just send me a note." (`RESUME_LINE`); `CONTACT_LINE` is no longer used. Email, LinkedIn and résumé buttons stay.
 - The Home "[Approach] Strategy first, then craft…" block (steps + Expertise line) is removed (`approach*` keys still in `content.py`, unused).
 - Rodrigo loved its contrast, so the Brand & Ecommerce group on Home and on Works is now near-black (`section.dark.brand-dark`, CSS at the end of `site.css`). Branding case pages themselves unchanged (only the shared footer text).
+
+## Nov 24 (t111u) — Contact layout
+Contact page hero says only "Get in Touch": headline left with the Get in Touch + Request My Résumé buttons under it; contact list (email, LinkedIn, Expertise) on the right, bottom-aligned with the buttons (`.contact-grid`, end of `site.css`); stacks on mobile. The large résumé sentence and the [Résumé] row are gone from the hero (offer = button). Sitewide footer contact block unchanged.

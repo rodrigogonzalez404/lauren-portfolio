@@ -183,14 +183,13 @@ def about():
 def contact():
     r = ''
     b = head('Contact — Lauren Gonzalez', r) + nav(r, 'contact') + f'''
-<section class="wrap case-cover" style="padding-bottom:var(--sec)" data-name="Contact Hero"><span class="mono muted">[Contact]</span>
-<h1 class="xxl mt24">Get in<br>Touch</h1>
-<div class="g12 mt96"><p class="l c1-8">{T(RESUME_LINE)}</p>
+<section class="wrap case-cover contact-hero" style="padding-bottom:var(--sec)" data-name="Contact Hero"><span class="mono muted">[Contact]</span>
+<div class="g12 mt24 contact-grid"><div class="c1-8 col"><h1 class="xxl">Get in<br>Touch</h1>
+<div class="btns mt40">{btn("Get in Touch", "mailto:"+EMAIL, "pri", "↗")}{btn("Request My Résumé", RESUME_MAILTO, "sec", "↗")}</div></div>
 <div class="c9-13 col contact-list">
 <div><span class="mono-s muted">[Contact]</span><a class="s" href="mailto:{EMAIL}" style="word-break:break-all">{EMAIL}</a></div>
 <div><span class="mono-s muted">[Social]</span><a class="s" href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn ↗</a></div>
-<div><span class="mono-s muted">[Expertise]</span><span class="bm">{" · ".join(EXPERTISE)}</span></div></div></div>
-<div class="btns mt64">{btn("Get in Touch", "mailto:"+EMAIL, "pri", "↗")}{btn("Request My Résumé", RESUME_MAILTO, "sec", "↗")}</div></section>
+<div><span class="mono-s muted">[Expertise]</span><span class="bm">{" · ".join(EXPERTISE)}</span></div></div></div></section>
 ''' + footer(r, EMAIL)
     write('contact.html', b)
 
