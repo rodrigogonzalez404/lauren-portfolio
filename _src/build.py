@@ -434,7 +434,7 @@ def leftbank_blocks(r):
         return '<div class="g-row">' + ''.join(pic(I + f, a, r, size(I + f)[0] / size(I + f)[1]) for f, a in fs) + '</div>'
     sw = ''.join(f'<div class="col gap8"><div class="sw" style="background:{h}"></div><span class="mono-s">{n}</span><span class="mono-s muted">{h}</span></div>' for n, h in LEFTBANK_PAL)
     return (gsec(f'<div class="gallery"><div class="swatches">{sw}</div></div>', 'Design system')
-            + gsec(f'<div class="gallery">{row(("brochure_front.jpg", "Front page"), ("brochure_back.jpg", "Back page"))}</div>', 'The brochure')
+            + gsec('<div class="gallery">' + row(("brochure_front.jpg", "Front page"), ("brochure_back.jpg", "Back page")).replace('<figure class="pic"', '<figure class="pic lift"') + '</div>', 'The brochure')   # t104u: pages lifted off the white background
             + gsec(ipad_viewer('leftbank', 'The Leftbank Project', [f'sheets/s{i:02d}.jpg' for i in range(1, 8)], r, LOG['leftbank']['note']), 'Inside the brochure', 'Seven pages, in the order a prospective tenant reads them — the building, its history, the spaces, the neighborhood and what is changing around it. Swipe through them on the iPad.'))
 
 PDX_PAL = [('Sage', '#76A48E'), ('Slate', '#505F69'), ('Deep Slate', '#374B4E'), ('Mist', '#ECF3F0'), ('White', '#FFFFFF')]

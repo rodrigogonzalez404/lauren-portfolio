@@ -136,6 +136,7 @@ button{font:inherit;color:inherit}
 .gallery{display:flex;flex-direction:column;gap:var(--g)}
 .g-row{display:flex;gap:var(--g);align-items:flex-start}
 .pic{min-width:0}.pic img{width:100%}
+.pic.lift img{display:block;box-shadow:0 12px 32px rgba(0,0,0,.20),0 2px 6px rgba(0,0,0,.14)}   /* t104u: printed pages lifted off the page background */
 .case-next{background:var(--paper);padding-top:var(--cn);padding-bottom:var(--cn)}
 .cn-head{grid-column:1/6;display:flex;flex-direction:column;align-items:flex-start;gap:24px;padding-top:clamp(0px,4.1vw,59px)}
 .cn-title{font-weight:500;font-size:clamp(32px,3.9vw,56px);line-height:1;letter-spacing:-.03em}
