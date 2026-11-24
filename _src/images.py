@@ -104,6 +104,7 @@ def main():
     import leftbank_round; leftbank_round.main()   # Nov 24 (t102u): shadowed brochure pages + Rodrigo's desk mockup as hero/card (needs the sheets)
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'grid')); import grid_assets; grid_assets.main()   # The Grid identity case
     import madison_card; madison_card.main()
+    import madison_mock; madison_mock.main()   # Nov 24 (t105u): Rodrigo's mockup = hero + card + card-wide (overrides madison_card)
     # Nomad home/works card (Rodrigo t79u): his cover-on-stone image, used as is — the white screenshot border trimmed,
     # the stone frame (~4:3) kept whole, resized to the card size
     _n = Image.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'nomad_card_src.png')).convert('RGB')

@@ -17,7 +17,7 @@ BLUR = {
     5:  [(0.0, 0.24, 0.355, 0.89)],                                 # operating text: opex, rents, NOI upside
     6:  [(0.0, 0.29, 0.29, 0.84), (0.72, 0.26, 0.995, 0.84)],       # ground-lease rent / MFTE savings
     21: [(0.025, 0.66, 0.092, 0.71)],                                 # in-place rent / income-qualification line
-    24: [(0.02, 0.67, 0.62, 0.80)],                                 # back cover broker names, emails, phones
+    # 24 (back cover): unblurred Nov 24 (Rodrigo t105u), it carries only broker names/titles/contacts, no financials
 }
 BEFORE = list(range(2, 13))     # PDF spreads 2-12  -> printed pp. 2-23 (12 = 03 The Financials divider)
 DROPPED = list(range(13, 18))   # PDF 13-17 -> printed pp. 24-33

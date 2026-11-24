@@ -247,8 +247,8 @@ def meta_items(p):
     if p['cat'] == 'interactive':
         return [('Client', p['client']), ('Type', p['type']), ('Format', p['tool'] + ' interactive presentation'), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
     return [('Client', p['client']), ('Type', p['type']), ('Location', p['place']), ('Year', p['year']), ('Role', p['role'])]
-HERO_RATIO = {"pacific-center": "1448/910", "leftbank": "1448/920"}   # hero image shown whole in its own frame ratio (Rodrigo's 4:3 desk mockup, t101u)
-HERO_FIT = {"madison-plaza"}   # mockups on white: show whole image, no crop
+HERO_RATIO = {"pacific-center": "1448/910", "leftbank": "1448/920", "madison-plaza": "1448/1086"}   # hero image shown whole in its own frame ratio (Rodrigo's 4:3 desk mockup, t101u)
+HERO_FIT = set()   # (was madison-plaza; since t105u its hero is Rodrigo's mockup in its own 4:3 frame, see HERO_RATIO)
 def case_head(p, r):
     lab = CAT_LABEL[p['cat']]
     L = len(p['title'])
@@ -312,7 +312,7 @@ def nomad_blocks(r):
             + gsec(f'<div class="gallery">{row(("book_a.jpg", "The 03 Market Overview spread beside the closed cover"))}{row(("book_b.jpg", "The back cover with the contacts beside the Overlook Neighborhood spread"))}{row(("book_c.jpg", "Inside spreads: property, floor plans and apartment amenities"))}</div>', 'The printed book')
             + gsec(book, 'Inside the book', 'The whole book as an investor meets it — investment summary, the property, amenities and floor plans, the market and the comparables, through to the back cover. Turn the pages.', LOG["nomad"]["note"]))
 
-MADISON_PAL = [('Raspberry', '#B0144A'), ('Crimson', '#A41D41'), ('Plum Charcoal', '#37272C'), ('Warm Grey', '#ACA5A8'), ('White', '#FFFFFF')]
+MADISON_PAL = [('Raspberry', '#B0144A'), ('Plum Charcoal', '#37272C'), ('Warm Grey', '#ACA5A8'), ('White', '#FFFFFF')]
 def madison_blocks(r):
     I = 'assets/img/madison-plaza/'
     def row(*fs):
